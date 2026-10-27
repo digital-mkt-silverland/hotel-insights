@@ -1,0 +1,1081 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Q1/2027 Silverland · Dashboard kế hoạch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f4f3ef; --surface:#fcfcfb; --surface2:#f0efea; --ink:#0b0b0b; --sub:#52514e; --muted:#7a7974; --line:#e2e0d8; --grid:#ebe9e2;
+  --hero:#14161a; --hero-ink:#f5f3ee; --hero-sub:#b9b6ad; --gold:#c9a66b;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; --s6:#9a9890; --s7:#008300;
+  --good:#0a7d0a; --good-bg:#e3f2e3; --crit:#c0392f; --crit-bg:#f9e3e1; --warn:#946200; --warn-bg:#fbefd6;
+  --ly:#8d8b84; --target:#0b0b0b; --focus:#2a78d6;
+  --sans:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme:dark;
+    --bg:#111211; --surface:#1a1a19; --surface2:#222221; --ink:#f0efec; --sub:#c3c2b7; --muted:#97958d; --line:#33332f; --grid:#2a2a27;
+    --hero:#0b0c0d; --hero-ink:#f5f3ee; --hero-sub:#a9a69d; --gold:#d9bc86;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#7d7b74; --s7:#008300;
+    --good:#4cc24c; --good-bg:#1d2f1d; --crit:#ef7d72; --crit-bg:#3a1f1c; --warn:#e8b54a; --warn-bg:#36290f;
+    --ly:#8f8d86; --target:#f0efec; --focus:#3987e5;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#111211; --surface:#1a1a19; --surface2:#222221; --ink:#f0efec; --sub:#c3c2b7; --muted:#97958d; --line:#33332f; --grid:#2a2a27;
+  --hero:#0b0c0d; --hero-ink:#f5f3ee; --hero-sub:#a9a69d; --gold:#d9bc86;
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#7d7b74; --s7:#008300;
+  --good:#4cc24c; --good-bg:#1d2f1d; --crit:#ef7d72; --crit-bg:#3a1f1c; --warn:#e8b54a; --warn-bg:#36290f;
+  --ly:#8f8d86; --target:#f0efec; --focus:#3987e5;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14.5px;line-height:1.55}
+.num{font-variant-numeric:tabular-nums}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+/* hero */
+.hero{background:var(--hero);color:var(--hero-ink);padding:28px 0 26px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.hero h1{font-size:30px;line-height:1.2;margin:8px 0 4px;font-weight:800;letter-spacing:-.01em}
+.hero .meta{color:var(--hero-sub);font-size:13px}
+.toggle{flex:0 0 auto;background:transparent;color:var(--hero-ink);border:1px solid #4a4a46;border-radius:999px;padding:6px 14px;font-size:12.5px;cursor:pointer}
+.toggle .ts{display:none}
+.strip{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:12px;margin-top:22px}
+.tile{background:#1f2125;border:1px solid #2d3036;border-radius:10px;padding:14px 16px}
+.tile .l{font-size:12px;color:var(--hero-sub)}
+.tile .v{font-size:26px;font-weight:800;line-height:1.15;margin-top:4px}
+.tile .v small{font-size:13px;font-weight:500;color:var(--hero-sub)}
+.tile .d{font-size:12px;color:var(--hero-sub);margin-top:4px}
+.tile.big .v{font-size:38px;color:var(--gold)}
+.prog{position:relative;height:10px;background:#33363c;border-radius:6px;margin:10px 0 6px}
+.prog span{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:var(--gold)}
+.prog i{position:absolute;top:-4px;width:2px;height:18px;background:#f5f3ee}
+.prog-l{display:flex;justify-content:space-between;font-size:11.5px;color:var(--hero-sub)}
+.pill{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px}
+.pill.g{background:#173a1f;color:#7fdc8a}.pill.r{background:#40211e;color:#ff9a8f}
+
+/* step nav */
+.stepnav{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.stepnav ol{list-style:none;margin:0 auto;padding:0 20px;max-width:1180px;display:flex;gap:4px;overflow-x:auto}
+.stepnav a{display:flex;align-items:center;gap:8px;padding:12px 10px 10px;color:var(--sub);text-decoration:none;font-size:13px;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent}
+.stepnav a b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--surface2);color:var(--sub);font-size:11.5px}
+.stepnav a.on{color:var(--ink);border-bottom-color:var(--ink)}
+.stepnav a.on b{background:var(--ink);color:var(--surface)}
+
+/* sections */
+section{padding:34px 0 8px;scroll-margin-top:56px}
+.sh{display:grid;grid-template-columns:44px 1fr;gap:4px 14px;align-items:start;margin-bottom:16px}
+.sh .n{width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--surface);display:grid;place-items:center;font-weight:800;font-size:16px}
+.sh .q{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.sh h2{margin:2px 0 0;font-size:22px;line-height:1.3;font-weight:800;letter-spacing:-.01em}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.grid2{display:grid;grid-template-columns:1.55fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ct{font-size:13px;font-weight:700;margin:0 0 2px}
+.cs{font-size:12px;color:var(--muted);margin:0 0 10px}
+.chart{position:relative;height:300px}
+.chart.sm{height:220px}
+.note{font-size:12px;color:var(--muted);margin-top:8px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.fact .v{font-size:28px;font-weight:800;line-height:1.1}
+.fact .l{font-size:12.5px;color:var(--sub);margin-top:4px}
+.inf{font-size:10.5px;font-weight:700;color:var(--warn);border:1px solid var(--warn);border-radius:4px;padding:0 5px;margin-left:4px;vertical-align:1px;white-space:nowrap}
+
+/* segmented & chips */
+.ctrl{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;align-items:center}
+.ctrl .lbl{font-size:12px;color:var(--muted);margin-right:4px}
+.seg{border:1px solid var(--line);background:var(--surface);color:var(--sub);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600;cursor:pointer}
+.seg[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px 5px 9px;font-size:12.5px;font-weight:600;cursor:pointer}
+.chip i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.chip[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+
+/* market detail */
+.mk-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.mk-head .nm{font-size:18px;font-weight:800}
+.kv{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 12px}
+.kv div{background:var(--surface2);border-radius:8px;padding:8px 10px}
+.kv b{display:block;font-size:20px;font-weight:800}
+.kv span{font-size:11.5px;color:var(--sub)}
+.lead-row{display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:center;margin:6px 0}
+.lead-row .m{font-size:12px;font-weight:700;color:var(--sub)}
+.stack{display:flex;height:22px;border-radius:5px;overflow:hidden;gap:2px;background:var(--surface)}
+.stack span{display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;color:#fff;min-width:0}
+.lead-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:11.5px;color:var(--sub);margin-top:8px}
+.lead-legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.window{background:var(--surface2);border-radius:8px;padding:10px 12px;font-size:13px;margin-top:10px}
+.window b{display:block;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+
+/* pace bullets */
+.bul{display:grid;grid-template-columns:120px 1fr 150px;gap:12px;align-items:center;padding:10px 4px;border-top:1px solid var(--line);border-radius:6px}
+.bul:first-of-type{border-top:0}
+.bul.dim{opacity:.35}
+.bul .nm{font-weight:700;font-size:13.5px;display:flex;align-items:center;gap:7px}
+.bul .nm i{width:10px;height:10px;border-radius:50%}
+.track{position:relative;height:26px;background:var(--surface2);border-radius:5px}
+.track .ty{position:absolute;left:0;top:4px;bottom:4px;border-radius:4px}
+.track .need{position:absolute;top:4px;bottom:4px;border-radius:0 4px 4px 0;background-image:repeating-linear-gradient(135deg,var(--c) 0 2px,transparent 2px 6px);opacity:.75}
+.track .lyo{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+.track .lyf{position:absolute;top:-3px;bottom:-3px;width:0;border-left:2px dashed var(--muted)}
+.bul .st{font-size:12px;color:var(--sub);text-align:right}
+.bul .st b{font-size:14px;color:var(--ink)}
+.blegend{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--sub);margin-top:10px}
+.blegend span{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:18px;height:10px;border-radius:2px}
+.mom{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.mom div{background:var(--surface2);border-radius:8px;padding:10px;text-align:center}
+.mom b{display:block;font-size:20px;font-weight:800}
+.mom span{font-size:11.5px;color:var(--sub)}
+.delta.up{color:var(--good)} .delta.dn{color:var(--crit)}
+
+/* gantt */
+.gantt{position:relative;overflow-x:auto}
+.g-inner{min-width:820px;position:relative}
+.g-head{display:grid;grid-template-columns:210px 1fr;font-size:11.5px;color:var(--muted);font-weight:600}
+.g-months{position:relative;height:24px}
+.g-months span{position:absolute;top:4px;border-left:1px solid var(--line);padding-left:6px;height:20px}
+.g-row{display:grid;grid-template-columns:210px 1fr;align-items:center;min-height:42px;border-top:1px solid var(--grid);cursor:pointer}
+.g-row:hover .g-name{color:var(--ink)}
+.g-row.dim{opacity:.3}
+.g-row.sel{background:var(--surface2)}
+.g-name{font-size:13px;font-weight:700;color:var(--sub);padding:6px 10px 6px 4px;line-height:1.3}
+.g-name small{display:block;font-weight:500;color:var(--muted);font-size:11.5px}
+.g-lane{position:relative;height:42px}
+.g-bar{position:absolute;top:9px;height:14px;border-radius:4px;background:var(--ink)}
+.g-stay{position:absolute;top:26px;height:6px;border-radius:3px;background:var(--gold);opacity:.9}
+.g-prep{position:absolute;top:9px;height:14px;border-radius:4px;background:repeating-linear-gradient(135deg,var(--muted) 0 2px,transparent 2px 6px)}
+.g-vline{position:absolute;top:0;bottom:0;width:0;border-left:1px dashed var(--muted);pointer-events:none}
+.g-today{position:absolute;top:0;bottom:0;width:2px;background:var(--crit);pointer-events:none}
+
+.g-ms{position:absolute;top:-2px;transform:translateX(-50%);font-size:10.5px;font-weight:700;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:0 6px;white-space:nowrap}
+.g-legend{display:flex;flex-wrap:wrap;gap:16px;font-size:11.5px;color:var(--sub);margin:10px 0 0}
+.g-legend span{display:inline-flex;align-items:center;gap:6px}
+.detail{margin-top:12px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.detail div{background:var(--surface2);border-radius:8px;padding:10px 12px;font-size:13px}
+.detail b{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.phases{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px}
+.phase{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;border-top:4px solid var(--ink)}
+.phase .t{font-size:11.5px;color:var(--muted);font-weight:600}
+.phase .h{font-size:13.5px;font-weight:800;margin:2px 0 4px}
+.phase .m{font-size:12px;color:var(--sub)}
+.phase .m b{color:var(--ink)}
+
+/* budget */
+.bud-share{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}
+.bud-share div{text-align:center;background:var(--surface2);border-radius:8px;padding:8px}
+.bud-share b{display:block;font-size:18px;font-weight:800}
+.bud-share span{font-size:11.5px;color:var(--sub)}
+.bud-share .hot{background:var(--ink);color:var(--surface)}
+.bud-share .hot span{color:var(--surface);opacity:.8}
+
+/* decisions */
+.dec{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.dcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.dcard .tag{font-size:11px;font-weight:700;color:var(--crit);text-transform:uppercase;letter-spacing:.08em}
+.dcard h4{margin:0;font-size:14.5px;line-height:1.35}
+.dcard p{margin:0;font-size:12.5px;color:var(--sub)}
+.dcard button{margin-top:auto;align-self:flex-start;border:1px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.dcard.done{border-color:var(--good)}
+.dcard.done button{background:var(--good-bg);color:var(--good);border-color:var(--good)}
+.trig{width:100%;border-collapse:collapse;font-size:13px}
+.trig th,.trig td{text-align:left;padding:9px 10px;border-top:1px solid var(--line);vertical-align:top}
+.trig thead th{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;border-top:0;border-bottom:1.5px solid var(--ink)}
+.trig td:first-child{font-weight:700}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th,.tbl td{padding:6px 8px;border-top:1px solid var(--line);text-align:right}
+.tbl th:first-child,.tbl td:first-child{text-align:left}
+.tbl thead th{font-size:11px;color:var(--muted);text-transform:uppercase;border-top:0;border-bottom:1.5px solid var(--ink)}
+details.tv{margin-top:10px}
+details.tv summary{font-size:12px;color:var(--sub);cursor:pointer;font-weight:600}
+
+/* tooltip */
+[data-tip]{cursor:help;border-bottom:1px dotted currentColor}
+#tipbox{position:fixed;z-index:60;max-width:300px;background:var(--ink);color:var(--surface);font-size:12.5px;line-height:1.45;padding:8px 11px;border-radius:6px;pointer-events:none;display:none}
+#gtip{position:fixed;z-index:61;max-width:300px;background:var(--ink);color:var(--surface);font-size:12.5px;line-height:1.45;padding:8px 11px;border-radius:6px;pointer-events:none;display:none}
+
+footer{margin-top:40px;padding:22px 0 40px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+footer a{color:var(--sub)}
+footer ul{padding-left:18px;margin:6px 0}
+
+@media (max-width:980px){
+  .strip{grid-template-columns:1fr 1fr}
+  .tile.big{grid-column:1/-1}
+  .grid2{grid-template-columns:1fr}
+  .phases{grid-template-columns:1fr 1fr}
+  .dec{grid-template-columns:1fr 1fr}
+  .detail{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .hero h1{font-size:23px}
+  .toggle .tl{display:none}.toggle .ts{display:inline}
+  .grid3,.phases,.dec,.mom,.bud-share{grid-template-columns:1fr 1fr}
+  .bul{grid-template-columns:90px 1fr;}
+  .bul .st{grid-column:1/-1;text-align:left}
+  .wrap{padding:0 16px}
+}
+@media print{.stepnav,.toggle{display:none}}
+sup .ref{font-size:10px;color:var(--gold);text-decoration:none;font-weight:700;margin-left:1px}
+
+.gl-wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+details.gl{background:var(--paper,var(--surface));border:1px solid var(--line);border-radius:10px;margin:16px 0 0}
+details.gl>summary{cursor:pointer;padding:12px 16px;font-weight:700;font-size:14px;list-style:none;display:flex;align-items:center;gap:8px}
+details.gl>summary::before{content:"+";display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1px solid var(--line);font-weight:700}
+details.gl[open]>summary::before{content:"\2212"}
+details.gl>summary::-webkit-details-marker{display:none}
+.gl-intro{padding:0 18px 4px;font-size:13.5px}
+.gl-intro ul{margin:4px 0 10px;padding-left:18px}
+.gl-intro li{margin:3px 0}
+.gl-panel{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:4px 22px;padding:4px 18px 16px}
+.gl-h{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin:10px 0 4px;color:var(--sub)}
+.gl-panel dl{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:3px 10px;font-size:12.5px}
+.gl-panel dt{font-weight:700}
+.gl-panel dd{margin:0;color:var(--sub)}
+.gl-wrap details.gl{background:var(--surface)}
+
+/* hotel tabs */
+.htabs{display:flex;gap:6px;margin:0 0 18px;flex-wrap:wrap}
+.htab{display:flex;flex-direction:column;align-items:flex-start;gap:1px;background:transparent;border:1px solid #3a3d44;color:var(--hero-sub);border-radius:10px;padding:8px 16px;cursor:pointer;min-width:150px;text-align:left}
+.htab b{font-size:15px;color:var(--hero-ink);font-weight:700}
+.htab span{font-size:11.5px}
+.htab[aria-selected="true"]{background:var(--gold);border-color:var(--gold);color:#14161a}
+.htab[aria-selected="true"] b{color:#14161a}
+.htab:hover{border-color:var(--gold)}
+.window.ota{background:transparent;border:1px solid var(--line)}
+.window.ota b.num{display:inline;font-size:13px;color:var(--ink);text-transform:none;letter-spacing:0;margin:0}
+@media (max-width:600px){.htab{min-width:0;flex:1;padding:7px 10px}.htab b{font-size:13.5px}.mom{grid-template-columns:repeat(3,1fr)!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="htabs" role="tablist" aria-label="Chọn khách sạn" id="htabs"></div>
+    <div class="hero-top">
+      <div>
+        <div class="eyebrow" id="eyebrow"></div>
+        <h1 id="h1"></h1>
+        <div class="meta" id="meta"></div>
+      </div>
+      <button class="toggle" id="themeBtn" type="button" aria-label="Đổi giao diện sáng hoặc tối"><span class="tl">Giao diện sáng / tối</span><span class="ts">Sáng / tối</span></button>
+    </div>
+    <div class="strip" id="strip"></div>
+  </div>
+</header>
+
+<div class="gl-wrap"><details class="gl"><summary>Cách đọc dashboard và giải thích thuật ngữ</summary>
+<div class="gl-intro" id="glIntro"></div><div class="gl-panel" id="glPanel"></div></details></div>
+<nav class="stepnav" aria-label="Các bước"><ol>
+  <li><a href="#s1"><b>1</b>Khi nào khách đặt</a></li>
+  <li><a href="#s2"><b>2</b>Ai đặt, sớm bao lâu</a></li>
+  <li><a href="#s3"><b>3</b>Đang ở đâu</a></li>
+  <li><a href="#s4"><b>4</b>Lịch chương trình</a></li>
+  <li><a href="#s5"><b>5</b>Ngân sách</a></li>
+  <li><a href="#s6"><b>6</b>Theo dõi và chốt</a></li>
+</ol></nav>
+
+<main class="wrap" id="main" role="tabpanel" aria-live="polite">
+
+<section id="s1">
+  <div class="sh"><div class="n">1</div><div><div class="q">Q1 được bán khi nào?</div><h2 id="s1h"></h2></div></div>
+  <div class="grid2">
+    <div class="card">
+      <div class="ctrl" role="group" aria-label="Chọn tháng stay" id="segs"></div>
+      <p class="ct">Số đêm đã đặt, tích luỹ theo ngày đặt</p>
+      <p class="cs">Đường xám đứt: Q1/2026 (sàn). Đường đậm: mốc cần đạt Q1/2027. Chấm: on hand hôm nay.</p>
+      <div class="chart"><canvas id="cCurve" aria-label="Đường số đêm tích luỹ theo ngày đặt"></canvas></div>
+      <details class="tv"><summary>Xem bảng số</summary><table class="tbl" id="tCurve"></table></details>
+    </div>
+    <div style="display:grid;gap:12px;align-content:start">
+      <div class="fact"><div class="v num" id="f1v"></div><div class="l" id="f1l"></div></div>
+      <div class="fact"><div class="v num" id="f2v"></div><div class="l" id="f2l"></div></div>
+      <div class="fact"><div class="v num" id="f3v"></div><div class="l" id="f3l"></div></div>
+      <div class="fact" style="background:var(--surface2)"><div class="l" style="margin:0;color:var(--ink)" id="f4"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="s2">
+  <div class="sh"><div class="n">2</div><div><div class="q">Ai đặt, đặt sớm bao lâu?</div><h2 id="s2h"></h2></div></div>
+  <div class="card" style="margin-bottom:14px">
+    <p class="ct">Số đêm stay Q1/2026 theo tháng đặt và thị trường</p>
+    <p class="cs">Bấm tên thị trường ở chú thích để ẩn, hiện. Rê chuột lên cột để xem số.</p>
+    <div class="chart"><canvas id="cBook" aria-label="Số đêm stay Q1/2026 theo tháng đặt và thị trường"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="ctrl" role="group" aria-label="Chọn thị trường" id="mkChips"></div>
+    <div class="grid2" style="grid-template-columns:1fr 1fr">
+      <div>
+        <div class="mk-head"><span class="nm" id="mkName"></span><span class="cs" id="mkShare" style="margin:0"></span></div>
+        <div class="kv">
+          <div><b class="num" id="mkLead"></b><span><span data-tip="Số ngày từ lúc đặt đến ngày nhận phòng. Trung vị: một nửa số đêm có lead time thấp hơn mức này.">Lead time</span> trung vị trên web (ngày)</span></div>
+          <div><b class="num" id="mkAdr"></b><span>ADR web Q1/2026 (tr)</span></div>
+          <div><b class="num" id="mkTr"></b><span id="mkTrL"></span></div>
+        </div>
+        <div class="window"><b>Cửa sổ đặt cho Q1/2027</b><span id="mkWin"></span></div>
+        <div class="window ota"><b>Cùng thị trường trên OTA (SiteMinder)</b><span id="mkOta"></span></div>
+      </div>
+      <div>
+        <p class="ct">Đặt trước bao nhiêu ngày, theo tháng stay</p>
+        <p class="cs">Tỷ trọng số đêm web Q1/2026 theo nhóm lead time</p>
+        <div id="leadBars"></div>
+        <div class="lead-legend" id="leadLegend"></div>
+        <p class="note" id="mkSmall"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s3">
+  <div class="sh"><div class="n">3</div><div><div class="q">Đang ở đâu?</div><h2 id="s3h"></h2></div></div>
+  <div class="grid2">
+    <div class="card">
+      <p class="ct">On hand hôm nay và phần cần đặt thêm để đạt mục tiêu</p>
+      <p class="cs">Mỗi dòng: thanh đặc là on hand, phần gạch là số đêm cần đặt thêm; vạch đen là on hand cùng thời điểm năm trước, vạch đứt là Q1/2026 cuối kỳ.</p>
+      <div id="bullets"></div>
+      <div class="blegend">
+        <span><i class="sw" style="background:var(--muted)"></i><span id="ohLbl">On hand</span></span>
+        <span><i class="sw" style="background:repeating-linear-gradient(135deg,var(--muted) 0 2px,transparent 2px 6px)"></i>Cần đặt thêm</span>
+        <span><i class="sw" style="width:2px;background:var(--ink)"></i>On hand cùng thời điểm 2025</span>
+        <span><i class="sw" style="width:0;border-left:2px dashed var(--muted)"></i>Q1/2026 cuối kỳ</span>
+      </div>
+      <p class="note" id="bulNote"></p>
+    </div>
+    <div style="display:grid;gap:12px;align-content:start">
+      <div class="card">
+        <p class="ct">Số đêm Q1 đặt trong 28 ngày qua</p>
+        <p class="cs">2026 so cùng kỳ 2025</p>
+        <div class="mom" id="mom"></div>
+      </div>
+      <div id="s3facts" style="display:grid;gap:12px"></div>
+    </div>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="sh"><div class="n">4</div><div><div class="q">Làm gì, khi nào?</div><h2 id="s4h"></h2></div></div>
+  <div class="phases" id="phases"></div>
+  <div class="card">
+    <div class="ctrl" role="group" aria-label="Lọc theo thị trường" id="mkChips2"></div>
+    <div class="gantt"><div class="g-inner" id="gantt"></div></div>
+    <div class="g-legend" style="margin-top:22px">
+      <span><i class="sw" style="background:repeating-linear-gradient(135deg,var(--muted) 0 2px,transparent 2px 6px)"></i>Chuẩn bị</span>
+      <span><i class="sw" style="background:var(--ink)"></i>Thời gian bán</span>
+      <span><i class="sw" style="height:6px;background:var(--gold)"></i>Thời gian stay</span>
+      <span><i class="sw" style="width:2px;background:var(--crit)"></i>Hôm nay</span>
+      <span>Bấm vào một dòng để xem giá, quyền lợi và lý do</span>
+    </div>
+    <div class="detail" id="pDetail"></div>
+  </div>
+</section>
+
+<section id="s5">
+  <div class="sh"><div class="n">5</div><div><div class="q">Tiền đi vào đâu?</div><h2 id="s5h"></h2></div></div>
+  <div class="grid2">
+    <div class="card">
+      <p class="ct">Ngân sách Google Ads theo tháng đặt (triệu đồng)</p>
+      <p class="cs" id="budSub"></p>
+      <div class="chart"><canvas id="cBud" aria-label="Ngân sách theo tháng đặt"></canvas></div>
+      <p class="ct" style="margin-top:12px">Phần trăm số đêm đặt trong tháng là để ở Q1 (số năm trước: đặt T11/2025 đến T3/2026)</p>
+      <div class="bud-share" id="budShare"></div>
+    </div>
+    <div class="card">
+      <p class="ct">ROAS theo quốc gia trong cửa sổ đặt Q1 năm trước</p>
+      <p class="cs" id="roasSub"></p>
+      <div class="chart sm" style="height:260px"><canvas id="cRoas" aria-label="ROAS theo quốc gia"></canvas></div>
+      <p class="note" id="roasNote"></p>
+    </div>
+  </div>
+</section>
+
+<section id="s6">
+  <div class="sh"><div class="n">6</div><div><div class="q">Theo dõi và quyết định</div><h2>3 quyết định cần chốt trước 08/11; mỗi thứ Hai so on hand với mốc</h2></div></div>
+  <div class="dec" id="dec"></div>
+  <div class="card" style="margin-top:14px">
+    <p class="ct">Ngưỡng điều chỉnh hằng tuần</p>
+    <table class="trig">
+      <thead><tr><th>Chỉ số</th><th>Ngưỡng</th><th>Hành động</th></tr></thead>
+      <tbody id="trig"></tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap" id="foot"></div>
+</footer>
+
+<div id="tipbox" role="tooltip"></div>
+<div id="gtip" role="tooltip"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function(){
+var G=[
+ ['Chỉ số',[
+  ['RN','Room night, số đêm phòng. 1 phòng ở 3 đêm = 3 RN; 2 phòng ở 2 đêm = 4 RN.'],
+  ['ADR','Giá phòng bình quân mỗi đêm = doanh thu phòng chia số đêm phòng (RN).'],
+  ['On hand','Số đã có trên hệ thống tại ngày cập nhật: tháng đã qua là khách đã ở; tháng chưa tới là phòng đã đặt nhưng chưa đến ngày ở.',['on hand']],
+  ['OTB','On the books: phòng đã được đặt cho các ngày ở trong tương lai, tính đến ngày cập nhật.'],
+  ['Ước tính cuối kỳ','On hand cộng lượng đặt thêm dự kiến từ nay đến cuối tháng, giả định bằng lượng đặt thêm của cùng kỳ năm trước. Là số dự báo, chưa phải kết quả.',['ước tính cuối kỳ']],
+  ['Pickup','Lượng phòng được đặt thêm trong một khoảng thời gian, ví dụ từ hôm nay đến cuối tháng.',['pickup']],
+  ['Cùng kỳ','Cùng giai đoạn của năm trước.',['cùng kỳ']],
+  ['Cùng thời điểm','Số đã đặt tại cùng ngày này của năm trước (ví dụ on hand T12 tính đến 26/10/2025), để so sánh công bằng với on hand hiện tại.',['cùng thời điểm']],
+  ['KPI','Chỉ tiêu ghi trong file kế hoạch chiến lược 6 tháng cuối năm lập giữa năm 2026.'],
+  ['Mục tiêu tháng','Mục tiêu RN, doanh thu từng tháng trong báo cáo Web Sales: T7 đến T10 do chủ đầu tư đặt, T11, T12 do CMO đặt. Khác với KPI kế hoạch chiến lược.',['mục tiêu tháng']],
+  ['ROAS','Return on ad spend = doanh thu web chia chi phí Google Ads. ROAS 19 nghĩa là 1 đồng quảng cáo mang về 19 đồng doanh thu. Dưới 5,9 thì chi phí quảng cáo cao hơn hoa hồng trả cho OTA (khoảng 17%).'],
+  ['CPA','Cost per acquisition: chi phí quảng cáo cho mỗi booking. Trần 2,2 tr tương đương hoa hồng OTA của một booking trung bình.'],
+  ['CPC','Cost per click: chi phí trung bình cho mỗi lượt nhấp vào quảng cáo.'],
+  ['CvR','Conversion rate: tỷ lệ lượt nhấp quảng cáo dẫn tới booking.'],
+  ['Tỷ trọng','Phần trăm của một nhóm trong tổng, ví dụ tỷ trọng khách Úc = RN khách Úc chia tổng RN web.',['tỷ trọng']]
+ ]],
+ ['Thời gian và đơn vị',[
+  ['2H','6 tháng cuối năm, từ tháng 7 đến tháng 12.'],
+  ['Q1','Quý 1: tháng 1, 2, 3.'],
+  ['T7','Tháng 7. Tương tự T1 là tháng 1, T12 là tháng 12.'],
+  ['Stay','Thời gian khách lưu trú (ngày ở), khác với ngày đặt phòng.',['stay']],
+  ['Theo ngày đặt','Tính theo ngày khách đặt phòng, không theo ngày khách ở. Dùng để đo hiệu quả quảng cáo trong tháng chạy quảng cáo.',['theo ngày đặt']],
+  ['Lead time','Số ngày từ lúc khách đặt đến ngày nhận phòng. Lead time trung vị: một nửa số đêm có lead time thấp hơn mức này.',['lead time']],
+  ['DBA','Days before arrival: số ngày khách đặt trước ngày đến.'],
+  ['tr','Triệu đồng. Tỷ là tỷ đồng; k là nghìn đồng (40k = 40.000 đồng).']
+ ]],
+ ['Kênh bán và quảng cáo',[
+  ['Web direct','Kênh khách tự đặt phòng trên website của khách sạn, không qua đại lý, nên khách sạn không trả hoa hồng.'],
+  ['OTA','Online travel agent: đại lý du lịch trực tuyến như Booking.com, Agoda, Trip.com; thu hoa hồng khoảng 17% mỗi booking.'],
+  ['IBE','Internet booking engine: hệ thống đặt phòng trên website (Travelanium), nơi tạo gói giá và mã giảm giá.'],
+  ['Search','Chiến dịch Google Ads hiện quảng cáo dạng chữ khi khách gõ từ khóa trên Google.'],
+  ['PMax','Performance Max: chiến dịch Google Ads tự phân phối quảng cáo trên Search, YouTube, Display, Maps, Gmail dựa trên dữ liệu chuyển đổi.'],
+  ['Từ khóa thương hiệu','Từ khóa có tên khách sạn (ví dụ "silverland ben thanh"): khách đã biết khách sạn.',['từ khóa thương hiệu']],
+  ['Non-brand','Từ khóa không có tên khách sạn (ví dụ "hotel near Ben Thanh market"): để tiếp cận khách chưa biết khách sạn.',['non-brand','ngoài thương hiệu']],
+  ['Asset group','Nhóm nội dung trong PMax (hình, tiêu đề, mô tả, tín hiệu đối tượng). EB: nội dung đặt sớm; LM: nội dung đặt sát ngày.',['asset group']],
+  ['Remarketing','Quảng cáo nhắm lại người đã vào website hoặc đã đặt trước đây.',['remarketing']],
+  ['RLSA','Remarketing lists for search ads: ưu tiên hiện quảng cáo Search cho người đã vào website (ví dụ đã thêm phòng vào giỏ).'],
+  ['Customer Match','Danh sách email, số điện thoại khách cũ tải lên Google Ads để nhắm lại hoặc làm tín hiệu cho PMax.'],
+  ['GA4','Google Analytics 4: công cụ đo lường hành vi khách trên website.'],
+  ['search terms insight','Báo cáo trong Google Ads cho biết khách gõ cụm từ gì trước khi thấy quảng cáo PMax.',['search term','Search term']],
+  ['auction insights','Báo cáo Google Ads so sánh tỷ lệ hiển thị quảng cáo với các đối thủ cùng đấu giá từ khóa.'],
+  ['SiteMinder','Channel manager kết nối khách sạn với các OTA và website. Báo cáo Insights cho số đêm theo kênh, quốc tịch, lead time; số OTA trong dashboard không gồm kênh website (Travelanium).'],
+  ['brand exclusion','Loại trừ thương hiệu: PMax không hiện quảng cáo khi khách gõ tên khách sạn, để ngân sách dành cho khách chưa biết khách sạn.']
+ ]],
+ ['Tên chiến dịch Google Ads',[
+  ['Search VN (excl. au)','Bến Thành: chiến dịch Search từ khóa thương hiệu nhắm nhiều nước (Mỹ, Singapore, khách nước ngoài đang ở Việt Nam), không gồm Úc.'],
+  ['Search Brand AU','Bến Thành: chiến dịch Search từ khóa thương hiệu chỉ nhắm Úc.'],
+  ['PMax Peak','Bến Thành: chiến dịch PMax chính, nhắm Úc và Mỹ, có loại trừ thương hiệu.'],
+  ['PMax SG deal','Bến Thành: chiến dịch PMax nhắm Singapore, Đài Loan và một số nước châu Á, có loại trừ thương hiệu.'],
+  ['PMax Jul\\pur','Bến Thành: chiến dịch PMax phụ tạo từ tháng 7.'],
+  ['Search Sing','Bến Thành: chiến dịch Search nhắm Singapore, chạy tháng 7.'],
+  ['Search Sakyo VN','Sakyo: chiến dịch Search từ khóa thương hiệu nhắm Nhật và khách nước ngoài đang ở Việt Nam.'],
+  ['PMax Sakyo VN','Sakyo: chiến dịch PMax nhắm Việt Nam, đã dừng từ tháng 8 vì tỷ lệ chuyển đổi rất thấp.'],
+  ['Search 18.9','Sakyo: chiến dịch Search tạo ngày 18/9 trên tài khoản Google Ads riêng của Sakyo.'],
+  ['Japan Town','Sakyo: asset group trong PMax nhắm khách Nhật.'],
+  ['Only Úc','Jolie: chiến dịch PMax chỉ nhắm Úc. Only VN: chỉ nhắm khách nước ngoài đang ở Việt Nam.',['Only VN']]
+ ]],
+ ['Giá, chương trình và vai trò',[
+  ['Rate plan','Gói giá trên website: giá, điều kiện (số đêm tối thiểu, hoàn huỷ) và quyền lợi đi kèm.',['rate plan']],
+  ['Early-bird','Ưu đãi cho khách đặt sớm trước ngày ở một khoảng nhất định.',['early-bird']],
+  ['Sát ngày','Ưu đãi cho khách đặt gần ngày ở (last-minute).',['last-minute','đặt gần ngày']],
+  ['Upsell','Mời khách nâng lên hạng phòng cao hơn để tăng doanh thu mỗi đêm.',['upsell']],
+  ['Parity','Giá trên website không cao hơn giá công khai trên OTA cho cùng hạng phòng, cùng ngày ở.',['parity']],
+  ['Giá thành viên','Giá giảm cho khách nhập mã thành viên SVLMEMBER (giảm 20%) trên website.',['giá thành viên']],
+  ['SVLMEMBER','Mã thành viên đang dùng trên website Silverland, giảm 20% so giá công khai.'],
+  ['Room Only','Giá chỉ gồm phòng, không gồm ăn sáng.'],
+  ['Benefit','Quyền lợi đi kèm khi đặt trực tiếp, ví dụ ăn sáng, trà chiều, đưa đón.',['benefit']],
+  ['RM','Revenue Manager: người phụ trách giá phòng và gói giá.'],
+  ['FO','Front Office: bộ phận lễ tân.'],
+  ['F&B','Bộ phận ẩm thực (nhà hàng, bar).'],
+  ['CĐT','Chủ đầu tư.'],
+  ['Xuân phân','Vernal Equinox Day, ngày lễ ở Nhật; năm 2027 là 21/03, nghỉ bù 22/03, tạo kỳ nghỉ 3 ngày 20 đến 22/03.',['xuân phân']],
+  ['Nghỉ giữa kỳ','Half-term: kỳ nghỉ một tuần giữa học kỳ ở Anh; tháng 2/2027 phần lớn trường ở Anh nghỉ 15 đến 19/02.',['nghỉ giữa kỳ']],
+  ['Easter','Lễ Phục sinh; năm 2027 là 26 đến 29/03, trùng kỳ nghỉ học ở một số bang của Úc.']
+ ]]
+];
+window.SVL_GLOSS=G;
+function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+var flat=[];G.forEach(function(g){g[1].forEach(function(t){flat.push([t[0],t[1]]);(t[2]||[]).forEach(function(a){flat.push([a,t[1]]);});});});
+flat.sort(function(a,b){return b[0].length-a[0].length;});
+function wrapIn(scope){
+  var used={};
+  scope.querySelectorAll('[data-tip]').forEach(function(e){used[e.textContent.trim().toLowerCase()]=1;});
+  var walker=document.createTreeWalker(scope,NodeFilter.SHOW_TEXT,{acceptNode:function(n){
+    var p=n.parentElement; if(!p) return NodeFilter.FILTER_REJECT;
+    if(p.closest('[data-tip],a,button,script,style,canvas,summary,.gl-panel,.nogl,thead,.tag-inf,.inf,.chip,.seg,.ref,sup')) return NodeFilter.FILTER_REJECT;
+    return n.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;}});
+  var nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+  flat.forEach(function(f){
+    var key=f[0].toLowerCase(); if(used[key]) return;
+    var re=new RegExp('(^|[^\\p{L}\\p{N}_])('+esc(f[0])+')(?=$|[^\\p{L}\\p{N}_])','u');
+    for(var i=0;i<nodes.length;i++){
+      var n=nodes[i]; if(!n.parentNode) continue;
+      var m=re.exec(n.nodeValue); if(!m) continue;
+      var start=m.index+m[1].length, end=start+m[2].length;
+      var after=n.splitText(start); var rest=after.splitText(end-start);
+      var sp=document.createElement('span'); sp.className='tip'; sp.tabIndex=0; sp.setAttribute('data-tip',f[1]); sp.textContent=after.nodeValue;
+      after.parentNode.replaceChild(sp,after);
+      nodes.splice(i,1,n,rest);
+      used[key]=1; break;
+    }
+  });
+}
+window.SVL_WRAP=wrapIn;
+function panel(el){
+  if(!el) return;
+  var h='';
+  G.forEach(function(g){h+='<div class="gl-grp"><div class="gl-h">'+g[0]+'</div><dl>';g[1].forEach(function(t){h+='<dt>'+t[0]+'</dt><dd>'+t[1]+'</dd>';});h+='</dl></div>';});
+  el.innerHTML=h;
+}
+window.SVL_PANEL=panel;
+})();
+</script>
+<script>
+var REF1='<sup><a href="#ref1" class="ref">[1]</a></sup>';
+var LEADB=['Trên 90 ngày','61 đến 90','31 đến 60','8 đến 30','0 đến 7'];
+var BLAB=['Trước T8','T8','T9','T10','T11','T12','T1','T2','T3'];
+var BUDM=['T11/2026','T12/2026','T1/2027','T2/2027','T3/2027'];
+var COMMON_TIP='<li><b>Các nút bấm:</b> chọn khách sạn ở đầu trang; chọn tháng stay ở mục 1, chọn thị trường ở mục 2 và 4, bấm một dòng ở mục 4 để xem giá, quyền lợi, lý do; rê chuột lên biểu đồ để xem số.</li><li><b>Chữ có gạch chân chấm:</b> rê chuột hoặc chạm vào để xem giải thích. Danh sách đầy đủ ở dưới.</li>';
+var INTRO0='<li><b>Dashboard trả lời 6 câu hỏi theo thứ tự</b> để chuẩn bị bán phòng quý 1/2027 cho kênh đặt trực tiếp trên website: khách đặt Q1 vào lúc nào; mỗi thị trường đặt sớm bao lâu; hiện đang ở đâu so năm trước; làm chương trình gì, khi nào; ngân sách đặt vào tháng nào; theo dõi và cần chốt gì. Mỗi khách sạn phân tích riêng trên dữ liệu của chính khách sạn đó.</li>';
+
+var H={
+/* ===================== BẾN THÀNH ===================== */
+BT:{
+ tab:'Bến Thành',tabSub:'347 / 1.349 RN',
+ eyebrow:'Silverland Bến Thành · Web direct · Q1/2027',
+ h1:'Kế hoạch bán Q1/2027: chạy từ hôm nay để đạt và vượt cùng kỳ',
+ meta:'Lập 27/10/2026 · Bộ phận Digital Marketing · Booking web đặt đến 26/10/2026 · OTA: SiteMinder, lấy 27/10/2026',
+ strip:'<div class="tile big"><div class="l">Đã bán cho Q1/2027 so mục tiêu đề xuất (+10%)</div><div class="v num">347 <small>/ 1.349 RN</small></div><div class="prog" aria-hidden="true"><span style="width:25.7%"></span><i style="left:90.9%" title="Sàn 1.226"></i></div><div class="prog-l"><span>26% mục tiêu</span><span>Vạch: sàn 1.226 RN (= Q1/2026)</span></div></div>'
+  +'<div class="tile"><div class="l">So cùng thời điểm năm trước</div><div class="v num">+24%</div><div class="d">347 so 279 RN <span class="pill g">Đi trước</span></div></div>'
+  +'<div class="tile"><div class="l">Mục tiêu đề xuất trên báo cáo Web Sales'+REF1+'</div><div class="v num">1.192 <small>đến 1.247 RN</small></div><div class="d">+10% đến +15% · doanh thu 4.875 đến 5.097 tr · Q1/2026: 1.084 RN, 4.432 tr</div></div>'
+  +'<div class="tile"><div class="l">Rủi ro lớn nhất</div><div class="v">Úc</div><div class="d">97 so 158 RN <span class="pill r">−39%</span></div></div>',
+ intro:'<li><b>Sàn</b> là kết quả Q1/2026 (mức tối thiểu phải đạt). <b>Mục tiêu đề xuất</b> tăng 10% đến 15% so Q1/2026: mức +10% (1.349 RN) dùng để tính mốc, mức +15% (1.410 RN) là mức vượt. <b>Mốc</b> là số đêm cần có tại các ngày 30/11, 31/12, 31/01, 28/02, 31/03 để về đích.</li><li><b>Số đêm (RN) tính theo dữ liệu booking web</b> để theo dõi được theo ngày đặt và quốc tịch. Số này cao hơn báo cáo Web Sales khoảng 13%: mục tiêu 1.349 đến 1.410 tương đương 1.192 đến 1.247 RN trên báo cáo Web Sales.</li><li><b>Số OTA</b> lấy từ SiteMinder (booking qua OTA theo ngày ở, không gồm website). Từ 08/2025 Trip.com, Expedia không gửi quốc tịch, nên 26% số đêm OTA Q1/2026 của Bến Thành không rõ thị trường; đọc số theo thị trường năm 2026 cùng Q1/2025.</li>',
+ s1h:'62% số đêm của Q1 được đặt trong 3 tháng T11, T12 và T1',
+ segs:[['Q1','Cả quý'],['T1','T1 · hè Úc'],['T2','T2 · Tết'],['T3','T3 · Easter']],
+ CP:['26/10','30/11','31/12','31/01','28/02','31/03'],
+ CURVE:{Q1:{ly:[279,406,692,1049,1156,1226],tg:[347,496,821,1189,1298,1349],now:347},
+  T1:{ly:[202,288,435,478,478,478],tg:[178,286,472,526,526,526],now:178},
+  T2:{ly:[54,85,186,354,373,373],tg:[89,120,221,389,410,410],now:89},
+  T3:{ly:[23,33,71,217,305,375],tg:[80,90,128,274,362,413],now:80}},
+ f3v:'70%',f3l:'số đêm khách đặt trong tháng 12/2025 là để ở trong Q1/2026 (với lượng đặt trong tháng 1/2026, tỷ lệ này là 65%). Nghĩa là quảng cáo chạy trong hai tháng này chủ yếu bán phòng cho Q1.',
+ f4:'<b>Ý nghĩa:</b> giá, chương trình và ngân sách cho Q1 phải sẵn sàng từ đầu T11. Đến T1 mới làm thì quý đã bán xong hơn một nửa.',
+ s2h:'Úc đặt sớm nhất, Singapore và châu Á đặt muộn nhất: mỗi nhóm mở bán vào thời điểm khác nhau',
+ k3l:'đặt qua gói có đưa đón',
+ MK:[
+ {k:'AU',n:'Úc, New Zealand',sn:'Úc',c:'--s1',share:'35% số đêm Q1/2026 · 429 đêm',lead:65,adr:'4,16',k3:'70%',
+  lead3:{T1:[41,26,14,19,0],T2:[26,14,50,11,0],T3:[10,29,23,35,3]},rn3:[236,74,119],
+  win:'T1: ngay đến 30/11, rồi 01/12 đến 15/01 · T2: 01/12 đến 10/01 · T3: 15/12 đến 31/01, sát ngày 25/02 đến 20/03',
+  ly:429,lyo:158,ty:97,tg:380,m28:[15,68],o25:[941,62],o26:[911,67],o27:510},
+ {k:'US',n:'Mỹ, Canada',sn:'Mỹ',c:'--s2',share:'23% · 284 đêm',lead:56,adr:'4,22',k3:'36%',
+  lead3:{T1:[42,5,19,30,5],T2:[24,8,24,23,21],T3:[2,51,27,11,9]},rn3:[81,100,103],
+  win:'T1: 01/12 đến 20/01 · T2: từ đầu T11, sát ngày trong T1 · T3: 15/12 đến 31/01',
+  ly:284,lyo:56,ty:111,tg:350,m28:[56,22],o25:[465,41],o26:[246,51],o27:148},
+ {k:'EU',n:'Châu Âu',sn:'Châu Âu',c:'--s3',share:'17% · 210 đêm',lead:45,adr:'4,13',k3:'58%',
+  lead3:{T1:[33,13,11,43,0],T2:[14,15,45,11,15],T3:[10,34,26,10,21]},rn3:[82,66,62],
+  win:'T1: 01/12 đến 20/01 · T2: 01/12 đến 10/01 · T3: 15/12 đến 31/01',
+  ly:210,lyo:42,ty:93,tg:265,m28:[35,14],o25:[1620,56],o26:[1334,55],o27:446},
+ {k:'AS',n:'Châu Á khác',sn:'Châu Á khác',c:'--s4',share:'16% · 202 đêm (Philippines, Đài Loan, Malaysia, Nhật)',lead:38,adr:'3,91',k3:'43%',
+  lead3:{T1:[12,10,33,45,0],T2:[6,2,77,13,1],T3:[24,11,21,37,8]},rn3:[67,97,38],
+  win:'T2 (Tết): 01/12 đến 10/01 · T1, T3: đặt trước 30 đến 60 ngày',
+  ly:202,lyo:23,ty:21,tg:220,m28:[9,12],o25:[1238,38],o26:[947,45],o27:165},
+ {k:'SG',n:'Singapore',sn:'Singapore',c:'--s5',share:'6% · 70 đêm',lead:38,adr:'4,02',k3:'37%',
+  lead3:{T1:[0,0,40,60,0],T2:[0,20,36,44,0],T3:[11,23,34,23,9]},rn3:[10,25,35],
+  win:'T2 (Tết): 15/12 đến 25/01 · T3: đặt trong T2',
+  ly:70,lyo:0,ty:15,tg:90,m28:[0,0],o25:[435,42],o26:[261,55],o27:50}],
+ BOOK:{AU:[11,27,57,63,53,85,68,39,26],US:[16,0,6,22,18,57,120,21,12],EU:[12,14,6,15,20,52,54,26,11],AS:[9,2,0,12,18,72,63,18,8],SG:[0,0,0,0,13,19,27,1,10],OT:[0,0,0,0,0,1,25,2,3]},
+ s3h:'Mỹ và châu Âu đi trước gấp đôi; Úc thiếu 61 đêm và đang chậm lại',
+ ohLbl:'On hand 26/10/2026',bulMax:440,bulNote:'Mục tiêu theo thị trường cộng 1.305; 44 đêm còn lại thuộc thị trường khác.',
+ s3facts:['<b>Úc thiếu chủ yếu ở T1:</b> on hand T1 là 45 so 127 đêm. Đặt thêm bằng cùng kỳ vẫn thiếu khoảng 80 đêm, nên mục tiêu Úc là 380 (Q1/2026: 429); phần còn lại bù bằng Mỹ, châu Âu.',
+  '<b>Vì sao Úc chậm:</b> 70% khách Úc Q1/2026 đặt qua gói có đưa đón, quyền lợi đã dừng từ 10/2026; giá on hand Úc 4,75 so 4,45 tr cùng kỳ. <span class="inf">Suy luận</span>',
+  '<b>Trên OTA:</b> Q1/2027 đã có 1.946 đêm (Úc 510, châu Âu 446). Web chiếm 15% số đêm Q1/2027 đã đặt; cả quý Q1/2026 là 17%.'],
+ s4h:'7 chương trình lên IBE trước cửa sổ đặt của từng thị trường, kiểm tra theo 5 mốc on hand',
+ PROG:[
+ {n:'Nền tảng giá Q1',s:'Mọi thị trường',mk:['AU','US','EU','AS','SG'],prep:['27/10/2026','01/11/2026'],sell:['01/11/2026','31/03/2027'],stay:['02/01/2027','31/03/2027'],
+  offer:'Giá thành viên (SVLMEMBER 20%), bản ăn sáng + trà chiều, huỷ miễn phí, đưa đón sân bay từ 2 đêm một chiều, từ 4 đêm hai chiều (chờ chốt); giá web không cao hơn OTA.',why:'62% số đêm Q1 đặt trong T11 đến T1; lần kiểm tra 28/09 giá web cao hơn Booking.com 5,2%.'},
+ {n:'Aussie Summer, last call',s:'Úc · stay T1',mk:['AU'],prep:['27/10/2026','01/11/2026'],sell:['01/11/2026','15/01/2027'],stay:['02/01/2027','31/01/2027'],
+  offer:'Giá thành viên; đưa đón sân bay từ 2 đêm một chiều, từ 4 đêm hai chiều (chờ chốt); phòng gia đình Sense City Family 42 m², Sense City 38 m².',why:'Úc T1 thiếu 82 đêm so cùng kỳ; 26% khách Úc T1 đặt trước 61 đến 90 ngày, tức trong T11.'},
+ {n:'Saigon Tết 2027',s:'Mỹ, Úc, châu Âu · stay Tết',mk:['US','AU','EU'],prep:['27/10/2026','01/11/2026'],sell:['01/11/2026','05/02/2027'],stay:['30/01/2027','14/02/2027'],
+  offer:'Bản ăn sáng + trà chiều, không bán Room Only giá sâu; trà chiều Tết, mứt, lì xì khi nhận phòng; ADR mục tiêu từ 3,9 tr.',why:'Gói Tết là 26% số đêm Q1/2026 nhưng ADR thấp hơn 16%; 24% khách Mỹ stay T2 đặt trước hơn 90 ngày.'},
+ {n:'Tết cho châu Á',s:'Singapore, Đài Loan, Philippines, Hồng Kông',mk:['AS','SG'],prep:['15/11/2026','01/12/2026'],sell:['01/12/2026','05/02/2027'],stay:['30/01/2027','14/02/2027'],
+  offer:'Cùng gói Tết; PMax Tết châu Á (từ PMax SG deal).',why:'Châu Á khác đặt 77% số đêm T2 trước 31 đến 60 ngày; Tết Âm lịch cùng ngày 06/02.'},
+ {n:'Black Friday, Cyber Monday',s:'Úc, Mỹ · stay Q1',mk:['AU','US'],prep:['10/11/2026','20/11/2026'],sell:['27/11/2026','30/11/2026'],stay:['02/01/2027','31/03/2027'],
+  offer:'Ưu đãi có thời hạn trên giá thành viên (mức do RM chốt), loại trừ 30/01 đến 14/02.',why:'T11/2025 chỉ mang về 122 đêm cho Q1; cần một mốc tạo lượng đặt trước T12.',inf:true},
+ {n:'Easter và nghỉ giữa kỳ',s:'Mỹ, châu Âu, Úc; Singapore từ T2',mk:['US','EU','AU','SG'],prep:['15/11/2026','01/12/2026'],sell:['01/12/2026','25/03/2027'],stay:['19/03/2027','11/04/2027'],
+  offer:'Early-bird chỉ có trên web (khung Early Unlock Deal), đưa đón sân bay từ 2 đêm một chiều, từ 4 đêm hai chiều, phòng gia đình.',why:'Easter 2027 nằm trong T3 (2026 là 05/04); 51% khách Mỹ stay T3 đặt trước 61 đến 90 ngày.'},
+ {n:'Đưa đón Long Thành',s:'Khách bay đường dài',mk:['US','EU','AU'],prep:['15/11/2026','01/12/2026'],sell:['01/12/2026','31/03/2027'],stay:['28/03/2027','11/04/2027'],
+  offer:'Áp dụng mức đưa đón chung (từ 2 đêm một chiều, từ 4 đêm hai chiều); stay 1 đêm đặt thêm có phí; hướng dẫn di chuyển trong email xác nhận.',why:'Long Thành khai thác từ 01/12/2026, nhận toàn bộ chuyến quốc tế đường dài từ 28/03/2027, cách trung tâm khoảng 40 km.'}],
+ MS:[['30/11/2026','≥ 496'],['31/12/2026','≥ 821'],['31/01/2027','≥ 1.189'],['28/02/2027','≥ 1.298'],['31/03/2027','≥ 1.349']],
+ PHASE:[{t:'28/10 đến 08/11',h:'Chốt nền tảng',m:'Giá Q1, gói Tết lên IBE 01/11; chốt 3 quyết định'},
+  {t:'09/11 đến 30/11',h:'Bán T1 cho Úc',m:'Aussie Summer, Tết cho Mỹ, Úc, châu Âu, Black Friday · mốc <b>496</b>'},
+  {t:'01/12 đến 31/12',h:'Tháng đặt lớn thứ hai',m:'Easter early-bird, Tết châu Á, T1 sát ngày · mốc <b>821</b>'},
+  {t:'01/01 đến 31/01',h:'Tháng đặt lớn nhất',m:'Tết sát ngày, Easter · mốc <b>1.189</b>'},
+  {t:'01/02 đến 31/03',h:'Stay T3, Long Thành',m:'T3 sát ngày, hướng dẫn sân bay · mốc <b>1.349</b>'}],
+ s5h:'Ngân sách T12 và T1 phần lớn là để bán Q1: giữ khung tối ưu, ưu tiên hai tháng này',
+ bud:{mode:'band',lo:[60.5,79.8,89.0,90.5,97.0],hi:[66.5,87.8,97.9,99.6,106.7],hot:[0,1,1,0,0],min:40,max:110},
+ budSub:'Thanh: ngang đến +10% so cùng kỳ; thanh xanh là tháng bán Q1 chính. Chấm: chi phí cùng kỳ.',
+ share:[38,70,65,28,22],
+ roasSub:'01/11/2025 đến 31/03/2026, Google Ads tài khoản Bến Thành',
+ roas:[['Philippines',42.5,4.4],['Đài Loan',27.5,7.9],['Mỹ',21.2,78.5],['Úc',18.6,136.1],['Singapore',17.3,47.8],['Anh',12.1,21.3],['Đức',11.1,12.8]],
+ roasNote:'Mở phần trên của khung khi ROAS 7 ngày từ 12, chiến dịch mất hiển thị do ngân sách trên 20% và giá web không cao hơn OTA. Không chạy lại các chiến dịch thử nghiệm Q1/2026 có ROAS dưới 3 (35 tr).',
+ decKey:'svl-q1-dec',
+ DEC:[{h:'Đưa đón sân bay cho stay Q1: từ 2 đêm một chiều, từ 4 đêm hai chiều',p:'Áp dụng cho Aussie Summer, Tết, Easter. 70% khách Úc Q1/2026 đặt qua gói có đưa đón; quyền lợi này đã dừng từ 10/2026. RM, FO chốt chi phí và ngày áp dụng.'},
+  {h:'Gói Tết 2027 lên IBE ngày 01/11',p:'Chỉ bản có ăn sáng và trà chiều, ADR mục tiêu từ 3,9 tr. Sớm hơn kế hoạch cũ 15/11 vì khách Mỹ đặt Tết sớm.'},
+  {h:'Ưu đãi Black Friday cho stay Q1',p:'Mức ưu đãi và ngày loại trừ (30/01 đến 14/02) cho 27 đến 30/11.'}],
+ TRIG:[['On hand Q1 so mốc','Thấp hơn mốc sàn quá 5%','Dồn phần trên của khung ngân sách cho thị trường đang thiếu; RM xem lại giá ngày on hand thấp'],
+  ['Úc đặt trong 7 ngày','Dưới 50% cùng kỳ, 2 tuần liền','Mở ưu đãi có thời hạn cho Úc'],
+  ['Giá web so OTA','Web cao hơn giá công khai thấp nhất','Báo RM trong ngày; giữ ngân sách ở mức nền'],
+  ['ROAS 7 ngày theo chiến dịch','Dưới 5,9 trong 2 tuần','Giảm 20% đến 30% ngân sách, chuyển sang chiến dịch có ROAS từ 12'],
+  ['ADR on hand Q1','Dưới 4,1 tr','Không mở thêm ưu đãi; ưu tiên bán Sense City, Square Suite']],
+ foot:'<li>Số đêm (RN) tính theo dữ liệu booking web (sheet Data, booking xác nhận) để theo dõi theo ngày đặt và quốc tịch. Dữ liệu booking cao hơn báo cáo Web Sales'+REF1+' khoảng 13%: mục tiêu 1.349 tương đương 1.192 RN trên báo cáo Web Sales, sàn 1.226 tương đương 1.084 RN.</li><li>Mốc tính theo từng tháng stay: mục tiêu tháng = Q1/2026 nhân 1,10 (T1 526, T2 410, T3 413); tháng đang đi trước giữ ít nhất tốc độ đặt của cùng kỳ, tháng đang đi sau (T1) phải đặt nhanh hơn cùng kỳ 1,26 lần. Mục tiêu theo thị trường là đề xuất, giữ Úc ở 380 vì thiếu hụt T1.</li>',
+ src:'<li>SVL Budget Report 2025, 2026; booking web (Data Hotel 2025, sheet Data 2026), không dùng cột thông tin cá nhân; Google Ads API tài khoản 645-385-5576, lấy 27/10/2026; SiteMinder Insights (Booking performance theo ngày ở, kênh OTA), lấy 27/10/2026.</li><li><a href="https://vietnamnews.vn/society/1796369/three-stage-transition-aims-to-ensure-smooth-launch-of-long-thanh-int-l-airport.html">Việt Nam News: lộ trình sân bay Long Thành</a> · <a href="https://www.cuemath.com/blog/school-holidays-2027-australia/">Lịch nghỉ học Úc 2027</a> · <a href="https://viettelstore.vn/tin-tuc/dem-ngay-den-tet-2027-con-bao-nhieu-ngay-nua-lich-nghi-tet-dinh-mui-chi-tiet">Lịch Tết Đinh Mùi 2027</a></li>'
+},
+
+/* ===================== SAKYO ===================== */
+SK:{
+ tab:'Sakyo',tabSub:'53 / 413 RN',
+ eyebrow:'Silverland Sakyo · Web direct · Q1/2027',
+ h1:'Kế hoạch bán Q1/2027: giữ đà tăng, bán đúng cửa sổ đặt ngắn của Sakyo',
+ meta:'Lập 27/10/2026 · Bộ phận Digital Marketing · Booking web đặt đến 25/10/2026 · OTA: SiteMinder, lấy 27/10/2026',
+ strip:'<div class="tile big"><div class="l">Đã bán cho Q1/2027 so mục tiêu đề xuất (+12%)</div><div class="v num">53 <small>/ 413 RN</small></div><div class="prog" aria-hidden="true"><span style="width:12.8%"></span><i style="left:89.3%" title="Sàn 369"></i></div><div class="prog-l"><span>13% mục tiêu</span><span>Vạch: sàn 369 RN (= Q1/2026)</span></div></div>'
+  +'<div class="tile"><div class="l">So cùng thời điểm năm trước</div><div class="v num">+179%</div><div class="d">53 so 19 RN <span class="pill g">Đi trước</span></div></div>'
+  +'<div class="tile"><div class="l">Mục tiêu đề xuất trên báo cáo Web Sales'+REF1+'</div><div class="v num">365 <small>đến 375 RN</small></div><div class="d">+12% đến +15% · doanh thu 1.241 đến 1.275 tr · Q1/2026: 326 RN, 1.108 tr</div></div>'
+  +'<div class="tile"><div class="l">Rủi ro lớn nhất</div><div class="v">Đặt muộn</div><div class="d">64% số đêm Q1/2026 đặt sau 31/12 <span class="pill r">T12, T1</span></div></div>',
+ intro:'<li><b>Sàn</b> là kết quả Q1/2026: 369 RN theo dữ liệu booking. <b>Mục tiêu đề xuất</b> tăng 10% đến 15% so Q1/2026: 413 RN (+12%) dùng để tính mốc, 424 RN (+15%) là mức vượt. Mức +12% thay vì +10% vì riêng T1 nếu chỉ đặt thêm bằng cùng kỳ đã đạt 110 đêm, cao hơn mức +10% của tháng này (102). <b>Mốc</b> là số đêm cần có tại 30/11, 31/12, 31/01, 28/02, 31/03.</li><li><b>Số đêm (RN) tính theo dữ liệu booking web</b>; số này cao hơn báo cáo Web Sales khoảng 13% (Q1/2026: 369 so 326 RN), nên mục tiêu 413 đến 424 tương đương 365 đến 375 RN trên báo cáo Web Sales.</li><li><b>Số OTA</b> lấy từ SiteMinder (booking qua OTA theo ngày ở, không gồm website). Từ 08/2025 Trip.com, Expedia không gửi quốc tịch, nên 59% số đêm OTA Q1/2026 của Sakyo không rõ thị trường; số theo thị trường năm 2026 thấp hơn thực tế, cần đọc cùng Q1/2025.</li><li><b>Mẫu web theo thị trường của Sakyo nhỏ</b> (25 đến 104 đêm mỗi thị trường), nên lead time trên web được đọc cùng lead time trên OTA.</li>',
+ s1h:'Sakyo bán Q1 muộn: 64% số đêm Q1/2026 được đặt sau 31/12, riêng tháng T1/2026 chiếm 46%',
+ segs:[['Q1','Cả quý'],['T1','T1 · năm mới Nhật'],['T2','T2 · Tết'],['T3','T3 · xuân phân, Easter']],
+ CP:['25/10','30/11','31/12','31/01','28/02','31/03'],
+ CURVE:{Q1:{ly:[19,46,131,300,350,369],tg:[53,80,165,338,392,413],now:53},
+  T1:{ly:[10,21,67,93,93,93],tg:[27,38,84,110,110,110],now:27},
+  T2:{ly:[9,18,45,120,152,152],tg:[22,31,58,133,167,167],now:22},
+  T3:{ly:[0,7,19,87,105,124],tg:[4,11,23,95,115,136],now:4}},
+ f3v:'82%',f3l:'số đêm khách đặt trong tháng 1/2026 là để ở trong Q1/2026 (đặt trong tháng 12/2025: 74%; tháng 11/2025: chỉ 22%). Nghĩa là tháng 11 vẫn chủ yếu bán cho T11, T12; từ tháng 12, phần lớn lượng đặt là cho Q1.',
+ f4:'<b>Ý nghĩa:</b> khác Bến Thành, Sakyo không cần mở bán đại trà từ T11. Giá, gói Tết và ngân sách cho Q1 phải sẵn từ đầu T12; T11 chỉ mở early-bird cho nhóm đặt sớm (Mỹ, Úc stay T3; khách Nhật đặt qua OTA).',
+ s2h:'Mỹ lớn nhất trên web; Nhật lớn nhất trên OTA nhưng chỉ chiếm 17% số đêm web; châu Âu đặt sát ngày nhất',
+ k3l:'ở Solace Premier, Sanctuary Executive',
+ MK:[
+ {k:'US',n:'Mỹ, Canada',sn:'Mỹ',c:'--s1',share:'28% số đêm Q1/2026 · 104 đêm',lead:38,adr:'3,58',k3:'58%',
+  lead3:{T1:[11,0,66,17,6],T2:[0,9,21,45,24],T3:[19,47,22,11,0]},rn3:[35,33,36],
+  win:'T1: 01/11 đến 15/12 · T2: sát ngày, 01/01 đến 10/02 · T3: 01/12 đến 31/01',
+  ly:104,lyo:4,ty:10,tg:117,m28:[6,0],o25:[290,28],o26:[125,44],o27:15},
+ {k:'JP',n:'Nhật',sn:'Nhật',c:'--s2',share:'17% · 61 đêm',lead:34,adr:'3,06',k3:'28%',
+  lead3:{T1:[14,0,0,86,0],T2:[0,17,58,25,0],T3:[0,0,100,0,0]},rn3:[22,24,15],
+  win:'T1: 05/12 đến 25/12 (kỳ nghỉ 01 đến 03/01, 09 đến 11/01) · T2: 15/12 đến 20/01 (11/02, 23/02) · T3: 20/01 đến 20/02 (20 đến 22/03). Trên OTA, khách Nhật đặt sớm hơn khoảng 2 tuần.',
+  ly:61,lyo:3,ty:5,tg:68,m28:[0,0],o25:[729,31],o26:[253,50],o27:80},
+ {k:'EU',n:'Châu Âu',sn:'Châu Âu',c:'--s3',share:'21% · 79 đêm (Anh, Hà Lan, Na Uy, Pháp)',lead:17,adr:'3,42',k3:'43%',
+  lead3:{T1:[21,0,0,7,71],T2:[0,0,30,40,30],T3:[0,28,36,32,4]},rn3:[14,40,25],
+  win:'T1: sát ngày trong T1 · T2: 15/12 đến 31/01 · T3: 01/12 đến 15/02',
+  ly:79,lyo:3,ty:23,tg:89,m28:[5,0],o25:[569,29],o26:[270,43],o27:47},
+ {k:'AS',n:'Châu Á khác',sn:'Châu Á khác',c:'--s4',share:'14% · 50 đêm (Trung Quốc, Philippines, Malaysia, Đài Loan)',lead:34,adr:'3,40',k3:'12%',
+  lead3:{T1:[0,0,0,88,12],T2:[22,0,44,34,0],T3:[0,0,0,100,0]},rn3:[8,41,1],
+  win:'T2 (Tết 06/02): 01/12 đến 25/01 · T1, T3: đặt trước 8 đến 30 ngày',
+  ly:50,lyo:9,ty:10,tg:56,m28:[8,0],o25:[577,18],o26:[395,19],o27:34},
+ {k:'AU',n:'Úc, New Zealand',sn:'Úc',c:'--s5',share:'11% · 41 đêm',lead:60,adr:'3,72',k3:'46%',
+  lead3:{T1:[0,0,40,40,20],T2:[50,38,0,12,0],T3:[0,43,18,32,7]},rn3:[5,8,28],
+  win:'T3: 15/12 đến 15/02 · T1: 01/12 đến 15/01 · T2: phần lớn đặt trước hơn 60 ngày',
+  ly:41,lyo:0,ty:5,tg:46,m28:[5,0],o25:[128,30],o26:[191,42],o27:66},
+ {k:'SG',n:'Singapore',sn:'Singapore',c:'--s7',share:'7% · 25 đêm',lead:29,adr:'3,35',k3:'36%',
+  lead3:{T1:[0,62,25,12,0],T2:[0,0,0,40,60],T3:[0,0,42,25,33]},rn3:[8,5,12],
+  win:'T2, T3: đặt trong vòng 30 ngày · T1: 01/11 đến 30/11',
+  ly:25,lyo:0,ty:0,tg:28,m28:[0,0],o25:[145,20],o26:[190,19],o27:12}],
+ BOOK:{US:[0,0,4,6,8,37,34,14,1],JP:[3,0,0,0,2,20,36,0,0],EU:[3,0,0,0,0,0,48,21,7],AS:[0,0,9,0,0,18,21,2,0],AU:[0,0,0,0,4,9,16,10,2],SG:[0,0,0,0,7,1,7,3,7],OT:[0,0,0,0,0,0,7,0,2]},
+ s3h:'Đi trước cùng kỳ ở 5 trên 6 thị trường, nhưng mới bằng 13% mục tiêu: phần lớn quý còn ở phía trước',
+ ohLbl:'On hand 25/10/2026',bulMax:130,bulNote:'Mục tiêu theo thị trường cộng 404; 9 đêm còn lại thuộc thị trường khác.',
+ s3facts:['<b>Châu Âu đi trước nhiều nhất:</b> 23 đêm so 3, đặt trước 112 đến 149 ngày (Bỉ, Đan Mạch, Đức, Ba Lan, Na Uy), giá on hand 5,30 tr.',
+  '<b>Giá và hạng phòng:</b> giá on hand Q1/2027 4,84 tr so 3,43 tr cả quý Q1/2026 (+41%); 62% số đêm on hand ở Solace Premier, Sanctuary Executive (Q1/2026: 41%).',
+  '<b>Trên OTA:</b> Q1/2027 đã có 554 đêm (Nhật 80, Úc 66, châu Âu 47). Web chiếm 6% số đêm Q1/2027 đã đặt, thấp hơn mức 8% của cả quý Q1/2026: nhóm đặt sớm hiện đi qua OTA nhiều hơn.'],
+ s4h:'6 chương trình theo cửa sổ đặt ngắn của Sakyo, tách riêng khách Nhật; kiểm tra theo 5 mốc on hand',
+ PROG:[
+ {n:'Nền tảng giá Q1',s:'Mọi thị trường',mk:['US','JP','EU','AS','AU','SG'],prep:['27/10/2026','14/11/2026'],sell:['15/11/2026','31/03/2027'],stay:['02/01/2027','31/03/2027'],
+  offer:'Giá đặt trực tiếp có ăn sáng; quyền lợi web hiện hành: trà chiều hằng ngày, minibar, massage 30 phút (Studio đến Premier) hoặc 60 phút (Executive, Suite), đưa đón sân bay một chiều từ 1 đêm; huỷ miễn phí. Bán chính Solace Premier, Sanctuary Executive; giá web không cao hơn OTA.',
+  why:'Giá on hand Q1/2027 cao hơn 41% mà lượng đặt vẫn tăng; 62% số đêm on hand ở Premier, Executive. Danh sách quyền lợi theo Room Type Nationality Report của Sakyo.'},
+ {n:'Năm mới và mùa xuân cho khách Nhật',s:'Nhật · stay T1 đến T3',mk:['JP'],prep:['27/10/2026','14/11/2026'],sell:['15/11/2026','15/03/2027'],stay:['01/01/2027','22/03/2027'],
+  offer:'Early-bird tiếng Nhật, đặt trước 45 đến 60 ngày; trang đặt phòng và quảng cáo tiếng Nhật; nâng hạng từ Stillness Studio lên Solace Premier khi còn phòng. Nhấn các kỳ nghỉ 01 đến 03/01, 09 đến 11/01, 11/02, 23/02, 20 đến 22/03.',
+  why:'Nhật là thị trường OTA lớn nhất của Sakyo trong Q1 (729 đêm Q1/2025) và đặt OTA sớm hơn web (50 so 34 ngày, Q1/2026); web chỉ có 61 đêm. PMax nhắm Nhật Q1/2026 chi 2,1 tr, chưa có chuyển đổi.'},
+ {n:'Tết châu Á',s:'Đài Loan, Trung Quốc, Hàn, Singapore · stay Tết',mk:['AS','SG'],prep:['15/11/2026','30/11/2026'],sell:['01/12/2026','05/02/2027'],stay:['04/02/2027','14/02/2027'],
+  offer:'Gói Tết có ăn sáng, ở từ 3 đêm; Solace Premier, Sanctuary Executive cho nhóm 2 người.',
+  why:'Châu Á khác có 41 đêm stay T2/2026, 44% đặt trước 31 đến 60 ngày, trung bình 4,2 đêm phòng mỗi booking; Tết Âm lịch 06/02/2027.'},
+ {n:'Early-bird stay T3',s:'Mỹ, Úc, châu Âu · stay T3',mk:['US','AU','EU'],prep:['15/11/2026','30/11/2026'],sell:['01/12/2026','31/01/2027'],stay:['01/03/2027','31/03/2027'],
+  offer:'Early-bird chỉ trên web, ở từ 3 đêm, kèm ăn sáng và đưa đón một chiều; Sanctuary Executive cho Mỹ, Úc.',
+  why:'Stay T3/2026: 47% số đêm khách Mỹ và 43% khách Úc đặt trước 61 đến 90 ngày; Easter 28/03/2027.'},
+ {n:'Đặt gần ngày',s:'Mỹ, châu Âu · stay T1 đến T3',mk:['US','EU','SG'],prep:['01/12/2026','20/12/2026'],sell:['01/01/2027','31/03/2027'],stay:['02/01/2027','31/03/2027'],
+  offer:'Ưu đãi có thời hạn cho ngày còn trống, đặt trước 0 đến 21 ngày, Room Only và bản ăn sáng; không áp dụng 04 đến 14/02.',
+  why:'78% số đêm khách châu Âu stay T1 và 69% khách Mỹ stay T2 đặt trước dưới 31 ngày.'},
+ {n:'Đưa đón Long Thành',s:'Khách bay đường dài',mk:['US','EU','AU'],prep:['15/11/2026','01/12/2026'],sell:['01/12/2026','31/03/2027'],stay:['28/03/2027','11/04/2027'],
+  offer:'Đưa đón một chiều từ 1 đêm áp dụng cho sân bay Long Thành (chờ FO xác nhận); hướng dẫn di chuyển trong email xác nhận.',
+  why:'Long Thành khai thác từ 01/12/2026, nhận toàn bộ chuyến quốc tế đường dài từ 28/03/2027, cách trung tâm khoảng 40 km.'}],
+ MS:[['30/11/2026','≥ 80'],['31/12/2026','≥ 165'],['31/01/2027','≥ 338'],['28/02/2027','≥ 392'],['31/03/2027','≥ 413']],
+ PHASE:[{t:'28/10 đến 14/11',h:'Chốt nền tảng',m:'Gói Q1, trang tiếng Nhật, asset Japan Town; chốt 3 quyết định'},
+  {t:'15/11 đến 30/11',h:'Mở early-bird',m:'Nhật, Mỹ, Úc stay T3 · mốc <b>80</b>'},
+  {t:'01/12 đến 31/12',h:'Tháng bán Q1 thứ hai',m:'Tết châu Á, năm mới Nhật · mốc <b>165</b>'},
+  {t:'01/01 đến 31/01',h:'Tháng đặt lớn nhất',m:'46% số đêm Q1/2026 đặt trong T1 · mốc <b>338</b>'},
+  {t:'01/02 đến 31/03',h:'Sát ngày, Long Thành',m:'Mỹ, châu Âu đặt gần ngày · mốc <b>413</b>'}],
+ s5h:'T12 và T1 là hai tháng bán Q1 (74% và 82% booking là cho Q1): giữ 30 tr/tháng, ưu tiên hai tháng này',
+ bud:{mode:'bar',plan:[30,30,30,30,30],ly:[25.0,34.0,31.9,25.0,35.0],hot:[0,1,1,0,0],min:0,max:40},
+ budSub:'Cột: đề xuất 30 tr/tháng (tổng Q1 90 tr); cột xanh là tháng bán Q1 chính. Chấm: chi phí cùng kỳ theo SVL Budget Report.',
+ share:[22,74,82,51,27],
+ roasSub:'01/11/2025 đến 31/03/2026, các chiến dịch Sakyo trên tài khoản 753-421-2327 (không gồm tài khoản riêng của Sakyo)',
+ roas:[['Khách tại Việt Nam',15.1,63.3],['Mỹ',9.5,11.5],['Anh',8.5,2.6],['Singapore',5.5,6.4],['Nhật',0,2.1],['Đài Loan',0,1.1],['Úc',0,0.8]],
+ roasNote:'Khách tại Việt Nam: Search Sakyo VN nhắm người dùng đang ở Việt Nam. Nhật, Đài Loan, Úc chưa có chuyển đổi trên Google Ads trong Q1/2026, nên chỉ tăng ngân sách Nhật sau khi có trang tiếng Nhật. Tổng chi Q1/2026 theo Budget Report 91,9 tr; khoảng 40 tr chạy trên tài khoản riêng của Sakyo, chỉ xem được qua giao diện.',
+ decKey:'svl-q1-dec-SK',
+ DEC:[{h:'Giữ ngân sách Google Ads 30 tr/tháng đến T3/2027',p:'Tổng Q1 90 tr, ngang Q1/2026 (91,9 tr). Ưu tiên T12, T1; chỉ mở thêm khi ROAS 7 ngày từ 12 và chiến dịch mất hiển thị do ngân sách trên 20%.'},
+  {h:'Trang và early-bird tiếng Nhật lên trước 15/11',p:'Early-bird đặt trước 45 đến 60 ngày cho stay T1 đến T3; gắn asset group Japan Town. Không tăng ngân sách Nhật trước khi trang chạy.'},
+  {h:'Gói Tết châu Á lên IBE 01/12; đưa đón cho Long Thành',p:'Gói ăn sáng, ở từ 3 đêm, stay 04 đến 14/02. FO xác nhận đưa đón một chiều áp dụng cho sân bay Long Thành từ 28/03.'}],
+ TRIG:[['On hand Q1 so mốc','Thấp hơn mốc quá 5%','Dồn ngân sách cho thị trường đang thiếu; RM xem lại giá ngày on hand thấp'],
+  ['Khách Nhật đặt trong 7 ngày (từ 01/12)','Dưới 50% cùng kỳ, 2 tuần liền','Mở ưu đãi có thời hạn bằng tiếng Nhật'],
+  ['Giá web so OTA','Web cao hơn giá công khai thấp nhất','Báo RM trong ngày; giữ ngân sách ở mức nền'],
+  ['ROAS 7 ngày theo chiến dịch','Dưới 5,9 trong 2 tuần','Giảm 20% đến 30% ngân sách, chuyển sang chiến dịch có ROAS từ 12'],
+  ['Tỷ trọng Solace Premier, Sanctuary Executive trong on hand','Dưới 50%','Tạm dừng ưu đãi hạng thấp; đẩy nâng hạng lên Solace Premier']],
+ foot:'<li>Số đêm (RN) tính theo dữ liệu booking web (Data Hotel 2025, sheet Data 2026, booking xác nhận), cao hơn báo cáo Web Sales'+REF1+' khoảng 13%: mục tiêu 413 tương đương 365 RN, sàn 369 tương đương 326 RN.</li><li>Mốc theo từng tháng stay: mục tiêu tháng = Q1/2026 nhân 1,10, nhưng không thấp hơn on hand cộng lượng đặt thêm của cùng kỳ; mục tiêu tháng T1 110, T2 167, T3 136. Mục tiêu theo thị trường là đề xuất.</li>',
+ src:'<li>Booking web (Data Hotel 2025, sheet Data 2026), không dùng cột thông tin cá nhân; SiteMinder Insights (Booking performance theo ngày ở, kênh OTA), lấy 27/10/2026; Room Type Nationality Report (Sakyo); SVL Budget Report 2025, 2026; Google Ads API tài khoản 753-421-2327, lấy 27/10/2026.</li><li><a href="https://sg.trip.com/guide/info/japan-public-holiday-2027.html">Trip.com: ngày lễ Nhật Bản 2027</a> · <a href="https://vietnamnews.vn/society/1796369/three-stage-transition-aims-to-ensure-smooth-launch-of-long-thanh-int-l-airport.html">Việt Nam News: lộ trình sân bay Long Thành</a> · <a href="https://viettelstore.vn/tin-tuc/dem-ngay-den-tet-2027-con-bao-nhieu-ngay-nua-lich-nghi-tet-dinh-mui-chi-tiet">Lịch Tết Đinh Mùi 2027</a></li>'
+},
+
+/* ===================== JOLIE ===================== */
+JL:{
+ tab:'Jolie',tabSub:'57 / 398 RN',
+ eyebrow:'Silverland Jolie · Web direct · Q1/2027',
+ h1:'Kế hoạch bán Q1/2027: bắt kịp khách Úc, châu Âu trước 31/12',
+ meta:'Lập 27/10/2026 · Bộ phận Digital Marketing · Booking web đặt đến 25/10/2026 · OTA: SiteMinder, lấy 27/10/2026',
+ strip:'<div class="tile big"><div class="l">Đã bán cho Q1/2027 so mục tiêu đề xuất (+10%)</div><div class="v num">57 <small>/ 398 RN</small></div><div class="prog" aria-hidden="true"><span style="width:14.3%"></span><i style="left:90.7%" title="Sàn 361"></i></div><div class="prog-l"><span>14% mục tiêu</span><span>Vạch: sàn 361 RN (= Q1/2026)</span></div></div>'
+  +'<div class="tile"><div class="l">So cùng thời điểm năm trước</div><div class="v num">−44%</div><div class="d">57 so 101 RN <span class="pill r">Đi sau</span></div></div>'
+  +'<div class="tile"><div class="l">Mục tiêu đề xuất trên báo cáo Web Sales'+REF1+'</div><div class="v num">322 <small>đến 336 RN</small></div><div class="d">+10% đến +15% · doanh thu 982 đến 1.027 tr · Q1/2026: 292 RN, 893 tr</div></div>'
+  +'<div class="tile"><div class="l">Rủi ro lớn nhất</div><div class="v">Úc, châu Âu</div><div class="d">13 so 71 RN <span class="pill r">−82%</span></div></div>',
+ intro:'<li><b>Sàn</b> là kết quả Q1/2026: 361 RN theo dữ liệu booking. <b>Mục tiêu đề xuất</b> tăng 10% đến 15% so Q1/2026: 398 RN (+10%) dùng để tính mốc, 415 RN (+15%) là mức vượt. Jolie đang đi sau cùng kỳ 44%, nên từ nay đến cuối quý phải đặt nhanh hơn cùng kỳ 1,31 lần. <b>Mốc</b> là số đêm cần có tại 30/11, 31/12, 31/01, 28/02, 31/03; mốc tháng đang đi sau đòi hỏi tốc độ đặt cao hơn cùng kỳ.</li><li><b>Số đêm (RN) tính theo dữ liệu booking web</b>; số này cao hơn báo cáo Web Sales khoảng 24% (Q1/2026: 361 so 292 RN), nên mục tiêu 398 đến 415 tương đương 322 đến 336 RN trên báo cáo Web Sales.</li><li><b>Số OTA</b> lấy từ SiteMinder (booking qua OTA theo ngày ở, không gồm website). Năm 2026 có 21% số đêm OTA Q1 của Jolie không rõ quốc tịch (Trip.com, Expedia không gửi), nên số theo thị trường năm 2026 thấp hơn thực tế một phần.</li>',
+ s1h:'Jolie bán Q1 sớm nhất: 28% số đêm Q1/2026 đã được đặt trước 25/10, 60% trước 31/12',
+ segs:[['Q1','Cả quý'],['T1','T1 · hè Úc'],['T2','T2 · Tết, nghỉ giữa kỳ Anh'],['T3','T3 · Easter']],
+ CP:['25/10','30/11','31/12','31/01','28/02','31/03'],
+ CURVE:{Q1:{ly:[101,156,218,326,354,361],tg:[57,139,220,359,390,398],now:57},
+  T1:{ly:[69,99,121,155,155,155],tg:[16,70,109,170,170,170],now:16},
+  T2:{ly:[25,31,52,99,109,109],tg:[37,43,64,111,121,121],now:37},
+  T3:{ly:[7,26,45,72,90,97],tg:[4,26,47,78,99,107],now:4}},
+ f3v:'95%',f3l:'số đêm khách đặt trong tháng 12/2025 là để ở trong Q1/2026 (đặt trong tháng 1/2026: 72%; tháng 11/2025: 37%). Nghĩa là lượng đặt trong tháng 12 gần như chỉ dành cho Q1.',
+ f4:'<b>Ý nghĩa:</b> mùa bán Q1 của Jolie đang diễn ra. Năm trước, đến 25/10 đã có 69 đêm cho T1; năm nay mới 16. Từ nay đến 31/12 là giai đoạn cuối để giữ khách Úc, Anh, Đức stay T1, T2.',
+ s2h:'Úc và châu Âu đặt sớm nhất (trung vị 66 đến 89 ngày); Mỹ đặt muộn hơn và đang dẫn đầu',
+ k3l:'đặt qua gói có tên đưa đón',
+ MK:[
+ {k:'US',n:'Mỹ, Canada',sn:'Mỹ',c:'--s1',share:'23% số đêm Q1/2026 · 82 đêm',lead:44,adr:'3,17',k3:'61%',
+  lead3:{T1:[26,0,35,35,4],T2:[26,5,42,21,5],T3:[53,24,0,24,0]},rn3:[46,19,17],
+  win:'T1: ngay đến 15/12 · T2: ngay đến 10/01 · T3: ngay đến 31/12 (53% đặt trước hơn 90 ngày)',
+  ly:82,lyo:17,ty:43,tg:100,m28:[27,0],o25:[281,51],o26:[223,57],o27:64},
+ {k:'UK',n:'Anh, Ireland',sn:'Anh',c:'--s2',share:'19% · 67 đêm',lead:70,adr:'3,26',k3:'54%',
+  lead3:{T1:[25,25,32,11,7],T2:[57,14,18,11,0],T3:[0,9,55,9,27]},rn3:[28,28,11],
+  win:'T1: ngay đến 30/11 · T2: ngay đến 15/12 (57% đặt trước hơn 90 ngày) · T3: 01/12 đến 15/02',
+  ly:67,lyo:23,ty:13,tg:72,m28:[7,0],o25:[393,76],o26:[339,90],o27:200},
+ {k:'DE',n:'Đức',sn:'Đức',c:'--s3',share:'14% · 52 đêm',lead:66,adr:'2,95',k3:'52%',
+  lead3:{T1:[35,12,0,47,6],T2:[0,0,50,42,8],T3:[13,70,0,17,0]},rn3:[17,12,23],
+  win:'T1: ngay, rồi sát ngày 15/12 đến 20/01 · T2: 15/12 đến 31/01 · T3: ngay đến 31/01',
+  ly:52,lyo:6,ty:0,tg:55,m28:[0,0],o25:[314,54],o26:[347,69],o27:83},
+ {k:'EU',n:'Châu Âu khác',sn:'Châu Âu khác',c:'--s4',share:'17% · 61 đêm (Pháp, Ý, Thuỵ Sĩ, Đan Mạch)',lead:89,adr:'3,14',k3:'66%',
+  lead3:{T1:[100,0,0,0,0],T2:[24,0,34,41,0],T3:[38,25,25,12,0]},rn3:[16,29,16],
+  win:'T1: đã qua (đặt trước hơn 90 ngày) · T2: 15/12 đến 31/01 · T3: ngay đến 31/01',
+  ly:61,lyo:22,ty:0,tg:65,m28:[0,6],o25:[703,54],o26:[937,67],o27:286},
+ {k:'AU',n:'Úc, New Zealand',sn:'Úc',c:'--s5',share:'19% · 68 đêm',lead:79,adr:'3,18',k3:'54%',
+  lead3:{T1:[50,17,0,33,0],T2:[0,57,0,43,0],T3:[28,36,12,24,0]},rn3:[36,7,25],
+  win:'T1: ngay đến 30/11, rồi sát ngày 15/12 đến 20/01 · T3: ngay đến 31/01',
+  ly:68,lyo:20,ty:0,tg:70,m28:[0,0],o25:[328,61],o26:[295,78],o27:93},
+ {k:'AS',n:'Châu Á',sn:'Châu Á',c:'--s7',share:'7% · 25 đêm (Nhật, Thái Lan, Singapore)',lead:77,adr:'3,16',k3:'88%',
+  lead3:{T1:[82,9,0,9,0],T2:[0,0,100,0,0],T3:[60,0,0,40,0]},rn3:[11,9,5],
+  win:'T2 (Tết): 15/12 đến 05/01 · T1, T3: phần lớn đặt trước hơn 90 ngày',
+  ly:25,lyo:13,ty:1,tg:26,m28:[1,9],o25:[438,29],o26:[245,36],o27:48}],
+ BOOK:{US:[5,0,12,0,18,24,18,1,4],UK:[7,8,8,3,10,10,11,7,3],DE:[6,0,0,0,5,7,29,5,0],EU:[8,4,10,4,3,11,17,4,0],AU:[4,10,6,0,12,10,17,9,0],AS:[4,0,0,9,0,0,10,2,0],OT:[0,0,0,0,0,0,6,0,0]},
+ s3h:'Mỹ đi trước gấp 2,5 lần; Úc, Anh, Đức, châu Âu khác mới có 13 so 71 đêm cùng thời điểm',
+ ohLbl:'On hand 25/10/2026',bulMax:110,bulNote:'Mục tiêu theo thị trường cộng 388; 10 đêm còn lại thuộc thị trường khác.',
+ s3facts:['<b>Mỹ:</b> 43 trên 57 đêm on hand, trong đó 26 đêm đến từ 2 booking 13 đêm phòng cho T2 (đặt 05 và 06/10). Trừ 2 booking này, Mỹ ngang cùng kỳ (17 so 17).',
+  '<b>Trên OTA:</b> Úc, Anh, Đức, châu Âu khác đã có 662 đêm cho Q1/2027 (Anh 200, châu Âu khác 286). Web chiếm 2% số đêm của nhóm này đã đặt (13 trên 675); cả quý Q1/2026 là 11%. Nhu cầu vẫn có, web chưa giữ được.',
+  '<b>Vì sao chậm:</b> 60% số đêm Q1/2026 bán qua gói có tên đưa đón sân bay (Early Saver, Unbeatable January, Lunar New Year); trong on hand Q1/2027 chỉ còn 5%, gói chính hiện là World Traveler Rate (ăn sáng). Kiểm tra giá 12/08: Agoda, Trip.com cho ngày 20/01, 20/02, 20/03/2027 thấp hơn web 172.000 đến 348.000 đồng/đêm (hạng thấp nhất). <span class="inf">Suy luận</span>'],
+ s4h:'7 chương trình, ưu tiên bắt kịp Úc và châu Âu trước 31/12; kiểm tra theo 5 mốc on hand',
+ PROG:[
+ {n:'Nền tảng giá Q1',s:'Mọi thị trường',mk:['US','UK','DE','EU','AU','AS'],prep:['27/10/2026','01/11/2026'],sell:['01/11/2026','31/03/2027'],stay:['02/01/2027','31/03/2027'],
+  offer:'Giá đặt trực tiếp có ăn sáng và trà chiều; đưa đón sân bay ghi ngay trong tên gói như Q1/2026; huỷ miễn phí; giá web không cao hơn Agoda, Trip.com. Bán Premier, Junior Suite, Executive.',
+  why:'60% số đêm Q1/2026 bán qua gói có tên đưa đón, on hand Q1/2027 chỉ 5%. Premier và Junior Suite chiếm 76% số đêm Q1/2026.'},
+ {n:'Aussie Summer',s:'Úc · stay T1 đến đầu T2',mk:['AU'],prep:['27/10/2026','01/11/2026'],sell:['01/11/2026','20/01/2027'],stay:['02/01/2027','03/02/2027'],
+  offer:'Từ 3 đêm, ăn sáng, đưa đón; Premier và Junior Suite (khách Úc chia đều hai hạng); PMax Úc dùng asset early-bird.',
+  why:'Úc stay T1/2026: 36 đêm, 50% đặt trước hơn 90 ngày, 33% đặt 8 đến 30 ngày; on hand Úc 0 so 20 cùng thời điểm. Hè Úc kéo dài đến 26/01 đến 03/02.'},
+ {n:'Winter Sun châu Âu',s:'Anh, Đức, châu Âu khác · stay T2, T3',mk:['UK','DE','EU'],prep:['27/10/2026','05/11/2026'],sell:['05/11/2026','31/01/2027'],stay:['08/02/2027','31/03/2027'],
+  offer:'Early-bird chỉ trên web, từ 3 đêm; Junior Suite cho khách Anh (46% số đêm khách Anh Q1/2026), Premier cho khách Đức (71%).',
+  why:'Anh, Đức, châu Âu khác: 180 đêm Q1/2026, trung vị đặt trước 66 đến 89 ngày; nghỉ giữa kỳ ở Anh 15 đến 19/02/2027, Easter 28/03/2027.'},
+ {n:'Mỹ: giữ đà',s:'Mỹ, Canada · stay T1 đến T3',mk:['US'],prep:['27/10/2026','01/11/2026'],sell:['01/11/2026','15/03/2027'],stay:['02/01/2027','31/03/2027'],
+  offer:'Junior Suite, Premier, Executive; ở từ 3 đêm; ưu đãi ở dài cho booking từ 7 đêm.',
+  why:'Mỹ là thị trường lớn nhất trên web (23% số đêm Q1/2026) và là thị trường duy nhất đi trước cùng kỳ; lead time trung vị 44 ngày, ngắn hơn châu Âu, Úc.'},
+ {n:'Black Friday, Cyber Monday',s:'Mỹ, Anh, Úc · stay Q1',mk:['US','UK','AU'],prep:['10/11/2026','20/11/2026'],sell:['27/11/2026','30/11/2026'],stay:['02/01/2027','31/03/2027'],
+  offer:'Ưu đãi có thời hạn (mức do RM chốt), loại trừ 04 đến 14/02.',why:'Cần một mốc tạo lượng đặt trong T11 để thu hẹp khoảng thiếu 44% so cùng kỳ.',inf:true},
+ {n:'River Soul Valentine',s:'Cặp đôi · stay 12 đến 16/02',mk:['US','UK','DE','EU','AU'],prep:['15/11/2026','30/11/2026'],sell:['01/12/2026','12/02/2027'],stay:['12/02/2027','16/02/2027'],
+  offer:'Junior Suite có bồn Jacuzzi, trà chiều, đồ uống tại Jolie Rooftop Garden Bar view sông Sài Gòn.',
+  why:'Junior Suite chiếm 38% số đêm Q1/2026; concept River Soul hướng tới cặp đôi; Valentine 14/02/2027 ngay sau Tết.',inf:true},
+ {n:'Đưa đón Long Thành',s:'Khách bay đường dài',mk:['US','UK','DE','EU','AU'],prep:['15/11/2026','01/12/2026'],sell:['01/12/2026','31/03/2027'],stay:['28/03/2027','11/04/2027'],
+  offer:'Mức đưa đón trong gói áp dụng cho sân bay Long Thành (chờ FO xác nhận); hướng dẫn di chuyển trong email xác nhận.',
+  why:'Long Thành khai thác từ 01/12/2026, nhận toàn bộ chuyến quốc tế đường dài từ 28/03/2027, cách trung tâm khoảng 40 km.'}],
+ MS:[['30/11/2026','≥ 139'],['31/12/2026','≥ 220'],['31/01/2027','≥ 359'],['28/02/2027','≥ 390'],['31/03/2027','≥ 398']],
+ PHASE:[{t:'28/10 đến 08/11',h:'Chốt nền tảng',m:'Gói Q1 có đưa đón lên IBE 01/11; thêm Anh, Đức vào PMax Úc'},
+  {t:'09/11 đến 30/11',h:'Bắt kịp T1, T2',m:'Úc, Anh, Đức; Black Friday · mốc <b>139</b>'},
+  {t:'01/12 đến 31/12',h:'Tháng chỉ bán Q1',m:'95% booking T12 là cho Q1; Valentine · mốc <b>220</b>'},
+  {t:'01/01 đến 31/01',h:'Stay T2, T3',m:'Châu Âu T2, T3; Easter · mốc <b>359</b>'},
+  {t:'01/02 đến 31/03',h:'Sát ngày, Long Thành',m:'T3 sát ngày · mốc <b>398</b>'}],
+ s5h:'T12 gần như chỉ bán cho Q1 (95% booking): giữ 20 tr/tháng, chuyển phần chi thử nghiệm sang tháng đặt chính',
+ bud:{mode:'bar',plan:[20,20,20,20,20],ly:[18.1,18.0,17.1,15.6,27.9],hot:[0,1,1,0,0],min:0,max:30},
+ budSub:'Cột: đề xuất 20 tr/tháng (tổng Q1 60 tr); cột xanh là tháng bán Q1 chính. Chấm: chi phí cùng kỳ theo SVL Budget Report.',
+ share:[37,95,72,43,8],
+ roasSub:'01/11/2025 đến 31/03/2026, các chiến dịch Jolie trên tài khoản 753-421-2327',
+ roas:[['Anh',16.1,6.2],['Khách tại Việt Nam',12.0,51.8],['Đức',11.3,5.7],['Úc',6.8,17.4],['Mỹ',3.6,4.6],['Pháp',0,1.4],['Singapore',0,1.3]],
+ roasNote:'PMax Jolie Only Úc ra chuyển đổi ở Anh (ROAS 20,1) và Đức (16,1) dù không nhắm chính; riêng tại Úc đạt 7,7. Mỹ ROAS 3,6 dù là thị trường web lớn nhất: phần lớn booking của khách Mỹ không đến từ quảng cáo nhắm Mỹ. T3/2026 có 6,9 tr chi cho các chiến dịch thử nghiệm không có chuyển đổi.',
+ decKey:'svl-q1-dec-JL',
+ DEC:[{h:'Gói Q1 có đưa đón trong tên gói lên IBE 01/11',p:'60% số đêm Q1/2026 bán qua các gói này. RM, FO chốt giá, số đêm tối thiểu và mức đưa đón; kiểm tra lại giá Agoda, Trip.com cho Q1.'},
+  {h:'Thêm Anh, Đức vào PMax nhắm Úc cho Q1',p:'Giữ 2 chiến dịch Úc, Mỹ; thêm asset early-bird châu Âu. Trong Q1/2026, PMax Only Úc đã ra chuyển đổi ở Anh (ROAS 20,1) và Đức (16,1).'},
+  {h:'Ngân sách 20 tr/tháng đến T3/2027, bỏ các chiến dịch thử nghiệm',p:'Tổng Q1 60 tr, ngang Q1/2026 (60,6 tr). Không chạy lại PM Jolie US 17.3, PM Jolie UK #2, PM Jolie VN 17.3, Search Jolie VN (T3/2026 chi 6,9 tr, 0 chuyển đổi).'}],
+ TRIG:[['On hand Q1 so mốc','Thấp hơn mốc quá 5%','Dồn ngân sách cho thị trường đang thiếu; RM xem lại giá ngày on hand thấp'],
+  ['Úc, Anh, Đức đặt trong 7 ngày','Dưới 50% cùng kỳ, 2 tuần liền','Mở ưu đãi có thời hạn cho thị trường đó'],
+  ['Giá web so Agoda, Trip.com','Web cao hơn giá công khai thấp nhất','Báo RM trong ngày; giữ ngân sách ở mức nền'],
+  ['ROAS 7 ngày theo chiến dịch','Dưới 5,9 trong 2 tuần','Giảm 20% đến 30% ngân sách, chuyển sang chiến dịch có ROAS từ 12'],
+  ['Tỷ trọng gói có đưa đón trong on hand','Dưới 30% sau 30/11','Kiểm tra hiển thị gói trên IBE và nội dung quảng cáo']],
+ foot:'<li>Số đêm (RN) tính theo dữ liệu booking web (sheet Data, booking xác nhận), cao hơn báo cáo Web Sales'+REF1+' khoảng 24%: mục tiêu 398 tương đương 322 RN, sàn 361 tương đương 292 RN. SiteMinder ghi nhận 85 đêm web cho Q1/2027 (tính đến 27/10, cách đếm khác dữ liệu booking).</li><li>Mốc theo từng tháng stay: mục tiêu tháng = Q1/2026 nhân 1,10; tháng đang đi sau phải đặt nhanh hơn cùng kỳ (T1 gấp 1,8 lần, T3 gấp 1,14 lần); mục tiêu tháng T1 170, T2 121, T3 107. Mục tiêu theo thị trường là đề xuất.</li>',
+ src:'<li>Booking web (sheet Data, Data Hotel), không dùng cột thông tin cá nhân; SiteMinder Insights (Booking performance theo ngày ở, kênh OTA), lấy 27/10/2026; So sánh giá WEB và OTA Q4/2026 đến Q1/2027 (thu thập 12/08/2026); SVL Budget Report 2025, 2026; Google Ads API tài khoản 753-421-2327, lấy 27/10/2026.</li><li><a href="https://cognito.org/blog/half-term-dates-2026-2027">Cognito: lịch nghỉ giữa kỳ Anh 2026 đến 2027</a> · <a href="https://www.cuemath.com/blog/school-holidays-2027-australia/">Lịch nghỉ học Úc 2027</a> · <a href="https://vietnamnews.vn/society/1796369/three-stage-transition-aims-to-ensure-smooth-launch-of-long-thanh-int-l-airport.html">Việt Nam News: lộ trình sân bay Long Thành</a> · <a href="https://viettelstore.vn/tin-tuc/dem-ngay-den-tet-2027-con-bao-nhieu-ngay-nua-lich-nghi-tet-dinh-mui-chi-tiet">Lịch Tết Đinh Mùi 2027</a></li>'
+}
+};
+
+</script>
+<script>
+(function(){
+var root=document.documentElement;
+try{var t=localStorage.getItem('svl-theme'); if(t) root.setAttribute('data-theme',t);}catch(e){}
+function v(n){return getComputedStyle(root).getPropertyValue(n).trim();}
+function fmt(x){return Number(x).toLocaleString('vi-VN');}
+function $(id){return document.getElementById(id);}
+var LEADC=['#0d366b','#256abf','#5598e7','#9ec5f4','#cde2fb'];
+var LEADT=['#fff','#fff','#fff','#0b0b0b','#0b0b0b'];
+var ORDER=['BT','SK','JL'];
+var hk='BT';
+try{var h0=(location.hash||'').replace('#','').toUpperCase(); if(H[h0]) hk=h0; else {var sv=localStorage.getItem('svl-q1-hotel'); if(H[sv]) hk=sv;}}catch(e){}
+var D, state, charts={};
+
+/* timeline 27/10/2026 to 15/04/2027 */
+var T0=Date.UTC(2026,9,27), T1=Date.UTC(2027,3,15), SPAN=T1-T0;
+function d(s){var p=s.split('/');return Date.UTC(+p[2],+p[1]-1,+p[0]);}
+function pc(s){return Math.max(0,Math.min(100,(d(s)-T0)/SPAN*100));}
+
+function tabs(){
+  $('htabs').innerHTML=ORDER.map(function(k){var x=H[k];return '<button class="htab" role="tab" id="tab-'+k+'" data-h="'+k+'" aria-selected="'+(k===hk)+'" aria-controls="main"><b>'+x.tab+'</b><span>'+x.tabSub+'</span></button>';}).join('');
+  document.querySelectorAll('.htab').forEach(function(b){
+    b.addEventListener('click',function(){pick(b.dataset.h);});
+    b.addEventListener('keydown',function(e){var i=ORDER.indexOf(b.dataset.h);if(e.key==='ArrowRight'){pick(ORDER[(i+1)%3]);$('tab-'+hk).focus();}if(e.key==='ArrowLeft'){pick(ORDER[(i+2)%3]);$('tab-'+hk).focus();}});
+  });
+}
+function pick(k){
+  if(k===hk) return; hk=k;
+  try{localStorage.setItem('svl-q1-hotel',k); history.replaceState(null,'','#'+k);}catch(e){}
+  document.querySelectorAll('.htab').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.h===hk));});
+  render();
+}
+
+/* ---------- static text ---------- */
+function renderText(){
+  $('eyebrow').textContent=D.eyebrow; $('h1').textContent=D.h1; $('meta').textContent=D.meta;
+  document.title='Q1/2027 '+D.tab+' · Dashboard kế hoạch';
+  $('strip').innerHTML=D.strip;
+  $('glIntro').innerHTML='<ul>'+INTRO0+D.intro+COMMON_TIP+'</ul>';
+  $('s1h').textContent=D.s1h; $('s2h').textContent=D.s2h; $('s3h').textContent=D.s3h; $('s4h').textContent=D.s4h; $('s5h').textContent=D.s5h;
+  $('segs').innerHTML='<span class="lbl">Tháng stay</span>'+D.segs.map(function(s,i){return '<button class="seg" data-stay="'+s[0]+'" aria-pressed="'+(i===0)+'">'+s[1]+'</button>';}).join('');
+  document.querySelectorAll('.seg[data-stay]').forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('.seg[data-stay]').forEach(function(x){x.setAttribute('aria-pressed','false');});
+    b.setAttribute('aria-pressed','true'); state.stay=b.dataset.stay; drawCurve();});});
+  $('f3v').textContent=D.f3v; $('f3l').textContent=D.f3l; $('f4').innerHTML=D.f4;
+  $('mkTrL').textContent=D.k3l;
+  $('ohLbl').textContent=D.ohLbl; $('bulNote').textContent=D.bulNote;
+  $('s3facts').innerHTML=D.s3facts.map(function(f){return '<div class="fact"><div class="l" style="margin:0;color:var(--ink)">'+f+'</div></div>';}).join('');
+  $('budSub').textContent=D.budSub; $('roasSub').textContent=D.roasSub; $('roasNote').textContent=D.roasNote;
+  $('budShare').innerHTML=D.share.map(function(x,i){return '<div'+(D.bud.hot[i]?' class="hot"':'')+'><b class="num">'+x+'%</b><span>'+['T11','T12','T1','T2','T3'][i]+'</span></div>';}).join('');
+  $('trig').innerHTML=D.TRIG.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>';}).join('');
+  $('foot').innerHTML='<b>Cách đọc số</b><ul>'+D.foot+'<li>Nhãn <span class="inf">Suy luận</span> là nhận định chưa kiểm chứng bằng dữ liệu. Lead time trên web là trung vị; lead time trên OTA là trung bình do SiteMinder tính.</li></ul><b>Nguồn</b><ul><li id="ref1">[1] Báo cáo Web Sales: Google Sheet "Hotels Web Sales Status 2025, 2026".</li>'+D.src+'</ul>';
+}
+
+/* ---------- section 1 ---------- */
+function drawCurve(){
+  var c=D.CURVE[state.stay], el=$('cCurve'); if(!el||!window.Chart) return;
+  if(charts.curve) charts.curve.destroy();
+  var ink=v('--ink'),sub=v('--muted'),grid=v('--grid');
+  charts.curve=new Chart(el,{type:'line',data:{labels:D.CP,datasets:[
+    {label:'Q1/2026 (sàn)',data:c.ly,borderColor:v('--ly'),backgroundColor:v('--ly'),borderDash:[6,4],borderWidth:2,pointRadius:4,tension:.3},
+    {label:'Mốc cần đạt Q1/2027',data:c.tg,borderColor:ink,backgroundColor:ink,borderWidth:2.5,pointRadius:4,tension:.3},
+    {label:'On hand hôm nay',data:[c.now,null,null,null,null,null],borderColor:v('--s2'),backgroundColor:v('--s2'),pointRadius:8,pointHoverRadius:10,showLine:false,pointBorderColor:v('--surface'),pointBorderWidth:2}
+  ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{position:'bottom',labels:{color:ink,boxWidth:12,usePointStyle:true}},tooltip:{callbacks:{label:function(x){return x.raw==null?null:x.dataset.label+': '+fmt(x.raw)+' đêm';}}}},
+    scales:{x:{ticks:{color:sub},grid:{display:false},title:{display:true,text:'Ngày đặt',color:sub}},y:{beginAtZero:true,ticks:{color:sub},grid:{color:grid},title:{display:true,text:'Số đêm (RN)',color:sub}}}}});
+  var p31=Math.round(c.ly[2]/c.ly[5]*100), p01=Math.round(c.ly[3]/c.ly[5]*100);
+  $('f1v').textContent=p31+'%';
+  $('f1l').textContent='số đêm '+(state.stay==='Q1'?'Q1':state.stay)+'/2026 đã đặt trước 31/12';
+  $('f2v').textContent=p01+'%';
+  $('f2l').textContent='đã đặt trước 31/01';
+  var t='<thead><tr><th>Mốc</th><th>Q1/2026</th><th>Mốc 2027</th></tr></thead><tbody>';
+  D.CP.forEach(function(x,i){t+='<tr><td>'+x+'</td><td class="num">'+fmt(c.ly[i])+'</td><td class="num">'+fmt(c.tg[i])+(i===0?' (thực tế)':'')+'</td></tr>';});
+  $('tCurve').innerHTML=t+'</tbody>';
+}
+
+/* ---------- section 2 ---------- */
+function drawBook(){
+  var el=$('cBook'); if(!el||!window.Chart) return;
+  if(charts.book) charts.book.destroy();
+  var ink=v('--ink'),sub=v('--muted'),grid=v('--grid');
+  var sets=D.MK.map(function(m){return [m.k,m.sn,m.c];}).concat([['OT','Khác','--s6']]);
+  charts.book=new Chart(el,{type:'bar',data:{labels:BLAB,datasets:sets.map(function(s){return {label:s[1],data:D.BOOK[s[0]],backgroundColor:v(s[2]),borderColor:v('--surface'),borderWidth:{top:2,bottom:0,left:0,right:0},borderRadius:3,stack:'a',maxBarThickness:56};})},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{position:'bottom',labels:{color:ink,boxWidth:12}},tooltip:{callbacks:{label:function(x){return x.dataset.label+': '+x.raw+' đêm';},footer:function(items){var s=0;items.forEach(function(i){s+=i.raw;});return 'Tổng: '+s+' đêm';}}}},
+      scales:{x:{stacked:true,ticks:{color:sub},grid:{display:false},title:{display:true,text:'Tháng đặt',color:sub}},y:{stacked:true,beginAtZero:true,ticks:{color:sub},grid:{color:grid},title:{display:true,text:'Số đêm (RN)',color:sub}}}}});
+}
+function chipsHTML(id,allLabel){
+  var h=allLabel?'<button class="chip" data-mk="" aria-pressed="true"><i style="background:var(--muted)"></i>'+allLabel+'</button>':'';
+  D.MK.forEach(function(m,i){h+='<button class="chip" data-mk="'+m.k+'" aria-pressed="'+(!allLabel&&m.k===state.mk)+'"><i style="background:var('+m.c+')"></i>'+m.n+'</button>';});
+  $(id).innerHTML='<span class="lbl">Thị trường</span>'+h;
+}
+function drawMarket(){
+  var m=D.MK.filter(function(x){return x.k===state.mk;})[0];
+  $('mkName').textContent=m.n; $('mkShare').textContent=m.share;
+  $('mkLead').textContent=m.lead; $('mkAdr').textContent=m.adr; $('mkTr').textContent=m.k3; $('mkWin').textContent=m.win;
+  $('mkOta').innerHTML='Q1/2025: <b class="num">'+fmt(m.o25[0])+'</b> đêm, lead time TB '+m.o25[1]+' ngày · Q1/2026: <b class="num">'+fmt(m.o26[0])+'</b> đêm, '+m.o26[1]+' ngày · đã có <b class="num">'+fmt(m.o27)+'</b> đêm cho Q1/2027 (web: '+m.ty+')';
+  var h='';
+  ['T1','T2','T3'].forEach(function(t,ti){
+    h+='<div class="lead-row"><span class="m">'+t+'</span><div class="stack" title="'+m.rn3[ti]+' đêm">';
+    m.lead3[t].forEach(function(p,i){ if(p>0) h+='<span style="flex:'+p+';background:'+LEADC[i]+';color:'+LEADT[i]+'" data-gt="'+t+' · '+LEADB[i]+': '+p+'% ('+m.rn3[ti]+' đêm cả tháng)">'+(p>=8?p+'%':'')+'</span>';});
+    if(m.rn3[ti]===0) h+='<span style="flex:1;background:var(--surface2);color:var(--muted)">không có booking</span>';
+    h+='</div></div>';
+  });
+  $('leadBars').innerHTML=h;
+  $('leadLegend').innerHTML=LEADB.map(function(b,i){return '<span><i style="background:'+LEADC[i]+'"></i>'+b+'</span>';}).join('');
+  var small=m.rn3.some(function(x){return x<30;});
+  $('mkSmall').textContent=small?'Tháng có dưới 30 đêm: đọc tỷ lệ thận trọng, đối chiếu lead time trên OTA.':'';
+}
+
+/* ---------- section 3 ---------- */
+function drawBullets(){
+  var max=D.bulMax, h='';
+  D.MK.forEach(function(m){
+    var need=Math.max(0,m.tg-m.ty), dim=state.gmk&&state.gmk!==m.k;
+    h+='<div class="bul'+(dim?' dim':'')+'" style="--c:var('+m.c+')">'
+      +'<div class="nm"><i style="background:var('+m.c+')"></i>'+m.sn+'</div>'
+      +'<div class="track" data-gt="'+m.n+': on hand '+m.ty+' đêm (cùng thời điểm '+m.lyo+'); cần đặt thêm '+need+' để đạt '+m.tg+'; Q1/2026 cuối kỳ '+m.ly+'">'
+      +'<span class="ty" style="width:'+(m.ty/max*100)+'%;background:var('+m.c+')"></span>'
+      +'<span class="need" style="left:'+(m.ty/max*100)+'%;width:'+(need/max*100)+'%"></span>'
+      +'<span class="lyo" style="left:'+(m.lyo/max*100)+'%"></span>'
+      +'<span class="lyf" style="left:'+(m.ly/max*100)+'%"></span></div>'
+      +'<div class="st"><b class="num">'+m.ty+'</b> / mục tiêu '+m.tg+'<br><span class="delta '+(m.ty>=m.lyo?'up':'dn')+'">'+(m.lyo? (m.ty>=m.lyo?'+':'−')+Math.abs(Math.round((m.ty/m.lyo-1)*100))+'% cùng kỳ':'cùng kỳ 0')+'</span></div></div>';
+  });
+  $('bullets').innerHTML=h;
+  $('mom').style.gridTemplateColumns='repeat('+(D.MK.length>5?3:D.MK.length)+',1fr)';
+  $('mom').innerHTML=D.MK.map(function(m){
+    return '<div style="border-top:3px solid var('+m.c+')"><b class="num">'+m.m28[0]+'</b><span>'+m.sn+'<br>cùng kỳ '+m.m28[1]+'</span></div>';}).join('');
+}
+
+/* ---------- section 4 ---------- */
+function drawPhases(){
+  $('phases').innerHTML=D.PHASE.map(function(p,i){return '<div class="phase"><div class="t">Giai đoạn '+(i+1)+' · '+p.t+'</div><div class="h">'+p.h+'</div><div class="m">'+p.m+'</div></div>';}).join('');
+}
+function drawGantt(){
+  var months=[['Th11','01/11/2026'],['Th12','01/12/2026'],['Th1','01/01/2027'],['Th2','01/02/2027'],['Th3','01/03/2027'],['Th4','01/04/2027']];
+  var h='<div class="g-head"><div></div><div class="g-months">'+months.map(function(m){return '<span style="left:'+pc(m[1])+'%">'+m[0]+'</span>';}).join('')+'</div></div>';
+  h+='<div class="g-head" style="height:22px"><div style="font-size:11px">Mốc on hand Q1</div><div class="g-months">'+D.MS.map(function(m){return '<span class="g-ms" style="left:'+pc(m[0])+'%;border-left:1px solid var(--line)">'+m[1]+'</span>';}).join('')+'</div></div>';
+  D.PROG.forEach(function(p,i){
+    var dim=state.gmk&&p.mk.indexOf(state.gmk)<0;
+    h+='<div class="g-row'+(dim?' dim':'')+(state.prog===i?' sel':'')+'" data-i="'+i+'" tabindex="0" role="button" aria-label="'+p.n+'">'
+      +'<div class="g-name">'+p.n+'<small>'+p.s+'</small></div><div class="g-lane">'
+      +'<span class="g-prep" style="left:'+pc(p.prep[0])+'%;width:'+(pc(p.prep[1])-pc(p.prep[0]))+'%"></span>'
+      +'<span class="g-bar" style="left:'+pc(p.sell[0])+'%;width:'+Math.max(.8,pc(p.sell[1])-pc(p.sell[0]))+'%" data-gt="Bán: '+p.sell[0].slice(0,5)+' đến '+p.sell[1].slice(0,5)+'"></span>'
+      +'<span class="g-stay" style="left:'+pc(p.stay[0])+'%;width:'+(pc(p.stay[1])-pc(p.stay[0]))+'%" data-gt="Stay: '+p.stay[0].slice(0,5)+' đến '+p.stay[1].slice(0,5)+'"></span>'
+      +'</div></div>';
+  });
+  h+='<div style="position:absolute;top:0;bottom:0;left:210px;right:0;pointer-events:none">'
+    +D.MS.map(function(m){return '<span class="g-vline" style="left:'+pc(m[0])+'%"></span>';}).join('')
+    +'<span class="g-today" style="left:0%"></span></div>';
+  $('gantt').innerHTML=h;
+  document.querySelectorAll('.g-row').forEach(function(r){
+    function sel(){state.prog=+r.dataset.i; drawGantt(); drawDetail();}
+    r.addEventListener('click',sel); r.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();sel();}});
+  });
+}
+function drawDetail(){
+  var p=D.PROG[state.prog];
+  $('pDetail').innerHTML='<div><b>'+p.n+'</b>Bán '+p.sell[0].slice(0,5)+' đến '+p.sell[1].slice(0,5)+'<br>Stay '+p.stay[0].slice(0,5)+' đến '+p.stay[1].slice(0,5)+'<br>'+p.s+'</div><div><b>Giá và quyền lợi</b>'+p.offer+'</div><div><b>Lý do</b>'+p.why+(p.inf?' <span class="inf">Suy luận</span>':'')+'</div>';
+}
+
+/* ---------- section 5 ---------- */
+function drawBud(){
+  var el=$('cBud'); if(!el||!window.Chart) return;
+  if(charts.bud) charts.bud.destroy();
+  var ink=v('--ink'),sub=v('--muted'),grid=v('--grid'), b=D.bud, ds, tip;
+  var colors=b.hot.map(function(h){return h?v('--s1'):v('--ly');});
+  if(b.mode==='band'){
+    ds=[{type:'line',label:'Cùng kỳ',data:b.lo,showLine:false,pointRadius:6,pointStyle:'circle',borderColor:v('--surface'),borderWidth:2,backgroundColor:ink},
+        {label:'Khung (ngang đến +10%)',data:b.lo.map(function(x,i){return [x,b.hi[i]];}),backgroundColor:colors,borderRadius:4,maxBarThickness:46}];
+    tip=function(x){return Array.isArray(x.raw)?'Khung: '+fmt(x.raw[0])+' đến '+fmt(x.raw[1])+' tr':'Cùng kỳ: '+fmt(x.raw)+' tr';};
+  } else {
+    ds=[{type:'line',label:'Cùng kỳ',data:b.ly,showLine:false,pointRadius:6,pointStyle:'circle',borderColor:v('--surface'),borderWidth:2,backgroundColor:ink},
+        {label:'Đề xuất',data:b.plan,backgroundColor:colors,borderRadius:4,maxBarThickness:46}];
+    tip=function(x){return x.dataset.label+': '+fmt(x.raw)+' tr';};
+  }
+  charts.bud=new Chart(el,{type:'bar',data:{labels:BUDM,datasets:ds},options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom',labels:{color:ink,boxWidth:12}},tooltip:{callbacks:{label:tip}}},
+    scales:{x:{ticks:{color:sub},grid:{display:false}},y:{min:b.min,max:b.max,ticks:{color:sub},grid:{color:grid},title:{display:true,text:'Triệu đồng',color:sub}}}}});
+}
+function drawRoas(){
+  var el=$('cRoas'); if(!el||!window.Chart) return;
+  if(charts.roas) charts.roas.destroy();
+  var ink=v('--ink'),sub=v('--muted'),grid=v('--grid'), rows=D.roas;
+  charts.roas=new Chart(el,{type:'bar',data:{labels:rows.map(function(r){return r[0];}),datasets:[{label:'ROAS',data:rows.map(function(r){return Math.max(r[1],0.25);}),backgroundColor:rows.map(function(r){return r[1]<5.9?v('--ly'):v('--s1');}),borderRadius:4,maxBarThickness:18}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(x){return 'ROAS '+String(rows[x.dataIndex][1]).replace('.',',')+' · chi phí '+String(rows[x.dataIndex][2]).replace('.',',')+' tr';}}}},
+      scales:{x:{beginAtZero:true,ticks:{color:sub},grid:{color:grid},title:{display:true,text:'ROAS (hoà vốn 5,9; cột xám: dưới hoà vốn)',color:sub}},y:{ticks:{color:ink},grid:{display:false}}}}});
+}
+
+/* ---------- section 6 ---------- */
+function drawDec(){
+  var done={}; try{done=JSON.parse(localStorage.getItem(D.decKey)||'{}');}catch(e){}
+  $('dec').innerHTML=D.DEC.map(function(x,i){return '<div class="dcard'+(done[i]?' done':'')+'"><span class="tag">Chốt trước 08/11</span><h4>'+x.h+'</h4><p>'+x.p+'</p><button type="button" data-d="'+i+'" aria-pressed="'+(!!done[i])+'">'+(done[i]?'Đã chốt':'Đánh dấu đã chốt')+'</button></div>';}).join('');
+  document.querySelectorAll('.dcard button').forEach(function(b){b.addEventListener('click',function(){
+    var i=b.dataset.d; done[i]=!done[i]; try{localStorage.setItem(D.decKey,JSON.stringify(done));}catch(e){} drawDec();});});
+}
+
+function wireChips(){
+  chipsHTML('mkChips',null); chipsHTML('mkChips2','Tất cả');
+  document.querySelectorAll('#mkChips .chip').forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('#mkChips .chip').forEach(function(x){x.setAttribute('aria-pressed','false');});
+    b.setAttribute('aria-pressed','true'); state.mk=b.dataset.mk; drawMarket();});});
+  document.querySelectorAll('#mkChips2 .chip').forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('#mkChips2 .chip').forEach(function(x){x.setAttribute('aria-pressed','false');});
+    b.setAttribute('aria-pressed','true'); state.gmk=b.dataset.mk||null; drawGantt(); drawBullets();});});
+}
+
+function drawCharts(){drawCurve();drawBook();drawBud();drawRoas();}
+function render(){
+  D=H[hk]; state={stay:'Q1',mk:D.MK[0].k,gmk:null,prog:0};
+  renderText(); wireChips(); drawMarket(); drawBullets(); drawPhases(); drawGantt(); drawDetail(); drawDec(); drawCharts();
+  if(window.SVL_WRAP){document.querySelectorAll('main section').forEach(function(s){SVL_WRAP(s);}); SVL_WRAP($('strip'));}
+}
+tabs(); render();
+if(window.SVL_PANEL) SVL_PANEL($('glPanel'));
+
+$('themeBtn').addEventListener('click',function(){
+  var cur=root.getAttribute('data-theme');
+  var dark=cur? cur==='dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var next=dark?'light':'dark'; root.setAttribute('data-theme',next);
+  try{localStorage.setItem('svl-theme',next);}catch(e){}
+  drawCharts();
+});
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',drawCharts);
+
+var links=[].slice.call(document.querySelectorAll('.stepnav a'));
+function spy(){var y=window.scrollY+90,cur=null;links.forEach(function(a){var s=document.querySelector(a.getAttribute('href'));if(s&&s.offsetTop<=y)cur=a;});links.forEach(function(a){a.classList.toggle('on',a===cur);});}
+window.addEventListener('scroll',spy,{passive:true}); spy();
+
+var box=$('tipbox'),g=$('gtip');
+function place(el,b,txt){b.textContent=txt;b.style.display='block';var r=el.getBoundingClientRect(),bw=b.offsetWidth,bh=b.offsetHeight;var x=Math.min(Math.max(8,r.left+r.width/2-bw/2),window.innerWidth-bw-8);var y=r.bottom+8;if(y+bh>window.innerHeight-8)y=r.top-bh-8;b.style.left=x+'px';b.style.top=Math.max(8,y)+'px';}
+document.addEventListener('mouseover',function(e){var t=e.target.closest&&e.target.closest('[data-tip]');if(t)place(t,box,t.getAttribute('data-tip'));var q=e.target.closest&&e.target.closest('[data-gt]');if(q)place(q,g,q.getAttribute('data-gt'));});
+document.addEventListener('mouseout',function(e){var t=e.target.closest&&e.target.closest('[data-tip]');if(t&&!t.contains(e.relatedTarget))box.style.display='none';var q=e.target.closest&&e.target.closest('[data-gt]');if(q&&!q.contains(e.relatedTarget))g.style.display='none';});
+document.addEventListener('focusin',function(e){var t=e.target.closest&&e.target.closest('[data-tip]');if(t)place(t,box,t.getAttribute('data-tip'));});
+document.addEventListener('focusout',function(){box.style.display='none';});
+window.addEventListener('scroll',function(){box.style.display='none';g.style.display='none';},{passive:true});
+})();
+
+</script>
+</body>
+</html>
