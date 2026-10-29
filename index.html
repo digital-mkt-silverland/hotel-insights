@@ -3,756 +3,502 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Review kênh Web direct 2H/2026 · Silverland</title>
+<title>Review Performance 2H/2026 · Silverland</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
+  color-scheme:light;
   --bg:#F6F2EC; --paper:#FFFDF9; --ink:#1E1A16; --sub:#5E554C; --line:#E4DBCF;
   --accent:#8E4F24; --accent-soft:#F3E3D3; --good:#2D6A4C; --good-soft:#E1EFE6;
   --bad:#A23A2C; --bad-soft:#F6E1DC; --warn:#8A6214; --warn-soft:#F5EAD2;
-  --bar:#8E4F24; --bar2:#D9B38F; --tgt:#1E1A16; --ly:#8C8378;
+  --s-otb:#8E4F24; --s-est:#D9B38F; --s-cdt:#2a78d6; --s-cmo:#eb6834; --s-ck:#1baf7a; --s-ly:#8C8378;
+  --grid:#ECE4D9;
   --serif:"Lora",Georgia,serif; --sans:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
+    color-scheme:dark;
     --bg:#141210; --paper:#1D1A17; --ink:#EEE7DE; --sub:#B3A898; --line:#3A332C;
     --accent:#E2A876; --accent-soft:#3A2A1E; --good:#7CC7A0; --good-soft:#1E3328;
     --bad:#F08E7E; --bad-soft:#3D221D; --warn:#E5C27A; --warn-soft:#3A2F17;
-    --bar:#E2A876; --bar2:#7A5A3F; --tgt:#EEE7DE; --ly:#9B9184;
+    --s-otb:#E2A876; --s-est:#7A5A3F; --s-cdt:#3987e5; --s-cmo:#d95926; --s-ck:#199e70; --s-ly:#9B9184;
+    --grid:#2C2722;
   }
 }
 :root[data-theme="dark"]{
+  color-scheme:dark;
   --bg:#141210; --paper:#1D1A17; --ink:#EEE7DE; --sub:#B3A898; --line:#3A332C;
   --accent:#E2A876; --accent-soft:#3A2A1E; --good:#7CC7A0; --good-soft:#1E3328;
   --bad:#F08E7E; --bad-soft:#3D221D; --warn:#E5C27A; --warn-soft:#3A2F17;
-  --bar:#E2A876; --bar2:#7A5A3F; --tgt:#EEE7DE; --ly:#9B9184;
+  --s-otb:#E2A876; --s-est:#7A5A3F; --s-cdt:#3987e5; --s-cmo:#d95926; --s-ck:#199e70; --s-ly:#9B9184;
+  --grid:#2C2722;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6}
-.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-.num{font-variant-numeric:tabular-nums}
-header.top{background:#16120F;color:#F5E6D3;padding:26px 0 24px}
-header.top .brand{letter-spacing:.32em;font-size:12px;color:#FCDDB9;text-transform:uppercase}
-header.top h1{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.3;margin:8px 0 6px;color:#FFF7EE}
-header.top .meta{font-size:13px;color:#CDBBA5}
-header.top .row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
-header.top .row>div{flex:1 1 auto;min-width:0}
-header.top .toggle{flex:0 0 auto;margin-left:auto}
-.toggle{background:transparent;color:#F5E6D3;border:1px solid #6B5A49;border-radius:6px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
-.toggle .ts{display:none}
-.htabs{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
-.htabs .wrap{display:flex;gap:0;overflow-x:auto}
-.htab{background:transparent;border:0;border-bottom:3px solid transparent;color:var(--sub);font:inherit;font-size:15px;font-weight:600;padding:14px 22px 11px;cursor:pointer;white-space:nowrap}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 16px 64px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);font-weight:600}
+h1{font-family:var(--serif);font-weight:600;font-size:28px;line-height:1.25;margin:6px 0 6px}
+.meta{color:var(--sub);font-size:13.5px;margin:0}
+.btn-theme{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:6px;padding:7px 12px;font:inherit;font-size:13px;cursor:pointer}
+.btn-theme:focus-visible,.htab:focus-visible,.card:focus-visible,.chip:focus-visible,.lnk:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.note{background:var(--warn-soft);border-left:3px solid var(--warn);padding:10px 14px;border-radius:4px;font-size:13.5px;margin:18px 0 6px}
+.htabs{display:flex;gap:6px;margin:22px 0 0;border-bottom:1px solid var(--line);overflow-x:auto}
+.htab{border:0;background:none;color:var(--sub);font:inherit;font-weight:600;padding:10px 14px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
 .htab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
-.htab .s{display:block;font-size:12px;font-weight:400;color:var(--sub)}
-.toggle:focus-visible,.htab:focus-visible,.mtab:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.panel-h[hidden]{display:none}
-section{padding:30px 0 4px;scroll-margin-top:90px}
-.toc{background:var(--paper);border:1px solid var(--line);padding:12px 18px;margin-top:26px}
-.toc-h{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);font-weight:600;margin-bottom:6px}
-.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
-.toc li{line-height:1.4}
-.toc a{color:var(--ink);text-decoration:none;font-size:14px;border-bottom:1px solid var(--line)}
-.toc a:hover,.toc a:focus-visible{color:var(--accent);border-color:var(--accent)}
-@media print{.toc{display:none}}
-.kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:600}
-h2{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.35;margin:6px 0 10px}
-h3{font-size:17px;margin:4px 0 6px}
-p.lead{color:var(--sub);max-width:800px;margin:0 0 14px}
-.verdict{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--accent);padding:14px 20px;margin-top:16px}
-.verdict h4{margin:0 0 6px;font-size:15px}
-.verdict p{margin:8px 0;line-height:1.6}
-.verdict p b{color:var(--ink)}
-.summary{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--accent);padding:16px 20px;margin-top:6px}
-.summary ol{margin:6px 0 0;padding-left:20px}
-.summary li{margin:4px 0}
-.hero{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
-.hero.h3{grid-template-columns:1.3fr 1fr 1fr}
-.kpi{background:var(--paper);border:1px solid var(--line);padding:14px 16px}
-.kpi .l{font-size:12px;color:var(--sub)}
-.kpi .v{font-size:28px;font-weight:700;line-height:1.15;margin:4px 0}
-.kpi.main .v{font-size:38px;color:var(--accent)}
-.kpi .d{font-size:13px;color:var(--sub)}
-.kpi .v .vs{font-size:13px;font-weight:500;color:var(--sub)}
-.kpi .d b{color:var(--ink);font-weight:600}
-.kpi .d .chip{margin:3px 0}
-.pg{position:relative;height:8px;background:var(--line);border-radius:4px;margin:6px 0 10px;overflow:visible}
-.pg span{position:absolute;top:0;height:8px}
-.pg .on{left:0;background:var(--bar);border-radius:4px 0 0 4px}
-.pg .est{background:var(--bar2)}
-.pg i{position:absolute;top:-4px;width:2px;height:16px;background:var(--tgt)}
-.chip{display:inline-block;font-size:12px;font-weight:600;padding:1px 8px;border-radius:3px;white-space:nowrap}
-.chip.g{background:var(--good-soft);color:var(--good)}
-.chip.r{background:var(--bad-soft);color:var(--bad)}
-.chip.w{background:var(--warn-soft);color:var(--warn)}
-.chip.n{background:var(--line);color:var(--sub)}
-.tip{border-bottom:1px dotted currentColor;cursor:help}
-.tip:focus-visible,[data-tip]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-[data-tip]{cursor:help}
-#tipbox{position:fixed;z-index:60;max-width:300px;background:var(--ink);color:var(--paper);font-size:12.5px;line-height:1.45;padding:8px 11px;border-radius:4px;box-shadow:0 4px 14px rgba(0,0,0,.18);pointer-events:none;display:none;text-transform:none;letter-spacing:0;font-weight:400}
-.tiphint{font-size:12px;color:var(--sub);margin-top:8px}
-table.items td{font-size:13.5px}
-tr.grp td{background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:12.5px;letter-spacing:.03em;text-transform:uppercase}
-.tag-inf{font-size:11px;font-weight:600;color:var(--warn);border:1px solid var(--warn);padding:0 6px;border-radius:3px;margin-left:4px;white-space:nowrap}
-.box{background:var(--paper);border:1px solid var(--line);padding:16px 18px;margin:12px 0}
-.mt{display:flex;gap:6px;justify-content:flex-end;margin-bottom:8px}
-.mtab{background:transparent;border:1px solid var(--line);color:var(--sub);padding:5px 12px;font:inherit;font-size:13px;cursor:pointer;border-radius:4px}
+.htab .s{display:block;font-size:12px;font-weight:500;color:var(--sub)}
+.panel{background:var(--paper);border:1px solid var(--line);border-top:0;border-radius:0 0 8px 8px;padding:22px 22px 26px}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.card{text-align:left;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:8px;padding:12px 14px 12px;font:inherit;position:relative}
+.card.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--accent-soft)}
+.card .k{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--sub)}
+.card .k small{font-weight:600;letter-spacing:0;text-transform:none}
+.card .v{font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;margin:4px 0 2px;line-height:1.2}
+.card .v small{font-size:13px;font-weight:600;color:var(--sub)}
+.card .d{font-size:12.5px;color:var(--sub)}
+.card .mini{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:8px;font-size:12px;font-variant-numeric:tabular-nums}
+.card .mini span b{font-weight:700}
+.pos{color:var(--good)} .neg{color:var(--bad)}
+.filters{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 6px}
+.filters .lab{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--sub);margin-right:2px}
+.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:5px 12px 5px 9px;font:inherit;font-size:13px;cursor:pointer}
+.chip[aria-pressed="false"]{color:var(--sub);opacity:.62}
+.chip[aria-pressed="false"] .sw{opacity:.35}
+.chip:disabled{cursor:not-allowed;opacity:.35}
+.chip.all{padding-left:12px;font-weight:600}
+.sw{display:inline-block;width:16px;height:10px;border-radius:2px}
+.sw.line{height:0;border-top:3px solid;border-radius:0}
+.sw.dash{height:0;border-top:3px dashed;border-radius:0}
+.sw.dot{height:0;border-top:2.5px dotted;border-radius:0}
+.sw.thick{height:0;border-top:4px solid;border-radius:0}
+.sw.thickdash{height:0;border-top:3px dashed;border-radius:0}
+.sep{width:1px;height:20px;background:var(--line);margin:0 4px}
+.chartbox{position:relative;height:380px;margin-top:8px}
+.mtabs{display:flex;flex-wrap:wrap;gap:6px;margin:20px 0 4px}
+.mtab{background:transparent;border:1px solid var(--line);color:var(--sub);padding:6px 13px;font:inherit;font-size:13px;cursor:pointer;border-radius:4px}
 .mtab[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.chartbox{position:relative;height:300px}
-.chartnote{font-size:12.5px;color:var(--sub);margin-top:8px}
-.nochart{display:none;font-size:13px;color:var(--sub);padding:16px 0}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
-th:first-child,td:first-child{text-align:left}
-td.l,th.l{text-align:left}
-thead th{font-size:12px;color:var(--sub);font-weight:600;text-transform:uppercase;letter-spacing:.04em;border-bottom:1.5px solid var(--ink)}
-td.neg{color:var(--bad);font-weight:600} td.pos{color:var(--good);font-weight:600}
-.tablewrap{overflow-x:auto}
-.cause{display:grid;grid-template-columns:36px 1fr;gap:2px 12px;padding:13px 0;border-top:1px solid var(--line)}
-.cause:first-child{border-top:0;padding-top:2px}
-.cause .n{font-family:var(--serif);font-size:22px;color:var(--accent);line-height:1.1}
-.cause h4{margin:0 0 3px;font-size:15.5px}
-.cause p{margin:0;color:var(--sub);font-size:14px}
-.lesson{display:grid;grid-template-columns:36px 1fr;gap:2px 12px;padding:14px 0;border-top:1px solid var(--line)}
-.lesson:first-child{border-top:0;padding-top:2px}
+.mtab:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#mfil{background:var(--accent-soft);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:14px 0 4px}
+#mfil .lab{color:var(--ink)}
+#mfil .chip{border:1.5px solid var(--sub);color:var(--ink);background:var(--paper);font-weight:600;padding:6px 16px;font-size:13.5px;opacity:1;min-width:52px;justify-content:center}
+#mfil .chip:hover{border-color:var(--accent)}
+#mfil .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper);opacity:1}
+#mfil .chip[aria-pressed="false"]{opacity:1;color:var(--ink)}
+#mfil .sep{background:var(--sub);opacity:.4}
+.ast{color:var(--warn);font-weight:700;margin-left:1px}
+.ii{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1px solid var(--warn);color:var(--warn);font-size:10px;font-weight:700;font-style:italic;margin-left:4px;cursor:help;position:relative;vertical-align:1px}
+.ii:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hint{font-size:12.5px;color:var(--accent);font-weight:600;margin:12px 0 0;display:flex;align-items:center;gap:6px}
+.hint::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex:0 0 auto}
+.tcard{position:relative}
+.tcard .go{position:absolute;top:10px;right:12px;font-size:11.5px;font-weight:600;color:var(--accent)}
+.tcard[aria-pressed="true"] .go{color:var(--sub)}
+.tcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:8px 0 4px}
+.tcard{text-align:left;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:8px;padding:12px 14px;cursor:pointer;font:inherit}
+.tcard:hover{border-color:var(--accent)}
+.tcard[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.tcard:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tcard .k{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--sub)}
+.tcard .k small{font-weight:600;letter-spacing:0;text-transform:none}
+.tcard .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;margin:3px 0 2px;line-height:1.2}
+.tcard .v small{font-size:13px;font-weight:600;color:var(--sub)}
+.tcard .d{font-size:12.5px;color:var(--sub)}
+.tcard .mini{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:8px;font-size:12px;font-variant-numeric:tabular-nums}
+@media (max-width:600px){.tcards{grid-template-columns:1fr}}
+.chartcap{font-size:12.5px;color:var(--sub);margin:8px 0 0}
+.lnk{background:none;border:0;color:var(--accent);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:0;margin-top:10px;text-decoration:underline;text-underline-offset:3px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums;margin-top:10px}
+.tbl th,.tbl td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child{text-align:left}
+.tbl thead th{font-size:12px;color:var(--sub);font-weight:700;letter-spacing:.03em}
+.tbl tfoot td{font-weight:700}
+.tscroll{overflow-x:auto}
+h2{font-family:var(--serif);font-weight:600;font-size:27px;line-height:1.3;margin:40px 0 6px;padding-top:22px;border-top:2px solid var(--line)}
+h3{font-size:15px;margin:18px 0 6px}
+.sub{color:var(--sub);font-size:13.5px;margin:0 0 6px}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 7px;margin-left:4px;vertical-align:1px}
+.tag.g{background:var(--good-soft);color:var(--good)} .tag.r{background:var(--bad-soft);color:var(--bad)} .tag.y{background:var(--warn-soft);color:var(--warn)}
+.verdict{border:1px solid var(--line);border-radius:8px;background:var(--paper);overflow:hidden}
+.vrow{display:grid;grid-template-columns:190px 1fr;gap:14px;padding:12px 16px;border-top:1px solid var(--line)}
+.vrow:first-child{border-top:0}
+.vrow .vl{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--sub);padding-top:2px}
+.vrow p{margin:0;font-size:14.5px}
+.vrow.va{background:var(--bg)}
+.vli{margin:0;padding-left:20px;font-size:14.5px}
+.vli li{margin:0 0 4px}
+.vrow.vk{background:var(--accent-soft)}
+.vrow.vk .vl{color:var(--accent)}
+.inf{margin-right:6px}
+@media (max-width:600px){.vrow{grid-template-columns:1fr;gap:4px}}
+.verdict b.h{display:inline-block;min-width:0}
+.inf{display:inline-block;font-size:11px;font-weight:700;border:1px solid var(--warn);color:var(--warn);border-radius:3px;padding:0 5px;margin-right:4px;vertical-align:1px}
+.effc{background:var(--accent-soft);border-left:3px solid var(--accent);padding:12px 16px;margin:10px 0 12px;border-radius:0 6px 6px 0}
+.effc .lk{display:block;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.effc p{margin:0 0 6px;font-size:14.5px}.effc p:last-child{margin:0}
+.effbox{border:1px solid var(--line);border-radius:8px;background:var(--paper);padding:4px 18px}
+.lesson{display:grid;grid-template-columns:32px 1fr;gap:2px 12px;padding:14px 0;border-top:1px solid var(--line)}
+.lesson:first-child{border-top:0}
 .lesson .n{font-family:var(--serif);font-size:22px;color:var(--accent);line-height:1.1}
 .lesson h4{margin:0 0 8px;font-size:15.5px;line-height:1.4}
-.lr{display:grid;grid-template-columns:130px 1fr;gap:10px;margin:4px 0}
+.lr{display:grid;grid-template-columns:120px 1fr;gap:10px;margin:4px 0}
 .lr .lk{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--sub);padding-top:2px}
 .lr p{margin:0;font-size:14px;color:var(--sub)}
 .lr.ap{background:var(--accent-soft);border-radius:4px;padding:7px 10px;margin-top:6px}
-.lr.ap .lk{color:var(--accent)} .lr.ap p{color:var(--ink)}
-@media (max-width:600px){.lr{grid-template-columns:1fr;gap:2px}}
-.approve{border:1.5px solid var(--accent);background:var(--accent-soft);padding:14px 18px;margin:12px 0}
-.approve ol{margin:4px 0 0;padding-left:20px}
-.approve li{margin:5px 0}
-footer{margin-top:40px;padding:22px 0 40px;border-top:1px solid var(--line);font-size:12.5px;color:var(--sub)}
-footer ul{padding-left:18px}
-@media (max-width:860px){
-  .hero{grid-template-columns:1fr 1fr}
-  .hero .kpi.main{grid-column:1/-1}
-  .hero.h3{grid-template-columns:1fr 1fr}
-  header.top h1{font-size:24px}
-  .htab{padding:12px 14px 9px}
+.lr.ap .lk{color:var(--accent)}.lr.ap p{color:var(--ink)}
+@media (max-width:600px){.lr{grid-template-columns:1fr;gap:2px}.effbox{padding:4px 12px}}
+.foot{font-size:12.5px;color:var(--sub);margin-top:26px;border-top:1px solid var(--line);padding-top:12px}
+.foot p{margin:0 0 6px}
+#tip{position:fixed;z-index:20;pointer-events:none;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,.12);padding:10px 12px;font-size:12.5px;min-width:220px;display:none;font-variant-numeric:tabular-nums}
+#tip .t{font-weight:700;margin-bottom:6px}
+#tip .r{display:flex;justify-content:space-between;gap:14px;align-items:center}
+#tip .r i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+#tip .f{border-top:1px solid var(--line);margin-top:6px;padding-top:6px;color:var(--sub)}
+@media (max-width:860px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){
+  h1{font-size:23px}h2{font-size:22px;margin-top:30px}.panel{padding:16px 14px 20px}.chartbox{height:320px}
+  .card .v{font-size:20px}.sep{display:none}
 }
-@media (max-width:600px){header.top .row{display:block;position:relative} header.top .brand{padding-right:96px} header.top .toggle{position:absolute;top:-4px;right:0;font-size:12px;padding:5px 9px} .toggle .tl{display:none} .toggle .ts{display:inline} .hero,.hero.h3{grid-template-columns:1fr}}
-@media print{.htabs,.toggle,.mt{display:none} .panel-h[hidden]{display:block}}
-sup .ref{font-size:10px;color:var(--accent);text-decoration:none;font-weight:700;margin-left:1px}
-
-.gl-wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-details.gl{background:var(--paper,var(--surface));border:1px solid var(--line);border-radius:10px;margin:16px 0 0}
-details.gl>summary{cursor:pointer;padding:12px 16px;font-weight:700;font-size:14px;list-style:none;display:flex;align-items:center;gap:8px}
-details.gl>summary::before{content:"+";display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1px solid var(--line);font-weight:700}
-details.gl[open]>summary::before{content:"\2212"}
-details.gl>summary::-webkit-details-marker{display:none}
-.gl-intro{padding:0 18px 4px;font-size:13.5px}
-.gl-intro ul{margin:4px 0 10px;padding-left:18px}
-.gl-intro li{margin:3px 0}
-.gl-panel{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:4px 22px;padding:4px 18px 16px}
-.gl-h{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin:10px 0 4px;color:var(--sub)}
-.gl-panel dl{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:3px 10px;font-size:12.5px}
-.gl-panel dt{font-weight:700}
-.gl-panel dd{margin:0;color:var(--sub)}
 </style>
 </head>
 <body>
-
-<header class="top">
-  <div class="wrap">
-    <div class="row">
-      <div>
-        <div class="brand">Silverland Hotels · Web direct</div>
-        <h1>Review thực thi kế hoạch Web direct 2H/2026</h1>
-        <div class="meta">Số liệu on hand cập nhật 27/10/2026 · Bộ phận Digital Marketing · Đối chiếu với kế hoạch chiến lược 2H/2026</div>
-      </div>
-      <button class="toggle" id="themeBtn" type="button" aria-label="Đổi giao diện sáng hoặc tối"><span class="tl">Giao diện sáng / tối</span><span class="ts">Sáng / tối</span></button>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <div class="eyebrow">Silverland · Web direct · Review 2H/2026</div>
+      <h1>Review Performance 2H/2026 so với 3 KPI, OTB, ước tính và cùng kỳ 2025</h1>
+      <p class="meta">Bản xem trước để duyệt trước khi ghép vào file Review 2H · Lập 29/10/2026 · Bộ phận Digital Marketing</p>
     </div>
+    <button class="btn-theme" id="themeBtn" type="button" aria-label="Đổi giao diện sáng tối">Sáng / tối</button>
   </div>
-</header>
-<div class="gl-wrap"><details class="gl"><summary>Cách đọc report và giải thích thuật ngữ</summary>
-<div class="gl-intro"><ul>
-<li><b>Report trả lời 4 câu hỏi</b> cho kênh đặt phòng trực tiếp trên website (web direct) 6 tháng cuối năm 2026: kết quả so với kế hoạch chiến lược lập giữa năm; những gì đã làm và chưa làm trong kế hoạch; cần làm gì trong T11, T12; rút ra bài học gì cho Q1/2027.</li>
-<li><b>Mỗi khách sạn một tab.</b> Mỗi tab đi theo thứ tự: Tóm tắt, 1 Đối chiếu KPI kế hoạch, 2 Hạng mục đã làm, chưa làm, 3 Performance theo tháng và chi phí (Sakyo có thêm mục Tăng trưởng và rủi ro), Việc cần làm T11, T12, rồi Bài học từ 2H (Bến Thành, Jolie): mỗi bài học có số liệu làm căn cứ và cách áp dụng cho Q1/2027.</li>
-<li><b>Có 2 loại chỉ tiêu:</b> KPI trong kế hoạch chiến lược (mục 1) và mục tiêu từng tháng trong báo cáo Web Sales (mục 3). Hai loại này đặt ở hai thời điểm khác nhau nên con số khác nhau.</li>
-<li><b>T7 đến T10 là số thực tế.</b> T11, T12 là phòng đã đặt đến 27/10 (on hand) cộng phần ước tính đặt thêm đến cuối tháng.</li>
-<li><b>Màu nhãn:</b> xanh là đạt hoặc đã làm; vàng là làm một phần, đã điều chỉnh so kế hoạch hoặc dưới mục tiêu; xám là chưa làm. Khung chữ "Ước tính", "Suy luận" đánh dấu số dự báo hoặc nhận định chưa kiểm chứng.</li>
-<li><b>Đơn vị:</b> tr là triệu đồng, tỷ là tỷ đồng.</li>
-<li><b>Chữ có gạch chân chấm:</b> rê chuột hoặc chạm vào để xem giải thích. Danh sách đầy đủ ở dưới.</li>
-</ul></div><div class="gl-panel" id="glPanel"></div></details></div>
+  <div class="note"><b>Cách đọc:</b> Có 3 Target theo stay date: <b>Target CĐT</b> (CEO Target), <b>Target CMO</b> và <b>Target Team cam kết</b> (Team Target). <b>OTB</b> là số phòng đã bán: với tháng đã kết thúc (T7 đến T10) là số thực tế khách đã lưu trú; với T11, T12 là số khách đã đặt tính đến ngày lấy số liệu. <b>Ước tính</b> bằng OTB cộng số phòng dự kiến đặt thêm đến cuối tháng. Doanh thu tách hai thẻ: <b>Doanh thu stay date</b> tính theo ngày khách ở, có Target; <b>Doanh thu book date</b> tính theo ngày khách đặt, không có Target.</div>
 
-<nav class="htabs" aria-label="Chọn khách sạn">
-  <div class="wrap" role="tablist">
-    <button class="htab" role="tab" id="tab-BT" aria-controls="p-BT" aria-selected="true" data-h="BT">Silverland Bến Thành<span class="s">RN 2H ước tính: 117% KPI</span></button>
-    <button class="htab" role="tab" id="tab-SK" aria-controls="p-SK" aria-selected="false" data-h="SK">Silverland Sakyo<span class="s">RN 2H ước tính: 155% KPI</span></button>
-    <button class="htab" role="tab" id="tab-JL" aria-controls="p-JL" aria-selected="false" data-h="JL">Silverland Jolie<span class="s">RN 2H ước tính: 99% KPI</span></button>
+  <div class="htabs" role="tablist" id="htabs"></div>
+  <div class="panel" id="panel" role="tabpanel">
+    <div class="cards" id="cards"></div>
+    <div class="mtabs" id="mtabs" role="group" aria-label="Chọn chỉ số cho biểu đồ"></div>
+
+    <p class="hint" style="margin-top:14px">Bấm vào từng đường bên dưới để ẩn hoặc hiện trên biểu đồ; bấm Tất cả để hiện lại toàn bộ.</p>
+    <div class="filters" style="margin-top:6px" id="filters" role="group" aria-label="Chọn đường hiển thị">
+      <span class="lab">Hiển thị</span>
+      <button type="button" class="chip all" id="chipAll" aria-pressed="true">Tất cả</button>
+      <span class="sep" aria-hidden="true"></span>
+      <span id="chipBox" style="display:contents"></span>
+    </div>
+    <div class="chartbox"><canvas id="chart" aria-label="Biểu đồ performance theo tháng" role="img"></canvas></div>
+    <p class="chartcap" id="cap"></p>
+
+    <h2>Đối chiếu KPI theo tháng</h2>
+    <p class="sub">Bảng dùng bộ lọc tháng riêng, không phụ thuộc biểu đồ. Mỗi lần chọn xem một tháng, hoặc bấm Cả 2H để xem cả kỳ.</p>
+    <div class="filters" id="mfil" role="group" aria-label="Chọn tháng">
+      <span class="lab">Tháng</span>
+      <button type="button" class="chip all" id="monAll" aria-pressed="true">Cả 2H</button>
+      <span class="sep" aria-hidden="true"></span>
+      <span id="monBox" style="display:contents"></span>
+    </div>
+    <p class="hint" id="tcHint">Bấm vào từng thẻ (Doanh thu stay date, RN, %OCC) để đổi chỉ số trong bảng so với KPI bên dưới.</p>
+    <div class="tcards" id="tcards" role="group" aria-label="Chọn chỉ số so với KPI"></div>
+    <h3 id="sumH">Tổng các tháng đã chọn</h3>
+    <p class="sub" id="sumSub"></p>
+    <div class="tscroll"><table class="tbl" id="sum"></table></div>
+    <p class="chartcap" id="astNote"><sup class="ast">*</sup> Chưa đủ dữ liệu: T11, T12 chưa kết thúc, cột Thực tế là số đã đặt (OTB) đến 29/10/2026 nên % đạt KPI còn thấp và được gắn nhãn Tạm tính thay vì Chưa đạt. Di chuột hoặc chạm vào biểu tượng i để xem ước tính cuối tháng.</p>
+
+    <h2>Nhận xét performance 2H/2026</h2>
+    <div class="verdict" id="verdict"></div>
+
+    <h2 id="effH">Hạng mục đã triển khai và hiệu quả: duy trì và tối ưu</h2>
+    <p class="sub">Những hạng mục trong kế hoạch 2H đã làm và có số liệu cho thấy hiệu quả. Mỗi mục gồm kết quả, bài học, việc cần duy trì và điểm tối ưu tiếp.</p>
+    <div id="eff"></div>
+
+    <div class="foot" id="foot"></div>
   </div>
-</nav>
-
-<main class="wrap">
-
-<!-- ================= BẾN THÀNH ================= -->
-<div class="panel-h" id="p-BT" role="tabpanel" aria-labelledby="tab-BT">
-
-<nav class="toc" aria-label="Mục lục Bến Thành"><div class="toc-h">Mục lục</div><ol><li><a href="#BT-s0">Tóm tắt</a></li><li><a href="#BT-s1">1 · Đối chiếu KPI kế hoạch</a></li><li><a href="#BT-s2">2 · Hạng mục đã làm, chưa làm</a></li><li><a href="#BT-s3">3 · Performance theo tháng và chi phí</a></li><li><a href="#BT-s4">4 · Việc cần làm T11, T12</a></li><li><a href="#BT-s5">5 · Bài học từ 2H</a></li></ol></nav>
-
-<section id="BT-s0">
-  <div class="kicker">Silverland Bến Thành · Tóm tắt</div>
-  <h2>Đạt các KPI định lượng của kế hoạch 2H</h2>
-  <div class="summary">
-    <ol>
-      <li><b>Kết quả:</b> đạt cả 4 <span class="tip" tabindex="0" data-tip="Chỉ tiêu trong file kế hoạch chiến lược 2H/2026 lập giữa năm (Silverland_BaoCao_Web_2H2026, Silverland_Jolie_Dashboard).">KPI</span> định lượng của kế hoạch: <span class="tip" tabindex="0" data-tip="Room night, số đêm phòng: 1 phòng ở 1 đêm là 1 RN; 2 phòng ở 3 đêm là 6 RN.">RN</span> 2H 1.574 (KPI ≥ 1.486), doanh thu ước tính +22%, <span class="tip" tabindex="0" data-tip="Return on ad spend = doanh thu web theo ngày đặt chia chi phí Google Ads. ROAS 19 nghĩa là mỗi 1 đồng quảng cáo mang về 19 đồng doanh thu đặt phòng.">ROAS</span> 19,0 (KPI ≥ 15), chi phí 2H dự kiến 476 tr (khung ngân sách kế hoạch 552 tr).</li>
-      <li><b>Đã làm:</b> 8 trên 11 hạng mục: tăng ngân sách T7 đến T9; loại trừ thị trường, thành phố không ra booking; triển khai chiến dịch <span class="tip" tabindex="0" data-tip="Ưu đãi dành cho khách đặt sớm trước ngày ở một khoảng nhất định, để giữ booking trước khi khách tìm trên OTA.">early-bird</span> Úc từ sớm; đẩy mạnh thêm các chiến dịch cho thị trường Singapore và Mỹ; push gói ưu đãi cho hạng phòng được ưa thích ở các thị trường mục tiêu; mở rộng thêm từ khóa non-brand để tiếp cận khách mới.</li>
-      <li><b>Cần làm T11, T12:</b> push doanh thu stay T11, T12 cho Úc, Singapore, Mỹ. Duy trì chiến dịch early-bird cho Úc (giai đoạn hè, stay 12/12 đến 31/01, từ 3 đêm). Mỹ và Singapore: định hướng content theo ưu đãi đặt sớm cho các mốc lễ và kỳ nghỉ học (Thanksgiving 20 đến 30/11, nghỉ học Singapore 21/11 đến 31/12, Giáng sinh 25 đến 27/12), triển khai các gói promo Black Friday, Giáng sinh. Push thêm chiến dịch early-bird cho Mỹ, Singapore, châu Âu và Anh, nhắm stay T1 đến T3/2027 (Tết 06/02, nghỉ giữa kỳ ở Anh 15 đến 19/02, Easter 26 đến 29/03).</li>
-    </ol>
-  </div>
-  <p class="chartnote">Mức độ triển khai 11 hạng mục trong kế hoạch: <span class="chip g">Đã làm, đạt</span> 8 · <span class="chip w">Một phần, điều chỉnh</span> 3</p>
-  <div class="hero h3">
-    <div class="kpi main"><div class="l">Doanh thu web 2H</div><div class="v num">109%<span class="vs"> <span class="tip" tabindex="0" data-tip="Cùng giai đoạn năm 2025.">cùng kỳ</span></span></div><div class="pg" aria-hidden="true"><span class="on" style="width:81.3%"></span><span class="est" style="left:81.3%;width:9.3%"></span><i style="left:74.6%"></i></div><div class="d"><b>KPI:</b> tăng so 2H/2025 (5.734 tr)</div><div class="d"><b><span class="tip" tabindex="0" data-tip="Số đã có trên hệ thống tại ngày cập nhật: các tháng đã qua là số khách đã ở; T11, T12 là phòng đã đặt nhưng chưa đến ngày ở (OTB).">On hand</span>:</b> 6.253 tr</div><div class="d"><b><span class="tip" tabindex="0" data-tip="On hand cộng lượng đặt thêm dự kiến từ nay đến cuối tháng. Lượng đặt thêm giả định bằng lượng khách đã đặt trong cùng giai đoạn năm 2025. Đây là số dự báo, chưa phải kết quả thực tế.">Ước tính cuối kỳ</span>:</b> 6.970 tr, 122% cùng kỳ</div><div class="d"><span class="chip g">Ước tính vượt cùng kỳ 22%</span></div></div>
-    <div class="kpi"><div class="l">RN web 2H</div><div class="v num">106%<span class="vs"> KPI</span></div><div class="pg" aria-hidden="true"><span class="on" style="width:81.5%"></span><span class="est" style="left:81.5%;width:8.7%"></span><i style="left:76.9%"></i></div><div class="d"><b>KPI:</b> ≥ 1.486 RN</div><div class="d"><b>On hand:</b> 1.574 RN</div><div class="d"><b>Ước tính cuối kỳ:</b> 1.741 RN, 117% KPI</div><div class="d"><span class="chip g">Ước tính vượt KPI 17%</span></div></div>
-    <div class="kpi"><div class="l">ROAS Google Ads</div><div class="v num">127%<span class="vs"> KPI</span></div><div class="pg" aria-hidden="true"><span class="on" style="width:97.4%"></span><span class="est" style="left:97.4%;width:0.0%"></span><i style="left:76.9%"></i></div><div class="d"><b>KPI:</b> ≥ 15</div><div class="d"><b>Thực tế T7 đến T9:</b> 19,0</div><div class="d"><b>T10 <span class="tip" tabindex="0" data-tip="T10 chưa hết tháng: doanh thu mới tính đến ngày cập nhật, còn chi phí là ngân sách dự kiến cả tháng, nên chỉ số này sẽ còn thay đổi.">tạm tính</span>:</b> 20,7</div><div class="d"><span class="chip g">Đạt KPI</span></div></div>
-  </div>
-  <p class="chartnote">KPI theo kế hoạch chiến lược 2H. Số lớn: on hand ngày 27/10 (đã ở T7 đến T10 + <span class="tip" tabindex="0" data-tip="On the books: phòng đã được đặt cho các ngày ở trong tương lai, tính đến ngày cập nhật.">OTB</span> T11, T12) so KPI; với doanh thu, KPI là tăng so cùng kỳ nên mốc 100% là doanh thu 2H/2025. Thanh đậm: on hand. Thanh nhạt: <span class="tip" tabindex="0" data-tip="Lượng phòng được đặt thêm trong một khoảng thời gian, ví dụ từ hôm nay đến cuối tháng.">pickup</span> ước tính đến cuối tháng <span class="tag-inf">Ước tính</span>. Vạch dọc: 100% KPI. Bến Thành dùng mức ước tính thận trọng vì lượng đặt từ 1/10 thấp hơn cùng kỳ: T11 285 RN, T12 310 RN (nếu tính theo tốc độ đặt 2025 là 316 và 341 RN). Doanh thu phần đặt thêm tính theo giá bình quân của phần đặt thêm cùng kỳ 2025 (T11 3,97 tr, T12 4,39 tr mỗi đêm).</p>
-</section>
-
-<section id="BT-s1">
-  <div class="kicker">1 · Đối chiếu KPI kế hoạch</div>  <h2>Đạt cả 4 KPI định lượng</h2>
-  <div class="tablewrap"><table>
-  <thead><tr><th>KPI trong kế hoạch</th><th class="l">Mục tiêu</th><th class="l">Thực tế đến 27/10</th><th class="l">Ước tính cuối kỳ</th><th class="l">Đánh giá</th></tr></thead><tbody>
-  <tr><td>RN web 2H</td><td class="l">≥ 1.486 RN (bằng 2H/2025)</td><td class="l">1.574 RN</td><td class="l">1.741 RN</td><td class="l"><span class="chip g">Đạt</span></td></tr>
-  <tr><td>Doanh thu web 2H</td><td class="l">Tăng so 2H/2025 (5.734 tr)</td><td class="l">6.253 tr</td><td class="l">6.970 tr (+22%)</td><td class="l"><span class="chip g">Đạt</span></td></tr>
-  <tr><td>Chi phí Google Ads 2H</td><td class="l">552 tr</td><td class="l">T7 đến T10: 321,8 tr</td><td class="l">476 tr</td><td class="l"><span class="chip g">Đạt</span></td></tr>
-  <tr><td>ROAS</td><td class="l">≥ 15</td><td class="l">T7 đến T9: 19,0 (15,0 / 23,2 / 19,8)</td><td class="l">T10 tạm tính 20,7</td><td class="l"><span class="chip g">Đạt</span></td></tr>
-  <tr><td>Benefit đưa đón</td><td class="l">Một chiều, áp dụng từ 2 đêm</td><td class="l">Bán gói có đưa đón cho khách đặt từ 1/7 đến 17/8; từ 18/8 tạm dừng (áp dụng cho lưu trú từ T10)</td><td class="l"></td><td class="l"><span class="chip w" tabindex="0" data-tip="Triển khai đúng kế hoạch từ đầu kỳ, tạm dừng áp dụng từ 18/8.">Đã làm, tạm dừng 18/8</span></td></tr>
-  <tr><td>RN web T11</td><td class="l">Tham chiếu cùng kỳ T11/2025: 267 RN</td><td class="l">246 RN</td><td class="l">285 RN</td><td class="l"><span class="chip g">Ước tính vượt cùng kỳ 7%</span></td></tr>
-  <tr><td>RN web T12</td><td class="l">≥ 347 RN (KPI riêng cho T12 trong kế hoạch)</td><td class="l">182 RN</td><td class="l">310 RN</td><td class="l"><span class="chip w">Dưới KPI 11%</span></td></tr>
-  </tbody></table></div>
-  <p class="chartnote">Kế hoạch 2H đặt KPI RN cho cả kỳ (≥ 1.486) và một mốc riêng cho T12 (≥ 347 RN, bằng T12/2025). Kế hoạch không đề cập RN T11 nên so với cùng kỳ T11/2025. Kết quả từng tháng T7 đến T10 xem mục 3.</p>
-  <p class="chartnote">Kế hoạch gốc: Silverland_BaoCao_Web_2H2026 (tab Bến Thành), mục Giải pháp A1 đến C3, lịch T7 đến T12, Mục tiêu 2H và Điều chỉnh chi phí. Thực tế: báo cáo Web Sales<sup><a href="#ref1" class="ref">[1]</a></sup> (on hand 27/10), SVL Budget Report 2026. Ước tính cuối kỳ: mức thận trọng (xem ghi chú ở phần Tóm tắt).</p>
-</section>
-
-<section id="BT-s2">
-  <div class="kicker">2 · Hạng mục đã làm, chưa làm</div>
-  <h2>8 hạng mục đã làm, 3 làm một phần hoặc điều chỉnh</h2>
-  <div class="tablewrap"><table class="items">
-  <thead><tr><th><span class="tip" tabindex="0" data-tip="Mã hạng mục theo file kế hoạch gốc: A làm ngay (T7), B quý 3, C quý 4, CP điều chỉnh chi phí; Jolie đánh số theo 5 định hướng và lịch tháng.">Mã</span></th><th class="l">Hạng mục trong kế hoạch</th><th class="l">Trạng thái</th><th class="l">Bằng chứng thực thi</th><th class="l">Kết quả</th></tr></thead><tbody>
-  <tr class="grp"><td colspan="5">A · Việc làm ngay (T7)</td></tr>
-  <tr><td>A1</td><td class="l">Đẩy bán sớm: tăng ngân sách Google Ads T7 đến T9</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">Chi phí Google Ads T7 95,5 tr (+99% cùng kỳ), T8 77,7 tr (+56%), T9 70,6 tr (+41%).</td><td class="l">RN web đặt từ 1/7 đến 17/8/2026 tăng 42% so cùng khoảng ngày đặt năm 2025 (1/7 đến 17/8/2025).</td></tr>
-  <tr><td>A2</td><td class="l">Loại trừ thị trường không có chuyển đổi ở một số chiến dịch tiêu tiền mà không phát sinh booking (Malaysia, Philippines...)</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">Chi phí cho Malaysia, Hàn Quốc, Pháp, Brunei T7 đến T10 đều dưới 0,5 tr/tháng (báo cáo địa lý); Hàn Quốc bị loại trừ trong <span class="tip" tabindex="0" data-tip="Performance Max: loại chiến dịch Google Ads tự phân phối quảng cáo trên Search, YouTube, Display, Maps, Gmail dựa trên dữ liệu chuyển đổi.">PMax</span> Jul\pur và PMax SG deal.</td><td class="l">Ngân sách tập trung vào Úc, Singapore, Mỹ, Việt Nam.</td></tr>
-  <tr><td>A3</td><td class="l">Scale Singapore</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">Search Sing (T7); PMax SG deal chạy từ T8, chi phí T8 9,7 tr, T9 9,9 tr, T10 7,8 tr.</td><td class="l">Lưu trú T7 đến T10 (dữ liệu booking web): Singapore 186 RN, 609 tr doanh thu phòng (cùng kỳ 169 RN, 529 tr; +10% RN, +15% doanh thu), đứng thứ 3 về doanh thu sau Úc, Mỹ. Tỷ trọng RN giảm từ 16,1% xuống 13,9% vì Singapore tăng chậm hơn toàn khách sạn (+26%). OTB T12 43 RN (cùng thời điểm 2025: 51).</td></tr>
-  <tr class="grp"><td colspan="5">B · Quý 3</td></tr>
-  <tr><td>B1</td><td class="l">Early-bird <span class="tip" tabindex="0" data-tip="Days before arrival: số ngày khách đặt trước ngày đến. DBA 60 đến 90 là đặt trước 2 đến 3 tháng.">DBA</span> 60 đến 90 ngày cho Úc</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">Các PMax Úc chạy T7; Search Brand AU từ 30/9. <span class="tip" tabindex="0" data-tip="Gói giá trên booking engine của website: gồm giá, điều kiện (số đêm tối thiểu, hoàn huỷ) và quyền lợi đi kèm.">Rate plan</span> đặt sớm chiếm 38% RN web đặt T7 đến T10.</td><td class="l">OTB T12 khách Úc 83 RN (<span class="tip" tabindex="0" data-tip="Số đã đặt tại cùng ngày này của năm 2025 (ví dụ OTB T12 tính đến 25/10/2025), để so sánh công bằng với OTB hiện tại.">cùng thời điểm 2025</span>: 62).</td></tr>
-  <tr><td>B3, B4</td><td class="l">Mở rộng và giữ tệp phương Tây (Úc, Mỹ)</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">PMax US &amp; EU (T7, T8), PMax US &amp; UK (T9, T10); Search VN nhắm thêm Mỹ.</td><td class="l">Tỷ trọng Mỹ trong RN web lưu trú T7 đến T10 tăng từ 10,0% lên 16,3%; OTB T12 Mỹ 49 RN (cùng thời điểm 2025: 42).</td></tr>
-  <tr><td>Lịch T8, T9</td><td class="l">Flash Deal sát ngày cho các thị trường châu Á; early-bird Đài Loan</td><td class="l"><span class="chip w" tabindex="0" data-tip="Đã triển khai nhưng chưa đủ phạm vi hoặc thị trường như kế hoạch.">Một phần</span></td><td class="l">Đài Loan được nhắm trong PMax SG deal từ T8.</td><td class="l">Có phát sinh booking từ người dùng có IP tại Đài Loan.</td></tr>
-  <tr class="grp"><td colspan="5">C · Quý 4</td></tr>
-  <tr><td>C1</td><td class="l">Upsell Sunshine Garden lên Sense City, Square Suite</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">Đã tạo gói <span class="tip" tabindex="0" data-tip="Mời khách nâng lên hạng phòng cao hơn để tăng doanh thu trên mỗi đêm.">upsell</span> lên Sense City, Square Suite.</td><td class="l">Gói upsell mới đưa lên website, chưa có booking để đo kết quả. Cơ cấu hạng phòng khác nhau theo thị trường (lưu trú T7 đến T12, đặt đến 25/10, so cùng mốc 2025): <b>Úc</b> vẫn neo Sunshine Garden (29%) nhưng dịch xuống Spring Field (10% lên 17%), Sense City Double giảm (19% xuống 15%); <b>Mỹ</b> chuyển từ Sense City Double (33% xuống 22%) sang Sunshine Garden (17% lên 28%), Square Suite tăng nhẹ (11% lên 13%); <b>Singapore</b> ổn định, Sense City Double 23% lên 26%. Theo kế hoạch, upsell đi theo hạng neo của từng thị trường: Úc từ Sunshine Garden lên Sense City Double, Square Suite; Mỹ từ Sense City Double lên Square Suite. Theo dõi cơ cấu hạng phòng theo từng thị trường từ T11.</td></tr>
-  <tr><td>C2</td><td class="l">Tăng ngân sách direct cho cao điểm T10 đến T12</td><td class="l"><span class="chip w" tabindex="0" data-tip="Thay đổi so với kế hoạch theo quyết định sau đó (ví dụ định hướng tối ưu ngân sách).">Điều chỉnh</span></td><td class="l">T10 78 tr (dự toán 140 tr). T11, T12 tăng 10% so ngân sách cùng kỳ: T11 66,5 tr (cùng kỳ 60,5 tr), T12 87,8 tr (cùng kỳ 79,8 tr).</td><td class="l"></td></tr>
-  <tr><td>C3</td><td class="l">Mở rộng <span class="tip" tabindex="0" data-tip="Từ khóa không chứa tên khách sạn, ví dụ &quot;hotel near Ben Thanh market&quot;, để tiếp cận khách chưa biết khách sạn. Từ khóa thương hiệu là từ khóa chứa tên Silverland.">từ khóa ngoài thương hiệu</span> (hotel near Ben Thanh market, downtown Saigon, ben thanh hotel, district 1 hotels ho chi minh, hotels saigon district 1)</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">PMax Peak và PMax SG deal chạy với loại trừ thương hiệu (brand exclusion).</td><td class="l">01/09 đến 26/10: PMax Peak chi 40,5 tr, 49,8 chuyển đổi, giá trị 789,2 tr (ROAS 19,5); PMax SG deal chi 17,7 tr, 14,2 chuyển đổi, giá trị 206,5 tr (ROAS 11,7). Chuyển đổi của PMax đến từ nhiều kênh (Search, Display, YouTube, Maps), không chỉ từ từ khóa non-brand. Trên toàn tài khoản, từ khóa non-brand chỉ chiếm số ít chuyển đổi; phần lớn chuyển đổi vẫn đến từ khách tìm tên khách sạn.</td></tr>
-  <tr class="grp"><td colspan="5">Điều chỉnh chi phí</td></tr>
-  <tr><td>CP1</td><td class="l">Đưa đón sân bay một chiều khi đặt từ 2 đêm</td><td class="l"><span class="chip w" tabindex="0" data-tip="Triển khai đúng kế hoạch từ đầu kỳ, tạm dừng áp dụng từ 18/8.">Đã làm, tạm dừng 18/8</span></td><td class="l">Đưa đón tạm dừng cho lưu trú từ T10 trở đi.</td><td class="l">RN đặt qua web so cùng khoảng ngày đặt năm 2025: tăng 42% khi còn đưa đón (đặt 1/7 đến 17/8/2026 so 1/7 đến 17/8/2025); tăng 4% sau khi tạm dừng (18/8 đến 30/9/2026 so 18/8 đến 30/9/2025); giảm 6% (1 đến 25/10/2026 so 1 đến 25/10/2025).</td></tr>
-  <tr><td>CP2</td><td class="l">Giảm 15% ngân sách Google Ads 2H, còn 552 tr</td><td class="l"><span class="chip g">Đạt</span></td><td class="l">T7 đến T10: 321,8 tr. T11, T12 tăng 10% so ngân sách cùng kỳ: 154,3 tr (T11 66,5 tr, T12 87,8 tr).</td><td class="l">Tổng 2H dự kiến 476 tr, dưới khung 552 tr.</td></tr>
-  </tbody></table></div>
-  <p class="chartnote">Bằng chứng: Google Ads API (chiến dịch, ngân sách, geo, audience) và giao diện tài khoản, kiểm tra ngày 26, 27/10; dữ liệu booking sheet Data (rate plan, quốc tịch, hạng phòng, đặt đến 25/10).</p>
-</section>
-
-<section id="BT-s3">
-  <div class="kicker">3 · Performance theo tháng và chi phí</div>
-  <h2>T7, T10 đạt mục tiêu tháng, T8 đạt 74%; OTB T11, T12 dưới mục tiêu tháng về RN, trên về <span class="tip" tabindex="0" data-tip="Average daily rate: giá phòng bình quân mỗi đêm = doanh thu phòng chia số đêm phòng (RN).">ADR</span></h2>
-  <div class="box">
-    <div class="mt"><button class="mtab" aria-pressed="true" data-h="BT" data-m="rn">Số đêm (RN)</button><button class="mtab" aria-pressed="false" data-h="BT" data-m="rev">Doanh thu (triệu đồng)</button></div>
-    <div class="chartbox"><canvas id="c-BT" aria-label="Biểu đồ RN và doanh thu theo tháng, Bến Thành"></canvas></div>
-    <div class="nochart" id="nc-BT">Biểu đồ cần kết nối mạng. Số liệu ở bảng bên dưới.</div>
-    <div class="chartnote">Cột đậm: đã ở hoặc OTB ngày 27/10. Cột nhạt: phần ước tính đặt thêm đến cuối tháng (mức thận trọng). Đường liền: mục tiêu tháng theo <span class="tip" tabindex="0" data-tip="Google Sheet Hotels Web Sales Status 2026: mục tiêu và số on hand web theo tháng lưu trú của từng khách sạn.">báo cáo Web Sales</span><sup><a href="#ref1" class="ref">[1]</a></sup> (khác KPI kế hoạch chiến lược). Đường đứt: cùng kỳ 2025.</div>
-    <div class="tablewrap" style="margin-top:12px"><table><thead><tr><th>Tháng</th><th>RN</th><th>Mục tiêu</th><th>% mục tiêu</th><th>RN 2025</th><th>ADR (triệu đồng)</th><th>ADR mục tiêu</th><th>ADR 2025</th><th>Doanh thu (triệu đồng)</th><th>Mục tiêu (triệu đồng)</th></tr></thead><tbody id="t-BT"></tbody></table></div>
-    <div class="chartnote">Mục tiêu T7 đến T10 do CĐT (chủ đầu tư) đưa ra; mục tiêu T11, T12 do CMO đặt.</div>
-  </div>
-  <div class="verdict"><h4>Nhận xét performance 2H/2026</h4>
-<p><b>Đã ở T7 đến T10.</b> Bốn tháng đạt 1.146 RN và 4.152 tr doanh thu, bằng 92% và 93% tổng mục tiêu tháng (1.146 trên 1.240 RN mục tiêu cộng 4 tháng; 4.152 trên 4.479 tr), cao hơn cùng kỳ 31% về RN và 36% về doanh thu. ADR bám sát mục tiêu từng tháng (3,43 đến 4,00 tr), nên phần thiếu so với mục tiêu nằm ở số đêm: T8 đạt 74% và T9 đạt 94%; T7, T10 vượt mục tiêu.</p>
-<p><b>Vì sao T8 thấp.</b> T8 có 249 RN, thấp hơn cùng kỳ 23 RN, là tháng duy nhất giảm so 2025, trong khi mục tiêu tháng T8 (338 RN) cao hơn số RN T8/2025 (272 RN) 24%. Theo dữ liệu booking web, tính theo tháng lưu trú T8 (không phải tháng đặt), phần giảm nằm ở các thị trường nhỏ: Philippines (36 xuống 11 RN), Croatia (16 xuống 0), Anh (15 xuống 2), Campuchia (8 xuống 0), Brunei (9 xuống 2), Đức (13 xuống 6). Hà Lan (4 lên 29), Singapore (56 lên 69), Pháp và Nhật (mỗi nước +7) bù lại một phần.</p>
-<p><b>Tốc độ đặt.</b> RN đặt qua web so cùng khoảng ngày đặt năm 2025 chậm dần theo từng giai đoạn: tăng 42% (đặt 1/7 đến 17/8, khi gói đưa đón còn bán và chiếm 42% RN đặt), tăng 4% (18/8 đến 30/9), giảm 6% (1 đến 25/10). Cùng lúc ADR booking mới tăng 14% (đặt 1 đến 25/10). <span class="tag-inf">Suy luận</span> Giá cao hơn và việc tạm dừng benefit đưa đón giữ được doanh thu mỗi đêm nhưng làm chậm lượng đặt.</p>
-<p><b>T11, T12.</b> OTB T11 246 RN (68% mục tiêu tháng 360), T12 182 RN (41% mục tiêu 440); ADR OTB cao hơn mục tiêu 11% ở cả hai tháng (4,77 và 5,10 tr). <span class="tag-inf">Ước tính</span> Ở mức thận trọng, T11 ước tính đạt khoảng 285 RN, T12 ước tính đạt khoảng 310 RN, bằng 79% và 70% mục tiêu tháng; T12 đạt 89% KPI kế hoạch (347 RN).</p>
-<p><b>Kết luận.</b> Bến Thành đạt các KPI của kế hoạch 2H: RN ước tính đạt khoảng 1.741 (117% KPI), doanh thu ước tính đạt khoảng 6.970 tr (+22% cùng kỳ). Khoảng cách còn lại là với mục tiêu tháng T11, T12 do CMO đặt (tổng 800 RN, ước tính đạt khoảng 595 RN).</p></div>
-  <h3>Chi phí Google Ads và ROAS</h3>
-  <div class="tablewrap"><table><thead><tr><th>Chỉ số</th><th>T7</th><th>T8</th><th>T9</th><th>T10</th><th>T11</th><th>T12</th><th>2H</th></tr></thead><tbody><tr><td>Chi phí 2026 (tr)</td><td class="num">95,5</td><td class="num">77,7</td><td class="num">70,6</td><td class="num">78*</td><td class="num">66,5 (dự kiến)</td><td class="num">87,8 (dự kiến)</td><td class="num">476 (dự kiến)</td></tr><tr><td>Chi phí 2025 (tr)</td><td class="num">48,1</td><td class="num">49,8</td><td class="num">49,9</td><td class="num">77,7</td><td class="num">60,5</td><td class="num">79,8</td><td class="num">365,8</td></tr><tr><td>ROAS 2026</td><td class="num">15,0</td><td class="num">23,2</td><td class="num">19,8</td><td class="num">20,7*</td><td class="num"></td><td class="num"></td><td class="num">19,0 (T7 đến T9)</td></tr><tr><td>ROAS 2025</td><td class="num">21,9</td><td class="num">24,6</td><td class="num">27,8</td><td class="num">22,2</td><td class="num"></td><td class="num"></td><td class="num">24,8 (T7 đến T9)</td></tr></tbody></table></div>
-  <p class="chartnote">Chi phí T7 đến T9 tăng 65% so cùng kỳ, doanh thu <span class="tip" tabindex="0" data-tip="Tính theo ngày khách đặt phòng, không theo ngày khách ở. Dùng để đo hiệu quả quảng cáo trong tháng chạy quảng cáo.">theo ngày đặt</span> tăng 26%: ROAS 19,0, thấp hơn cùng kỳ (24,8) nhưng gấp 3,2 lần <span class="tip" tabindex="0" data-tip="ROAS tối thiểu để chi phí quảng cáo cho một booking không cao hơn hoa hồng OTA (khoảng 17%). Dưới 5,9 thì bán qua OTA còn rẻ hơn chạy quảng cáo.">ngưỡng hoà vốn 5,9</span>. Chi phí giảm dần từ T7 (95,5 tr) về T9 (70,6 tr). *T10: ngân sách dự kiến cả tháng, ROAS tạm tính trên doanh thu đặt đến nay. T11, T12: tăng 10% so ngân sách cùng kỳ. Nguồn: SVL Budget Report 2025, 2026; ROAS = doanh thu theo ngày đặt / chi phí.</p>
-</section>
-
-<section id="BT-s4">
-  <div class="kicker">4 · Việc cần làm T11, T12</div>
-  <h2>T11, T12: duy trì early-bird cho Úc (giai đoạn hè); Mỹ, Singapore định hướng content theo ưu đãi đặt sớm mốc lễ, kỳ nghỉ học và các gói promo</h2>
-  <div class="tablewrap"><table>
-  <thead><tr><th>Thời gian</th><th class="l">Việc cần làm</th><th class="l">Hạng mục kế hoạch liên quan</th><th class="l">Chỉ số theo dõi</th></tr></thead><tbody>
-  <tr><td>T11 đến T12</td><td class="l">Push doanh thu stay T11, T12 cho thị trường Úc, Singapore, Mỹ; chi tiết từng thị trường ở các dòng bên dưới.</td><td class="l">Mở rộng và giữ tệp khách Úc, Mỹ; scale Singapore</td><td class="l">Doanh thu stay T11, T12 so mục tiêu tháng; RN theo thị trường hằng tuần.</td></tr>
-  <tr><td>T11 đến T12</td><td class="l">Google Ads T11 66,5 tr, T12 87,8 tr (tăng 10% so ngân sách cùng kỳ 60,5 tr và 79,8 tr). Phân bổ theo ROAS, ưu tiên Úc, Mỹ, Singapore theo các dòng bên dưới.</td><td class="l">Tăng ngân sách cao điểm T10 đến T12; scale Singapore</td><td class="l">ROAS ≥ 12; <span class="tip" tabindex="0" data-tip="Cost per acquisition: chi phí quảng cáo cho mỗi booking.">CPA</span> ≤ 2,2 tr.</td></tr>
-  <tr><td>T11</td><td class="l">Rà search terms insight của PMax Peak, PMax SG deal: giữ nhóm truy vấn ngoài thương hiệu có chuyển đổi, loại nhóm không liên quan.</td><td class="l">Mở rộng từ khóa non-brand</td><td class="l">CPA ≤ 2,2 tr.</td></tr>
-  <tr><td>T11 đến T1/2027</td><td class="l"><b>Úc:</b> duy trì chiến dịch early-bird giai đoạn hè cho stay 12/12/2026 đến 31/01/2027 (lịch nghỉ hè 2026 của học sinh Úc: Lãnh thổ Bắc Úc từ 11/12; Queensland, Nam Úc từ 12/12; New South Wales, Tây Úc từ 18/12; Victoria, Tasmania, Lãnh thổ Thủ đô Úc từ 19/12; check-in đông nhất T12/2025 là 19/12), từ 3 đêm, kèm ăn sáng; đẩy Square Suite (23% RN Úc T11, T12/2025) và Sense City Double.</td><td class="l">Early-bird cho Úc</td><td class="l">OTB Úc T12, T1 so cùng thời điểm năm trước.</td></tr>
-  <tr><td>T11 đến T12</td><td class="l"><b>Mỹ:</b> content theo ưu đãi đặt sớm cho Thanksgiving (stay 20 đến 30/11; check-in đông nhất 2025 là 26/11) và Giáng sinh, năm mới; gói promo Black Friday (27/11); T12 nhấn Sense City Double 38 m² và Square Suite.</td><td class="l">Mở rộng và giữ tệp khách Mỹ</td><td class="l">RN Mỹ đặt theo tuần; ROAS ≥ 12.</td></tr>
-  <tr><td>T11 đến 25/12</td><td class="l"><b>Singapore:</b> content theo ưu đãi đặt sớm cho kỳ nghỉ học 21/11 đến 31/12 và Giáng sinh 25 đến 27/12; gói promo Giáng sinh cho gia đình (17% booking 2025 có trẻ em), stay 2 đêm, Sunshine Garden và Sense City Family.</td><td class="l">Scale Singapore</td><td class="l">OTB Singapore T12 so cùng thời điểm năm trước.</td></tr>
-  <tr><td>T11 đến T1/2027</td><td class="l"><b>Mỹ, Singapore, châu Âu, Anh:</b> push thêm chiến dịch early-bird cho stay T1 đến T3/2027 (Tết 06/02, nghỉ giữa kỳ ở Anh 15 đến 19/02, Easter 26 đến 29/03). Mở theo cửa sổ đặt: Mỹ từ đầu T11 cho stay Tết; châu Âu, Anh từ 01/12; Singapore từ 15/12 cho Tết.</td><td class="l">Mở rộng và giữ tệp phương Tây; scale Singapore</td><td class="l">OTB Q1/2027 theo thị trường so cùng thời điểm năm trước.</td></tr>
-  </tbody></table></div>
-  <p class="chartnote">Stay T11 chỉ còn cách 5 đến 34 ngày, ngắn hơn <span class="tip" tabindex="0" data-tip="Số ngày từ ngày khách đặt phòng đến ngày nhận phòng.">lead time</span> trung vị của khách Úc (51 ngày) và Mỹ (54 ngày) cho lưu trú T11, T12/2025, nên T11 tập trung ưu đãi đặt gần ngày và gói promo; early-bird chỉ còn phù hợp cho stay từ giữa T12. Ước tính cuối tháng ở mức thận trọng: T11 285 RN, 1,33 tỷ (mục tiêu tháng 360 RN, 1,55 tỷ); T12 310 RN, 1,49 tỷ (KPI kế hoạch ≥ 347 RN; mục tiêu tháng 440 RN, 2,02 tỷ).</p>
-</section>
-
-<section id="BT-s5">
-  <div class="kicker">5 · Bài học từ 2H</div>
-  <h2>2 bài học: benefit đưa đón sân bay là yếu tố thúc đẩy bán phòng; triển khai chiến dịch early-bird theo cửa sổ đặt của từng thị trường</h2>
-  <p class="lead">Mỗi bài học gồm số liệu 2H làm căn cứ và cách áp dụng trong kế hoạch Q1/2027.</p>
-  <div class="box">
-<div class="lesson"><div class="n">1</div><div><h4>Benefit đưa đón sân bay là yếu tố thúc đẩy bán phòng trên web, dừng là lượng đặt chậm <span class="tag-inf">Suy luận</span></h4><div class="lr"><span class="lk">Số liệu</span><p>Khách đặt từ 1/7 đến 17/8, gói có đưa đón chiếm 42% số đêm đặt qua web, và tổng số đêm đặt tăng 42% so cùng khoảng ngày đặt năm 2025. Sau khi tạm dừng từ 18/8, mức tăng còn 4%, rồi giảm 6% với khách đặt từ 1 đến 25/10. On hand Q1/2027 khách Úc 86 đêm so 140 cùng thời điểm (−39%).</p></div><div class="lr ap"><span class="lk">Áp dụng Q1/2027</span><p>Đưa đón có điều kiện cho stay Q1: từ 2 đêm một chiều, từ 4 đêm hai chiều (chờ approve).</p></div></div></div>
-<div class="lesson"><div class="n">2</div><div><h4>Triển khai chiến dịch early-bird giúp Úc, Mỹ đặt sớm hơn và nhiều hơn; Singapore đặt sớm hơn</h4><div class="lr"><span class="lk">Số liệu</span><p>So cùng mốc đặt đến 25/10, số đêm lưu trú T7 đến T12 (dữ liệu booking web): Úc 466 lên 553 (+19%), lead time trung vị 65 lên 72 ngày; Mỹ 192 lên 323 (+68%), lead time 53 lên 70 ngày; Singapore 249 lên 253 (+2%), lead time 43 lên 52 ngày. OTB T12 khách Úc 83 đêm so 62 cùng thời điểm, Mỹ 49 so 42. Singapore đứng thứ 3 về doanh thu lưu trú T7 đến T10 (609 tr, +15% cùng kỳ, sau Úc và Mỹ).</p></div><div class="lr ap"><span class="lk">Áp dụng Q1/2027</span><p>Tiếp tục chiến dịch early-bird Úc (Aussie Summer); triển khai thêm chiến dịch early-bird cho Mỹ, Singapore, châu Âu, Anh theo cửa sổ đặt Q1/2027.</p></div></div></div>
-  </div>
-  <p class="chartnote">Số đêm và lead time: dữ liệu booking web (sheet Data), nên lệch nhẹ với báo cáo Web Sales. Nhãn Suy luận ở bài học 1: chưa tách được riêng ảnh hưởng của benefit đưa đón và của giá lên lượng đặt.</p>
-</section>
 </div>
+<div id="tip" role="tooltip"></div>
 
-<!-- ================= SAKYO ================= -->
-<div class="panel-h" id="p-SK" role="tabpanel" aria-labelledby="tab-SK" hidden>
-
-<nav class="toc" aria-label="Mục lục Sakyo"><div class="toc-h">Mục lục</div><ol><li><a href="#SK-s0">Tóm tắt</a></li><li><a href="#SK-s1">1 · Đối chiếu KPI kế hoạch</a></li><li><a href="#SK-s2">2 · Hạng mục đã làm, chưa làm</a></li><li><a href="#SK-s3">3 · Performance theo tháng và chi phí</a></li><li><a href="#SK-s4">4 · Tăng trưởng và rủi ro</a></li><li><a href="#SK-s5">5 · Việc cần làm T11, T12</a></li></ol></nav>
-
-<section id="SK-s0">
-  <div class="kicker">Silverland Sakyo · Tóm tắt</div>
-  <h2>Đạt toàn bộ KPI kết quả của kế hoạch 2H</h2>
-  <div class="summary">
-    <ol>
-      <li><b>Kết quả:</b> đạt toàn bộ <span class="tip" tabindex="0" data-tip="Chỉ tiêu trong file kế hoạch chiến lược 2H/2026 lập giữa năm (Silverland_BaoCao_Web_2H2026, Silverland_Jolie_Dashboard).">KPI</span> kết quả: <span class="tip" tabindex="0" data-tip="Room night, số đêm phòng: 1 phòng ở 1 đêm là 1 RN; 2 phòng ở 3 đêm là 6 RN.">RN</span> 2H 546 (KPI ≥ 431), doanh thu ước tính +83%, <span class="tip" tabindex="0" data-tip="Return on ad spend = doanh thu web theo ngày đặt chia chi phí Google Ads. ROAS 19 nghĩa là mỗi 1 đồng quảng cáo mang về 19 đồng doanh thu đặt phòng.">ROAS</span> 15,4 (KPI ≥ 14), RN T12 ước tính 172 (KPI ≥ 122).</li>
-      <li><b>Đã làm:</b> 6 trên 13 hạng mục: dừng <span class="tip" tabindex="0" data-tip="Performance Max: loại chiến dịch Google Ads tự phân phối quảng cáo trên Search, YouTube, Display, Maps, Gmail dựa trên dữ liệu chuyển đổi.">PMax</span> Sakyo VN, <span class="tip" tabindex="0" data-tip="Remarketing lists for search ads: dùng danh sách người đã vào website (ví dụ đã thêm phòng vào giỏ) để ưu tiên hiển thị quảng cáo tìm kiếm cho họ.">RLSA</span> (nhắm lại khách đã thêm phòng vào giỏ), bật lại Nhật và Singapore, giữ tệp Mỹ, <span class="tip" tabindex="0" data-tip="Mời khách nâng lên hạng phòng cao hơn để tăng doanh thu trên mỗi đêm.">upsell</span> hạng phòng cao.</li>
-      <li><b>Cần làm T11, T12:</b> duy trì hiệu quả hiện tại với ngân sách Google Ads 30 tr/tháng, push doanh thu stay T11, T12; <span class="tip" tabindex="0" data-tip="Gói giá trên booking engine của website: gồm giá, điều kiện (số đêm tối thiểu, hoàn huỷ) và quyền lợi đi kèm.">rate plan</span> năm mới cho khách Nhật; early-bird từ 3 đêm cho Úc (stay 12/12 đến 31/01); ưu đãi ở dài cho Mỹ; Singapore theo kỳ nghỉ học từ 21/11 và Giáng sinh.</li>
-    </ol>
-  </div>
-  <p class="chartnote">Mức độ triển khai 13 hạng mục trong kế hoạch: <span class="chip g">Đã làm, đạt</span> 6 · <span class="chip w">Một phần, điều chỉnh</span> 7</p>
-  <div class="hero h3">
-    <div class="kpi main"><div class="l">Doanh thu web 2H</div><div class="v num">151%<span class="vs"> <span class="tip" tabindex="0" data-tip="Cùng giai đoạn năm 2025.">cùng kỳ</span></span></div><div class="pg" aria-hidden="true"><span class="on" style="width:79.2%"></span><span class="est" style="left:79.2%;width:16.7%"></span><i style="left:52.3%"></i></div><div class="d"><b>KPI:</b> tăng so 2H/2025 (1.369 tr)</div><div class="d"><b><span class="tip" tabindex="0" data-tip="Số đã có trên hệ thống tại ngày cập nhật: các tháng đã qua là số khách đã ở; T11, T12 là phòng đã đặt nhưng chưa đến ngày ở (OTB).">On hand</span>:</b> 2.072 tr</div><div class="d"><b><span class="tip" tabindex="0" data-tip="On hand cộng lượng đặt thêm dự kiến từ nay đến cuối tháng. Lượng đặt thêm giả định bằng lượng khách đã đặt trong cùng giai đoạn năm 2025. Đây là số dự báo, chưa phải kết quả thực tế.">Ước tính cuối kỳ</span>:</b> 2.508 tr, 183% cùng kỳ</div><div class="d"><span class="chip g">Ước tính vượt cùng kỳ 83%</span></div></div>
-    <div class="kpi"><div class="l">RN web 2H</div><div class="v num">127%<span class="vs"> KPI</span></div><div class="pg" aria-hidden="true"><span class="on" style="width:77.6%"></span><span class="est" style="left:77.6%;width:17.5%"></span><i style="left:61.3%"></i></div><div class="d"><b>KPI:</b> ≥ 431 RN</div><div class="d"><b>On hand:</b> 546 RN</div><div class="d"><b>Ước tính cuối kỳ:</b> 669 RN, 155% KPI</div><div class="d"><span class="chip g">Ước tính vượt KPI 55%</span></div></div>
-    <div class="kpi"><div class="l">ROAS Google Ads</div><div class="v num">110%<span class="vs"> KPI</span></div><div class="pg" aria-hidden="true"><span class="on" style="width:84.6%"></span><span class="est" style="left:84.6%;width:0.0%"></span><i style="left:76.9%"></i></div><div class="d"><b>KPI:</b> ≥ 14</div><div class="d"><b>Thực tế T7 đến T9:</b> 15,4</div><div class="d"><b>T10 <span class="tip" tabindex="0" data-tip="T10 chưa hết tháng: doanh thu mới tính đến ngày cập nhật, còn chi phí là ngân sách dự kiến cả tháng, nên chỉ số này sẽ còn thay đổi.">tạm tính</span>:</b> 21,0</div><div class="d"><span class="chip g">Đạt KPI</span></div></div>
-  </div>
-  <p class="chartnote">KPI theo kế hoạch chiến lược 2H. Số lớn: on hand ngày 27/10 (đã ở T7 đến T10 + <span class="tip" tabindex="0" data-tip="On the books: phòng đã được đặt cho các ngày ở trong tương lai, tính đến ngày cập nhật.">OTB</span> T11, T12) so KPI; với doanh thu, KPI là tăng so cùng kỳ nên mốc 100% là doanh thu 2H/2025. Thanh đậm: on hand. Thanh nhạt: <span class="tip" tabindex="0" data-tip="Lượng phòng được đặt thêm trong một khoảng thời gian, ví dụ từ hôm nay đến cuối tháng.">pickup</span> ước tính đến cuối tháng theo tốc độ đặt 2025 <span class="tag-inf">Ước tính</span>. Vạch dọc: 100% KPI.</p>
-</section>
-
-<section id="SK-s1">
-  <div class="kicker">1 · Đối chiếu KPI kế hoạch</div>  <h2>KPI kết quả đạt; chi phí cao hơn khung nhưng doanh thu tăng nhanh hơn</h2>
-  <div class="tablewrap"><table>
-  <thead><tr><th>KPI trong kế hoạch</th><th class="l">Mục tiêu</th><th class="l">Thực tế đến 27/10</th><th class="l">Ước tính cuối kỳ</th><th class="l">Đánh giá</th></tr></thead><tbody>
-  <tr><td>RN web 2H</td><td class="l">≥ 431 RN (bằng 2H/2025)</td><td class="l">546 RN</td><td class="l">669 RN</td><td class="l"><span class="chip g">Đạt</span></td></tr>
-  <tr><td>Doanh thu web 2H</td><td class="l">Tăng so 2H/2025 (1.369 tr)</td><td class="l">2.072 tr</td><td class="l">2.508 tr (+83%)</td><td class="l"><span class="chip g">Đạt</span></td></tr>
-  <tr><td>ROAS</td><td class="l">≥ 14</td><td class="l">T7 đến T9: 15,4 (12,5 / 12,9 / 20,9)</td><td class="l">T10 tạm tính 21,0</td><td class="l"><span class="chip g">Đạt (luỹ kế)</span></td></tr>
-  <tr><td>Chi phí Google Ads 2H</td><td class="l">166 tr</td><td class="l">T7 đến T10: 118,5 tr</td><td class="l">178,5 tr (T11, T12: 30 tr/tháng)</td><td class="l"><span class="chip w">Cao hơn khung 8%</span></td></tr>
-  <tr><td>RN web T11</td><td class="l">Tham chiếu cùng kỳ T11/2025: 75 RN</td><td class="l">88 RN</td><td class="l">122 RN</td><td class="l"><span class="chip g">Ước tính vượt cùng kỳ 63%</span></td></tr>
-  <tr><td>RN web T12</td><td class="l">≥ 122 RN (KPI riêng cho T12 trong kế hoạch)</td><td class="l">83 RN</td><td class="l">172 RN</td><td class="l"><span class="chip g">Đạt</span></td></tr>
-  </tbody></table></div>
-  <p class="chartnote">Kế hoạch 2H đặt KPI RN cho cả kỳ (≥ 431) và một mốc riêng cho T12 (≥ 122 RN). Kế hoạch không đề cập RN T11 nên so với cùng kỳ T11/2025. Kết quả từng tháng T7 đến T10 xem mục 3.</p>
-  <p class="chartnote">Kế hoạch gốc: Silverland_BaoCao_Web_2H2026 (tab Sakyo), mục Giải pháp A1 đến C4, lịch T7 đến T12, Mục tiêu 2H và Điều chỉnh chi phí. Thực tế: báo cáo Web Sales<sup><a href="#ref1" class="ref">[1]</a></sup> (on hand 27/10), SVL Budget Report 2026. Ước tính cuối kỳ theo tốc độ đặt 2025.</p>
-</section>
-
-<section id="SK-s2">
-  <div class="kicker">2 · Hạng mục đã làm, chưa làm</div>
-  <h2>6 hạng mục đã làm, 7 làm một phần hoặc điều chỉnh</h2>
-  <div class="tablewrap"><table class="items">
-  <thead><tr><th><span class="tip" tabindex="0" data-tip="Mã hạng mục theo file kế hoạch gốc: A làm ngay (T7), B quý 3, C quý 4, CP điều chỉnh chi phí; Jolie đánh số theo 5 định hướng và lịch tháng.">Mã</span></th><th class="l">Hạng mục trong kế hoạch</th><th class="l">Trạng thái</th><th class="l">Bằng chứng thực thi</th><th class="l">Kết quả</th></tr></thead><tbody>
-  <tr class="grp"><td colspan="5">A · Việc làm ngay (T7)</td></tr>
-  <tr><td>A1</td><td class="l">Tăng ngân sách Search Sakyo VN lên 500 đến 600K/ngày</td><td class="l"><span class="chip w" tabindex="0" data-tip="Đã triển khai nhưng chưa đủ phạm vi hoặc thị trường như kế hoạch.">Một phần</span></td><td class="l">Ngân sách đang chạy 400K/ngày; chi phí T7 đến T10: 12,2 / 12,1 / 12,0 / 10,3 tr.</td><td class="l">ROAS chiến dịch 30 ngày 26/9 đến 25/10: 18,9.</td></tr>
-  <tr><td>A2</td><td class="l">Audit và giảm PMax Sakyo VN (CvR 0,01%)</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">PMax Sakyo VN chi 6,9 tr (T7), 1,3 tr (T8), sau đó dừng.</td><td class="l">Ngân sách chuyển sang PMax Sakyo Úc &amp; Sing từ T8.</td></tr>
-  <tr><td>A3</td><td class="l">RLSA cho nhóm giỏ hàng (CvR 25%)</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">Danh sách khách đã thêm phòng vào giỏ hoặc đã bắt đầu thanh toán, gắn vào Search Sakyo VN; dùng thêm làm tín hiệu PMax.</td><td class="l">T7 đến T10: 44 click, 4 chuyển đổi, 36,8 tr giá trị (ROAS 18,6).</td></tr>
-  <tr class="grp"><td colspan="5">B · Quý 3</td></tr>
-  <tr><td>B1</td><td class="l"><span class="tip" tabindex="0" data-tip="Ưu đãi dành cho khách đặt sớm trước ngày ở một khoảng nhất định, để giữ booking trước khi khách tìm trên OTA.">Early-bird</span> direct tiếng Nhật, <span class="tip" tabindex="0" data-tip="Days before arrival: số ngày khách đặt trước ngày đến. DBA 60 đến 90 là đặt trước 2 đến 3 tháng.">DBA</span> 45 đến 60</td><td class="l"><span class="chip w" tabindex="0" data-tip="Đã triển khai nhưng chưa đủ phạm vi hoặc thị trường như kế hoạch.">Một phần</span></td><td class="l">Sửa trang tiếng Nhật (01/10); <span class="tip" tabindex="0" data-tip="Nhóm thành phần trong PMax gồm hình, tiêu đề, mô tả và tín hiệu đối tượng. EB: nội dung đặt sớm; LM: nội dung sát ngày.">asset group</span> "Japan Town" trong PMax. Rate plan đặt sớm (December Early Rate, Winter Early Bird, Advance Purchase) chiếm 22% RN web đặt T7 đến T10, nhưng chưa có rate plan riêng cho khách Nhật.</td><td class="l">Tỷ trọng Nhật trong RN web lưu trú T7 đến T10: 25,8% (cùng kỳ 36,8%); OTB T11, T12: 19 RN (cùng thời điểm 2025: 31).</td></tr>
-  <tr><td>B2</td><td class="l">Bật lại Search, PMax cho Nhật và Singapore</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">Search Sakyo VN nhắm thêm Nhật; PMax Sakyo Úc &amp; Sing từ T8 nhắm Nhật, Singapore, Úc. Danh sách GA4 Nhật, Singapore gắn vào Search.</td><td class="l">Danh sách Nhật trên Search: 29 click, 5 chuyển đổi, 86 tr. Tỷ trọng số đêm của khách Singapore trong tổng RN web lưu trú T7 đến T10: 16,7% (cùng kỳ 5,0%).</td></tr>
-  <tr><td>B3</td><td class="l">Early-bird Đài Loan, Úc; flash deal sát ngày cho Singapore</td><td class="l"><span class="chip w" tabindex="0" data-tip="Đã triển khai nhưng chưa đủ phạm vi hoặc thị trường như kế hoạch.">Một phần</span></td><td class="l">PMax Úc &amp; Sing có asset group EB; rate plan sát ngày (Sakyo Last-Minute, Saigon This Week) chiếm 14% RN.</td><td class="l">Tỷ trọng số đêm của khách Úc trong tổng RN web lưu trú T7 đến T10: 13,9% (cùng kỳ 8,8%).</td></tr>
-  <tr><td>B4</td><td class="l">Giữ tệp Mỹ trên kênh direct</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">Search Sakyo VN nhắm cả người dùng ở Mỹ (báo cáo vị trí người dùng, 01/07 đến 26/10): chi 8,8 tr, 10,8 chuyển đổi, giá trị 202,8 tr (ROAS 23,1), là vị trí có chi phí lớn nhất của chiến dịch. Từ 26/10 thêm PMax Sakyo Mỹ &amp; Sing.</td><td class="l">Tỷ trọng số đêm của khách Mỹ trong tổng RN web lưu trú T7 đến T10: 13,4% (cùng kỳ 7,7%).</td></tr>
-  <tr class="grp"><td colspan="5">C · Quý 4</td></tr>
-  <tr><td>C1</td><td class="l">Upsell hạng phòng thấp lên hạng Premier trở lên</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">Ưu tiên bán Solace Premier, Sanctuary Executive trong gói và quảng cáo.</td><td class="l">Solace Premier và Sanctuary Executive chiếm 57% RN web lưu trú T7 đến T12/2026 (đặt đến 25/10). Không so được với cùng kỳ vì tên và cơ cấu hạng phòng đổi sau đợt nâng cấp 2025.</td></tr>
-  <tr><td>C2</td><td class="l">Tăng ngân sách direct cho T11, T12</td><td class="l"><span class="chip w" tabindex="0" data-tip="Thay đổi so với kế hoạch theo quyết định sau đó (ví dụ định hướng tối ưu ngân sách).">Điều chỉnh</span></td><td class="l">T10 30 tr, bằng T7 đến T9. T11, T12 duy trì 30 tr/tháng.</td><td class="l"></td></tr>
-  <tr><td>C3</td><td class="l">Mở rộng <span class="tip" tabindex="0" data-tip="Từ khóa không chứa tên khách sạn, ví dụ &quot;hotel near Ben Thanh market&quot;, để tiếp cận khách chưa biết khách sạn. Từ khóa thương hiệu là từ khóa chứa tên Silverland.">từ khóa ngoài thương hiệu</span></td><td class="l"><span class="chip w" tabindex="0" data-tip="Đã triển khai nhưng chưa đủ phạm vi hoặc thị trường như kế hoạch.">Một phần</span></td><td class="l">Search 18.9 (tài khoản Sakyo) thử nhóm từ khóa khách công tác tiếng Việt; nhóm này đang tạm dừng do lượng tìm kiếm thấp. Từ khóa đang chạy đều là thương hiệu.</td><td class="l"></td></tr>
-  <tr><td>C4</td><td class="l">Giữ giá hạng bán chậm bằng benefit (afternoon tea, massage, đưa đón)</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">Gói The Zen Retreat (massage, high tea): 40 RN; Stay More, Feel More (đưa đón một chiều): 61 RN.</td><td class="l"><span class="tip" tabindex="0" data-tip="Average daily rate: giá phòng bình quân mỗi đêm = doanh thu phòng chia số đêm phòng (RN).">ADR</span> web T7 đến T10 cao hơn cùng kỳ 13% đến 30%.</td></tr>
-  <tr class="grp"><td colspan="5">Điều chỉnh chi phí</td></tr>
-  <tr><td>CP1</td><td class="l">Phân tầng benefit theo hạng phòng</td><td class="l"><span class="chip w" tabindex="0" data-tip="Đã triển khai nhưng chưa đủ phạm vi hoặc thị trường như kế hoạch.">Một phần</span></td><td class="l">Rate plan kèm đưa đón vẫn bán ở hạng thấp nhất (Stillness Studio 19 trên 54 RN). Mức giảm spa theo hạng phòng vẫn duy trì bán cho mọi hạng phòng.</td><td class="l"></td></tr>
-  <tr><td>CP2</td><td class="l">Google Ads 2H khoảng 166 tr</td><td class="l"><span class="chip w" tabindex="0" data-tip="Chi phí dự kiến cao hơn ngân sách khung trong kế hoạch.">Cao hơn khung</span></td><td class="l">T7 đến T10: 118,5 tr; T11, T12 duy trì 30 tr/tháng.</td><td class="l">Tổng 2H dự kiến 178,5 tr; doanh thu <span class="tip" tabindex="0" data-tip="Tính theo ngày khách đặt phòng, không theo ngày khách ở. Dùng để đo hiệu quả quảng cáo trong tháng chạy quảng cáo.">theo ngày đặt</span> T7 đến T9 +132%.</td></tr>
-  </tbody></table></div>
-  <p class="chartnote">Bằng chứng: Google Ads API (chiến dịch, ngân sách, geo, audience) và giao diện tài khoản, kiểm tra ngày 26, 27/10; dữ liệu booking sheet Data (rate plan, quốc tịch, hạng phòng, đặt đến 25/10).</p>
-</section>
-
-<section id="SK-s3">
-  <div class="kicker">3 · Performance theo tháng và chi phí</div>
-  <h2>T10 vượt mục tiêu tháng; T7 đến T9 đạt 79% đến 93% mục tiêu tháng về RN</h2>
-  <div class="box">
-    <div class="mt"><button class="mtab" aria-pressed="true" data-h="SK" data-m="rn">Số đêm (RN)</button><button class="mtab" aria-pressed="false" data-h="SK" data-m="rev">Doanh thu (triệu đồng)</button></div>
-    <div class="chartbox"><canvas id="c-SK" aria-label="Biểu đồ RN và doanh thu theo tháng, Sakyo"></canvas></div>
-    <div class="nochart" id="nc-SK">Biểu đồ cần kết nối mạng. Số liệu ở bảng bên dưới.</div>
-    <div class="chartnote">Cột đậm: đã ở hoặc OTB ngày 27/10. Cột nhạt: phần ước tính đến cuối tháng, theo tốc độ đặt 2025. Đường liền: mục tiêu tháng theo <span class="tip" tabindex="0" data-tip="Google Sheet Hotels Web Sales Status 2026: mục tiêu và số on hand web theo tháng lưu trú của từng khách sạn.">báo cáo Web Sales</span><sup><a href="#ref1" class="ref">[1]</a></sup> (khác KPI kế hoạch chiến lược). Đường đứt: cùng kỳ 2025.</div>
-    <div class="tablewrap" style="margin-top:12px"><table><thead><tr><th>Tháng</th><th>RN</th><th>Mục tiêu</th><th>% mục tiêu</th><th>RN 2025</th><th>ADR (triệu đồng)</th><th>ADR mục tiêu</th><th>ADR 2025</th><th>Doanh thu (triệu đồng)</th><th>Mục tiêu (triệu đồng)</th></tr></thead><tbody id="t-SK"></tbody></table></div>
-  </div>
-  <div class="verdict"><h4>Nhận xét performance 2H/2026</h4>
-<p><b>Đã ở T7 đến T10.</b> Bốn tháng đạt 375 RN và 1.314 tr doanh thu, bằng 101% và 104% tổng mục tiêu tháng (375 trên 373 RN mục tiêu cộng 4 tháng; 1.314 trên 1.269 tr), cao hơn cùng kỳ 60% về RN và 94% về doanh thu. ADR vượt mục tiêu từ T8 (3,36 đến 3,74 tr so 3,2 đến 3,6 tr), nên doanh thu đạt tỷ lệ cao hơn RN. T10 vượt mục tiêu với 131 RN (139% mục tiêu, gấp 2,4 lần cùng kỳ).</p>
-<p><b>Vì sao T7 đến T9 dưới mục tiêu tháng.</b> T7, T8, T9 đạt 90%, 93% và 79% mục tiêu RN, nhưng vẫn cao hơn cùng kỳ 63%, 12% và 47%. Theo dữ liệu booking web, tính theo tháng lưu trú: T8 tăng ít nhất vì khách Nhật giảm từ 48 xuống 20 RN; Mỹ (0 lên 31), Úc (13 lên 28) và Singapore (4 lên 20) bù lại. T9 khách Nhật giữ ngang cùng kỳ (23 RN), nhưng Singapore chỉ còn 6 RN (T7: 23, T8: 20).</p>
-<p><b>Tốc độ đặt.</b> RN đặt qua web so cùng khoảng ngày đặt năm 2025 tăng nhanh dần: +23% (đặt 1/7 đến 17/8), +174% (18/8 đến 30/9), +88% (1 đến 25/10), dù ADR cao hơn. Tăng trưởng đến từ ba yếu tố có số liệu: (1) thị trường mở rộng: tỷ trọng số đêm của Singapore, Úc, Mỹ trong tổng RN web lưu trú T7 đến T10 tăng từ 21,5% lên 44,0%; (2) hạng phòng cao bán nhiều hơn: Solace Premier và Sanctuary Executive chiếm 57% RN web; (3) khách đặt sớm hơn: lead time trung vị tăng từ 21 lên 33 ngày. Chi phí Google Ads T7 đến T9 chỉ tăng 11% so cùng kỳ, doanh thu theo ngày đặt tăng 132%.</p>
-<p><b>T11, T12.</b> OTB T11 88 RN (77% mục tiêu tháng 115), T12 83 RN (55% mục tiêu 150); ADR OTB cao hơn mục tiêu 10% (4,21 tr) và 20% (4,66 tr). <span class="tag-inf">Ước tính</span> Theo tốc độ đặt 2025, T11 ước tính đạt khoảng 122 RN (106% mục tiêu), T12 ước tính đạt khoảng 172 RN (115%).</p>
-<p><b>Kết luận.</b> Sakyo có kết quả 2H tốt nhất trong ba khách sạn: vượt tổng mục tiêu tháng, tăng đồng thời số đêm và giá, RN 2H ước tính đạt khoảng 155% KPI kế hoạch. Điểm cần theo dõi là khách Nhật: OTB T11, T12 19 RN so 31 cùng thời điểm 2025, trong khi Nhật là thị trường lớn nhất của Sakyo trên OTA.</p></div>
-  <h3>Chi phí Google Ads và ROAS</h3>
-  <div class="tablewrap"><table><thead><tr><th>Chỉ số</th><th>T7</th><th>T8</th><th>T9</th><th>T10</th><th>T11</th><th>T12</th><th>2H</th></tr></thead><tbody><tr><td>Chi phí 2026 (tr)</td><td class="num">29,5</td><td class="num">29,4</td><td class="num">29,6</td><td class="num">30*</td><td class="num">30 (dự kiến)</td><td class="num">30 (dự kiến)</td><td class="num">178,5 (dự kiến)</td></tr><tr><td>Chi phí 2025 (tr)</td><td class="num">23,7</td><td class="num">25,6</td><td class="num">30,2</td><td class="num">29,6</td><td class="num">25,0</td><td class="num">34,0</td><td class="num">168,1</td></tr><tr><td>ROAS 2026</td><td class="num">12,5</td><td class="num">12,9</td><td class="num">20,9</td><td class="num">21,0*</td><td class="num"></td><td class="num"></td><td class="num">15,4 (T7 đến T9)</td></tr><tr><td>ROAS 2025</td><td class="num">10,8</td><td class="num">6,5</td><td class="num">5,5</td><td class="num">14,0</td><td class="num"></td><td class="num"></td><td class="num">7,4 (T7 đến T9)</td></tr></tbody></table></div>
-  <p class="chartnote">Chi phí T7 đến T9 tăng 11% so cùng kỳ, doanh thu theo ngày đặt tăng 132%: ROAS 15,4, gấp đôi cùng kỳ (7,4). *T10: ngân sách dự kiến cả tháng, ROAS tạm tính trên doanh thu đặt đến nay. T11, T12: duy trì 30 tr/tháng. Nguồn: SVL Budget Report 2025, 2026; ROAS = doanh thu theo ngày đặt / chi phí.</p>
-</section>
-
-<section id="SK-s4">
-  <div class="kicker">4 · Tăng trưởng và rủi ro</div>
-  <h2>Tăng trưởng đến từ giá, hạng phòng cao, lead time dài hơn và thị trường mới; khách Nhật cần theo dõi</h2>
-  <div class="box">
-    <div class="cause"><div class="n">1</div><div><h4>Giá và hạng phòng</h4><p>ADR web booking đặt từ 18/8 tăng 18% so cùng kỳ; RN vẫn tăng: OTB T11 +108%, T12 +125% so <span class="tip" tabindex="0" data-tip="Số đã đặt tại cùng ngày này của năm 2025 (ví dụ OTB T12 tính đến 25/10/2025), để so sánh công bằng với OTB hiện tại.">cùng thời điểm 2025</span> (theo dữ liệu booking). Solace Premier và Sanctuary Executive chiếm 57% RN web lưu trú T7 đến T12.</p></div></div>
-    <div class="cause"><div class="n">2</div><div><h4><span class="tip" tabindex="0" data-tip="Số ngày từ ngày khách đặt phòng đến ngày nhận phòng.">Lead time</span> và benefit</h4><p>Lead time trung vị của booking web tăng từ 21 lên 33 ngày; tỷ trọng đặt trong 7 ngày giảm từ 23% xuống 15%. Các rate plan bán nhiều cho T10 đến T12 có kèm đưa đón sân bay (ví dụ "Autumn Comfort Stay &amp; Airport Transfer").</p></div></div>
-    <div class="cause"><div class="n">3</div><div><h4>Cơ cấu thị trường trên web</h4><p>Lưu trú T7 đến T10: Singapore, Úc, Mỹ cùng tăng tỷ trọng (tổng từ 21,5% lên 44,0% RN web); Đài Loan 6,1%. Nhật giảm tỷ trọng từ 36,8% xuống 25,8%, RN tương đương cùng kỳ. OTB T11, T12 khách Nhật 19 RN (cùng thời điểm 2025: 31).</p></div></div>
-    <div class="cause"><div class="n">4</div><div><h4>Hiệu quả chiến dịch Google Ads</h4><p>30 ngày 26/9 đến 25/10: Search Sakyo VN chi 11,7 tr, ROAS 18,9; PMax Sakyo Úc &amp; Sing 4,8 tr, ROAS 21,3; Search 18.9 trên tài khoản Sakyo 5,8 tr, ROAS 15,8. Tuần 19 đến 25/10 thấp hơn: Search Sakyo VN ROAS 13,3, <span class="tip" tabindex="0" data-tip="Cost per click: chi phí trung bình cho mỗi lượt nhấp quảng cáo.">CPC</span> 49.800 đ; PMax Úc &amp; Sing ROAS 6,7.</p></div></div>
-  </div>
-</section>
-
-<section id="SK-s5">
-  <div class="kicker">5 · Việc cần làm T11, T12</div>
-  <h2>Giữ đà tăng trưởng với ngân sách 30 tr/tháng</h2>
-  <div class="tablewrap"><table>
-  <thead><tr><th>Thời gian</th><th class="l">Việc cần làm</th><th class="l">Hạng mục kế hoạch liên quan</th><th class="l">Chỉ số theo dõi</th></tr></thead><tbody>
-  <tr><td>T11 đến T12</td><td class="l">Duy trì hiệu quả hiện tại (ROAS T7 đến T9: 15,4; T10 tạm tính 21,0) với ngân sách Google Ads 30 tr/tháng, tập trung push doanh thu stay T11, T12.</td><td class="l">Tăng ngân sách T11, T12; Google Ads 2H khoảng 166 tr</td><td class="l">Doanh thu stay T11, T12 so mục tiêu tháng; ROAS ≥ 14; chi phí khoảng 30 tr/tháng.</td></tr>
-  <tr><td>27/10 đến 31/10</td><td class="l">Rà <span class="tip" tabindex="0" data-tip="Cụm từ khách thực sự gõ trên Google trước khi thấy quảng cáo.">search term</span> và <span class="tip" tabindex="0" data-tip="Báo cáo Google Ads so sánh tỷ lệ hiển thị của quảng cáo với các đối thủ cùng đấu giá từ khóa.">auction insights</span> của Search Sakyo VN (CPC tuần 19 đến 25/10: 49.800 đ).</td><td class="l">Tăng ngân sách Search Sakyo VN</td><td class="l">CPC ≤ 40.000 đ.</td></tr>
-  <tr><td>T11</td><td class="l">Rate plan đặt sớm tiếng Nhật cho kỳ nghỉ năm mới (29/12 đến 03/01) và T1 đến T3; gắn vào asset group Japan Town.</td><td class="l">Early-bird direct tiếng Nhật</td><td class="l">OTB khách Nhật T12, T1 so cùng thời điểm 2025.</td></tr>
-  <tr><td>T11 đến T12</td><td class="l">Theo thị trường (mẫu web nhỏ, đọc cùng số OTA): <b>Úc</b> early-bird từ 3 đêm cho stay 12/12 đến 31/01, giới hạn số phòng Sanctuary Executive, dùng Solace Premier làm phương án thay thế; <b>Mỹ</b> ưu đãi ở dài, Room Only, cho Thanksgiving và 20/12 đến 03/01; <b>Singapore</b> nghỉ học từ 21/11 và Giáng sinh 25 đến 27/12, hai mức giá: nhóm cao (Solace Premier, Sanctuary Executive) và nhóm tiết kiệm (Stillness Studio).</td><td class="l">Early-bird Đài Loan, Úc; giữ tệp Mỹ</td><td class="l">OTB T12, T1 theo thị trường so cùng thời điểm năm trước.</td></tr>
-  <tr><td>T11 đến T12</td><td class="l">Giữ giá; ưu tiên Solace Premier, Sanctuary Executive; bổ sung asset cho PMax Úc &amp; Sing (ROAS tuần 19 đến 25/10: 6,7).</td><td class="l">Upsell lên hạng Premier trở lên; giữ giá bằng benefit</td><td class="l">ADR T12 ≥ 4,4 tr; ROAS ≥ 14 theo tháng.</td></tr>
-  </tbody></table></div>
-  <p class="chartnote">Ước tính cuối tháng theo tốc độ đặt 2025: T11 ước tính đạt khoảng 122 RN, 484 tr (mục tiêu tháng 115 RN, 439 tr); T12 172 RN, 710 tr (KPI kế hoạch ≥ 122 RN; mục tiêu tháng 150 RN, 584 tr).</p>
-</section>
-
-</div>
-
-<!-- ================= JOLIE ================= -->
-<div class="panel-h" id="p-JL" role="tabpanel" aria-labelledby="tab-JL" hidden>
-
-<nav class="toc" aria-label="Mục lục Jolie"><div class="toc-h">Mục lục</div><ol><li><a href="#JL-s0">Tóm tắt</a></li><li><a href="#JL-s1">1 · Đối chiếu KPI kế hoạch</a></li><li><a href="#JL-s2">2 · Hạng mục đã làm, chưa làm</a></li><li><a href="#JL-s3">3 · Performance theo tháng và chi phí</a></li><li><a href="#JL-s4">4 · Việc cần làm T11, T12</a></li><li><a href="#JL-s5">5 · Bài học từ 2H</a></li></ol></nav>
-
-<section id="JL-s0">
-  <div class="kicker">Silverland Jolie · Tóm tắt</div>
-  <h2>Đạt KPI doanh thu của kế hoạch 2H; RN ước tính đạt khoảng 99% KPI</h2>
-  <div class="summary">
-    <ol>
-      <li><b>Kết quả:</b> doanh thu ước tính đạt khoảng +36%, đạt KPI; chưa đạt <span class="tip" tabindex="0" data-tip="Chỉ tiêu trong file kế hoạch chiến lược 2H/2026 lập giữa năm (Silverland_BaoCao_Web_2H2026, Silverland_Jolie_Dashboard).">KPI</span> <span class="tip" tabindex="0" data-tip="Room night, số đêm phòng: 1 phòng ở 1 đêm là 1 RN; 2 phòng ở 3 đêm là 6 RN.">RN</span>: ước tính đạt khoảng 485 RN, bằng 99% KPI (≥ 488 RN, thiếu 3 RN); <span class="tip" tabindex="0" data-tip="Average daily rate: giá phòng bình quân mỗi đêm = doanh thu phòng chia số đêm phòng (RN).">ADR</span> web cao hơn OTA 14% đến 28%.</li>
-      <li><b>Đã làm:</b> 4 trên 8 hạng mục: triển khai chiến dịch đặt sớm và đặt gần ngày trong <span class="tip" tabindex="0" data-tip="Performance Max: loại chiến dịch Google Ads tự phân phối quảng cáo trên Search, YouTube, Display, Maps, Gmail dựa trên dữ liệu chuyển đổi.">PMax</span>; upsell hạng phòng cao để giữ ADR; remarketing giỏ hàng và khách cũ; tăng ngân sách T10 so cùng kỳ.</li>
-      <li><b>Cần làm T11, T12:</b> ưu tiên ngân sách cho Mỹ và Úc (Mỹ là thị trường duy nhất đang vượt <span class="tip" tabindex="0" data-tip="Cùng giai đoạn năm 2025.">cùng kỳ</span> cả RN và ADR; Úc cần cho early-bird stay T1 đến đầu T2/2027); Úc T12: ưu đãi đặt gần ngày cho ngày nhận phòng 18/12 và 30 đến 31/12; <span class="tip" tabindex="0" data-tip="Ưu đãi dành cho khách đặt sớm trước ngày ở một khoảng nhất định, để giữ booking trước khi khách tìm trên OTA.">early-bird</span> cho stay T1 đến đầu T2/2027 cho Úc, Anh, Đức; giữ PMax theo ngưỡng <span class="tip" tabindex="0" data-tip="Return on ad spend = doanh thu web theo ngày đặt chia chi phí Google Ads. ROAS 19 nghĩa là mỗi 1 đồng quảng cáo mang về 19 đồng doanh thu đặt phòng.">ROAS</span> tuần.</li>
-    </ol>
-  </div>
-  <p class="chartnote">Mức độ triển khai 8 hạng mục trong kế hoạch: <span class="chip g">Đã làm, đạt</span> 4 · <span class="chip w">Một phần, điều chỉnh</span> 4</p>
-  <div class="hero h3">
-    <div class="kpi main"><div class="l">Doanh thu web 2H</div><div class="v num">117%<span class="vs"> <span class="tip" tabindex="0" data-tip="Cùng giai đoạn năm 2025.">cùng kỳ</span></span></div><div class="pg" aria-hidden="true"><span class="on" style="width:78.6%"></span><span class="est" style="left:78.6%;width:12.9%"></span><i style="left:67.2%"></i></div><div class="d"><b>KPI:</b> tăng so 2H/2025 (1.113 tr)</div><div class="d"><b><span class="tip" tabindex="0" data-tip="Số đã có trên hệ thống tại ngày cập nhật: các tháng đã qua là số khách đã ở; T11, T12 là phòng đã đặt nhưng chưa đến ngày ở (OTB).">On hand</span>:</b> 1.303 tr</div><div class="d"><b><span class="tip" tabindex="0" data-tip="On hand cộng lượng đặt thêm dự kiến từ nay đến cuối tháng. Với Jolie, số đêm cuối tháng là ước tính của bộ phận: T11 110 RN, T12 100 RN. Đây là số dự báo, chưa phải kết quả thực tế.">Ước tính cuối kỳ</span>:</b> 1.517 tr, 136% cùng kỳ</div><div class="d"><span class="chip g">Ước tính vượt cùng kỳ 36%</span></div></div>
-    <div class="kpi"><div class="l">RN web 2H</div><div class="v num">85%<span class="vs"> KPI</span></div><div class="pg" aria-hidden="true"><span class="on" style="width:65.4%"></span><span class="est" style="left:65.4%;width:11.0%"></span><i style="left:76.9%"></i></div><div class="d"><b>KPI:</b> ≥ 488 RN</div><div class="d"><b>On hand:</b> 415 RN</div><div class="d"><b>Ước tính cuối kỳ:</b> 485 RN, 99% KPI</div><div class="d"><span class="chip w">Ước tính thiếu 3 RN so KPI</span></div></div>
-    <div class="kpi"><div class="l">ADR web so ADR OTA</div><div class="v num">114%<span class="vs"> so OTA</span></div><div class="pg" aria-hidden="true"><span class="on" style="width:87.7%"></span><span class="est" style="left:87.7%;width:0.0%"></span><i style="left:76.9%"></i></div><div class="d"><b>KPI:</b> cao hơn OTA</div><div class="d"><b>T7, T8, T9:</b> +28%, +19%, +14%</div><div class="d">Số lớn: T9</div><div class="d"><span class="chip g">Đạt KPI</span></div></div>
-  </div>
-  <p class="chartnote">KPI theo kế hoạch chiến lược 2H. Số lớn: on hand ngày 27/10 (đã ở T7 đến T10 + <span class="tip" tabindex="0" data-tip="On the books: phòng đã được đặt cho các ngày ở trong tương lai, tính đến ngày cập nhật.">OTB</span> T11, T12) so KPI; với doanh thu, KPI là tăng so cùng kỳ nên mốc 100% là doanh thu 2H/2025. Thanh đậm: on hand. Thanh nhạt: <span class="tip" tabindex="0" data-tip="Lượng phòng được đặt thêm trong một khoảng thời gian, ví dụ từ hôm nay đến cuối tháng.">pickup</span> ước tính đến cuối tháng theo tốc độ đặt 2025 <span class="tag-inf">Ước tính</span>. Vạch dọc: 100% KPI. <b>Ước tính cuối kỳ của Jolie</b> là ước tính của bộ phận cho số đêm đặt thêm: T11 đạt khoảng 110 RN (on hand 101, đặt thêm 9; cùng kỳ 2025 đặt thêm 48), T12 đạt khoảng 100 RN (on hand 39, đặt thêm 61; cùng kỳ 2025 đặt thêm 43). Doanh thu phần đặt thêm tính theo ADR phần đặt thêm của cùng kỳ 2025 (T11 2,77 tr, T12 3,09 tr).</p>
-</section>
-
-<section id="JL-s1">
-  <div class="kicker">1 · Đối chiếu KPI kế hoạch</div>  <h2>Doanh thu đạt KPI; RN 2H ước tính đạt khoảng 99% KPI</h2>
-  <div class="tablewrap"><table>
-  <thead><tr><th>KPI trong kế hoạch</th><th class="l">Mục tiêu</th><th class="l">Thực tế đến 27/10</th><th class="l">Ước tính cuối kỳ</th><th class="l">Đánh giá</th></tr></thead><tbody>
-  <tr><td>RN web 2H</td><td class="l">≥ 488 RN</td><td class="l">415 RN</td><td class="l">485 RN</td><td class="l"><span class="chip w">Ước tính dưới KPI 1%</span></td></tr>
-  <tr><td>Doanh thu web 2H</td><td class="l">Tăng so 2H/2025 (1.113 tr)</td><td class="l">1.303 tr</td><td class="l">1.517 tr (+36%)</td><td class="l"><span class="chip g">Đạt</span></td></tr>
-  <tr><td>ADR web so ADR OTA</td><td class="l">Cao hơn OTA</td><td class="l">T7 +28%; T8 +19%; T9 +14%</td><td class="l"></td><td class="l"><span class="chip g">Đạt</span></td></tr>
-  <tr><td>Ưu tiên chi phí Ads</td><td class="l">Úc, Đức, Anh và quý 4</td><td class="l">PMax nhắm Úc, Đức, Anh từ T7; Úc chạy xuyên suốt, Đức và Anh không đẩy mạnh ngân sách. Ngân sách T10 20 tr, cao hơn cùng kỳ 23% (16,2 tr).</td><td class="l"></td><td class="l"><span class="chip w" tabindex="0" data-tip="Đã triển khai nhưng chưa đủ phạm vi hoặc thị trường như kế hoạch.">Một phần</span></td></tr>
-  <tr><td>RN web T11</td><td class="l">Tham chiếu cùng kỳ T11/2025: 100 RN</td><td class="l">101 RN</td><td class="l">110 RN</td><td class="l"><span class="chip g">Ước tính vượt cùng kỳ 10%</span></td></tr>
-  <tr><td>RN web T12</td><td class="l">Vượt T12/2025 (97 RN), KPI riêng cho T12 trong kế hoạch</td><td class="l">39 RN</td><td class="l">100 RN</td><td class="l"><span class="chip g">Ước tính đạt (vượt 3 RN)</span></td></tr>
-  </tbody></table></div>
-  <p class="chartnote">Kế hoạch 2H đặt KPI RN cho cả kỳ (≥ 488) và một mốc riêng cho T12 (vượt 97 RN của T12/2025). Kế hoạch không đề cập RN T11 nên so với cùng kỳ T11/2025. Kết quả từng tháng T7 đến T10 xem mục 3.</p>
-  <p class="chartnote">Kế hoạch gốc: Silverland_Jolie_Dashboard, tab Việc cần làm (5 định hướng, mục tiêu, lịch Google Ads T7 đến T12). Thực tế: báo cáo Web Sales<sup><a href="#ref1" class="ref">[1]</a></sup> (on hand 27/10), SVL Budget Report 2026. Ước tính cuối kỳ: ước tính của bộ phận (xem ghi chú ở phần Tóm tắt).</p>
-</section>
-
-<section id="JL-s2">
-  <div class="kicker">2 · Hạng mục đã làm, chưa làm</div>
-  <h2>4 hạng mục đã làm, 4 làm một phần hoặc điều chỉnh</h2>
-  <div class="tablewrap"><table class="items">
-  <thead><tr><th><span class="tip" tabindex="0" data-tip="Mã hạng mục theo file kế hoạch gốc: A làm ngay (T7), B quý 3, C quý 4, CP điều chỉnh chi phí; Jolie đánh số theo 5 định hướng và lịch tháng.">Mã</span></th><th class="l">Hạng mục trong kế hoạch</th><th class="l">Trạng thái</th><th class="l">Bằng chứng thực thi</th><th class="l">Kết quả</th></tr></thead><tbody>
-  <tr class="grp"><td colspan="5">Định hướng chính</td></tr>
-  <tr><td>1</td><td class="l">Early-bird theo <span class="tip" tabindex="0" data-tip="Số ngày từ ngày khách đặt phòng đến ngày nhận phòng.">lead time</span> cho Đức, Anh, Úc</td><td class="l"><span class="chip w" tabindex="0" data-tip="Đã triển khai nhưng chưa đủ phạm vi hoặc thị trường như kế hoạch.">Một phần</span></td><td class="l">PMax Jolie Đức &amp; Úc &amp; Mỹ chạy T7, T8 (7,4 tr) rồi dừng; PMax Only Úc chạy cả kỳ; Anh có trong nhắm chọn PMax nhưng không đẩy mạnh ngân sách. <span class="tip" tabindex="0" data-tip="Gói giá trên booking engine của website: gồm giá, điều kiện (số đêm tối thiểu, hoàn huỷ) và quyền lợi đi kèm.">Rate plan</span> đặt sớm chiếm 62% RN web đặt T7 đến T10.</td><td class="l">OTB T12 Úc, Anh, Pháp: 9 RN (<span class="tip" tabindex="0" data-tip="Số đã đặt tại cùng ngày này của năm 2025 (ví dụ OTB T12 tính đến 25/10/2025), để so sánh công bằng với OTB hiện tại.">cùng thời điểm 2025</span>: 32).</td></tr>
-  <tr><td>2</td><td class="l">Dồn ngân sách và rate plan vào quý 4</td><td class="l"><span class="chip w" tabindex="0" data-tip="Thay đổi so với kế hoạch theo quyết định sau đó (ví dụ định hướng tối ưu ngân sách).">Điều chỉnh</span></td><td class="l">T10 20 tr, bằng T7 đến T9. T11, T12 giữ 20 tr/tháng, không tăng thêm cho quý 4.</td><td class="l"></td></tr>
-  <tr><td>3</td><td class="l">Phân vai theo lead time: đặt sớm cho thị trường lead dài, sát ngày cho lead ngắn</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">PMax có <span class="tip" tabindex="0" data-tip="Nhóm thành phần trong PMax gồm hình, tiêu đề, mô tả và tín hiệu đối tượng. EB: nội dung đặt sớm; LM: nội dung sát ngày.">asset group</span> EB (đặt sớm) và LM (sát ngày, tạo 17/9); rate plan Midnight Deal.</td><td class="l"></td></tr>
-  <tr><td>4</td><td class="l">Giữ ADR; <span class="tip" tabindex="0" data-tip="Mời khách nâng lên hạng phòng cao hơn để tăng doanh thu trên mỗi đêm.">upsell</span> Premier lên Junior Suite, Suite</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">Rate plan đặt sớm giữ giá; không giảm giá sâu.</td><td class="l">ADR web T7 đến T10 +13% đến +18% cùng kỳ; Premier 29,5% lên 37,2%, Junior Suite 27,2% lên 29,4%, Executive 17,3% lên 21,8% RN web.</td></tr>
-  <tr class="grp"><td colspan="5">Lịch Google Ads T7 đến T12</td></tr>
-  <tr><td>T7</td><td class="l">Search thương hiệu cho Mỹ, Úc; chiến dịch đặt sớm cho Đức</td><td class="l"><span class="chip w" tabindex="0" data-tip="Thay đổi so với kế hoạch theo quyết định sau đó (ví dụ định hướng tối ưu ngân sách).">Điều chỉnh</span></td><td class="l">Không chạy Search vì CPC từ khóa thương hiệu cao; chỉ đẩy PMax để phủ thương hiệu. Đức chạy trong PMax Đức &amp; Úc &amp; Mỹ (T7: 4,7 tr, ROAS 21,2).</td><td class="l"></td></tr>
-  <tr><td>T8</td><td class="l">Search, PMax nhắm Úc, Đức, Anh</td><td class="l"><span class="chip w" tabindex="0" data-tip="Thay đổi so với kế hoạch theo quyết định sau đó (ví dụ định hướng tối ưu ngân sách).">Điều chỉnh</span></td><td class="l">Có PMax nhắm Úc, Đức, Anh; không chạy Search vì CPC cao (như T7).</td><td class="l"></td></tr>
-  <tr><td>T9, T11</td><td class="l">Remarketing khách đã vào web; remarketing giỏ hàng</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">Danh sách khách đã thêm phòng vào giỏ, đã bắt đầu thanh toán (trong 90 ngày) và khách cũ (<span class="tip" tabindex="0" data-tip="Danh sách email, số điện thoại của khách cũ được tải lên Google Ads để nhắm lại hoặc làm tín hiệu cho PMax.">Customer Match</span>) làm tín hiệu PMax.</td><td class="l"></td></tr>
-  <tr><td>T10</td><td class="l">Tăng ngân sách Search, PMax cho Úc, Đức, Anh, Mỹ; gói nâng hạng</td><td class="l"><span class="chip g">Đã làm</span></td><td class="l">T10 chi 20 tr, cao hơn cùng kỳ 23% (16,2 tr); duy trì 2 chiến dịch nhắm Úc và Mỹ; upsell Premier lên Junior Suite, Executive trong rate plan.</td><td class="l">OTB T12 khách Mỹ vẫn tăng: 20 RN (cùng thời điểm 2025: 8).</td></tr>
-  </tbody></table></div>
-  <p class="chartnote">Bằng chứng: Google Ads API (chiến dịch, ngân sách, geo, audience) và giao diện tài khoản, kiểm tra ngày 26, 27/10; dữ liệu booking sheet Data (rate plan, quốc tịch, hạng phòng, đặt đến 25/10).</p>
-</section>
-
-<section id="JL-s3">
-  <div class="kicker">3 · Performance theo tháng và chi phí</div>
-  <h2>T7, T8 đạt 67% đến 80% mục tiêu tháng về RN, T9, T10 đạt 93% đến 99%; OTB T11 vượt cùng kỳ, OTB T12 thấp</h2>
-  <div class="box">
-    <div class="mt"><button class="mtab" aria-pressed="true" data-h="JL" data-m="rn">Số đêm (RN)</button><button class="mtab" aria-pressed="false" data-h="JL" data-m="rev">Doanh thu (triệu đồng)</button></div>
-    <div class="chartbox"><canvas id="c-JL" aria-label="Biểu đồ RN và doanh thu theo tháng, Jolie"></canvas></div>
-    <div class="nochart" id="nc-JL">Biểu đồ cần kết nối mạng. Số liệu ở bảng bên dưới.</div>
-    <div class="chartnote">Cột đậm: đã ở hoặc OTB ngày 27/10. Cột nhạt: phần ước tính đặt thêm đến cuối tháng (ước tính của bộ phận: T11 110 RN, T12 100 RN). Đường liền: mục tiêu tháng theo <span class="tip" tabindex="0" data-tip="Google Sheet Hotels Web Sales Status 2026: mục tiêu và số on hand web theo tháng lưu trú của từng khách sạn.">báo cáo Web Sales</span><sup><a href="#ref1" class="ref">[1]</a></sup> (khác KPI kế hoạch chiến lược). Đường đứt: cùng kỳ 2025.</div>
-    <div class="tablewrap" style="margin-top:12px"><table><thead><tr><th>Tháng</th><th>RN</th><th>Mục tiêu</th><th>% mục tiêu</th><th>RN 2025</th><th>ADR (triệu đồng)</th><th>ADR mục tiêu</th><th>ADR 2025</th><th>Doanh thu (triệu đồng)</th><th>Mục tiêu (triệu đồng)</th></tr></thead><tbody id="t-JL"></tbody></table></div>
-  </div>
-  <div class="verdict"><h4>Nhận xét performance 2H/2026</h4>
-<p><b>Đã ở T7 đến T10.</b> Bốn tháng đạt 275 RN và 782 tr doanh thu, bằng 85% và 88% tổng mục tiêu tháng, cao hơn cùng kỳ 35% về RN và 58% về doanh thu. Thiếu hụt tập trung ở T7 (80%) và T8 (67%); T9, T10 cải thiện lên 99% và 93%. ADR vượt mục tiêu cả 4 tháng (2,63 đến 3,08 tr), giúp doanh thu đạt 88% mục tiêu dù RN chỉ đạt 85%.</p>
-<p><b>Tốc độ đặt.</b> RN đặt qua web so cùng khoảng ngày đặt năm 2025 đổi chiều trong kỳ: giảm 20% (đặt 1/7 đến 17/8), sau đó tăng 36% (18/8 đến 30/9) và 79% (1 đến 25/10). Đầu kỳ, khách châu Âu (Pháp, Đức, Ý) của Jolie giảm ở cả kênh OTA (trên Booking.com giảm 9% đến 30%), trong khi nhu cầu chung không giảm: tổng khách quốc tế đến TP.HCM 9 tháng 2026 tăng 34,5%, khách châu Âu đến Việt Nam tăng 55% (chưa có báo cáo công khai tách riêng khách châu Âu đến TP.HCM). <span class="tag-inf">Suy luận</span> Jolie đang mất thị phần ở nhóm khách châu Âu. Trong RN web lưu trú T7 đến T10, tỷ trọng số đêm của Nhật, Đức, Anh tăng so cùng kỳ 2025 (Nhật 4,9% lên 10,5%, Đức 5,7% lên 9,5%, Anh 3,7% lên 9,1%), của Mỹ giảm (24,1% xuống 13,9%); cơ cấu phòng dịch lên Premier, Junior Suite, Executive.</p>
-<p><b>T11, T12.</b> OTB T11 101 RN (70% mục tiêu tháng 145); <span class="tag-inf">Ước tính</span> T11 ước tính đạt khoảng 110 RN (76% mục tiêu tháng), cao hơn cùng kỳ 10% (100 RN). T12 OTB 39 RN (39% mục tiêu 100), ước tính đạt khoảng 100 RN, bằng mục tiêu tháng và cao hơn cùng kỳ (97 RN); ADR OTB 4,28 tr, cao hơn mục tiêu 19%. Để đạt mức này, T12 cần đặt thêm 61 RN, nhiều hơn mức 43 RN đặt thêm của cùng kỳ 2025. Khách Úc, Anh, Pháp đặt T12 rất sớm: OTB T12 của ba thị trường này 9 RN so 32 cùng thời điểm 2025, cửa sổ đặt sớm đã qua.</p>
-<p><b>Kết luận.</b> Jolie đạt KPI doanh thu 2H (ước tính đạt khoảng 1.517 tr, +36% cùng kỳ) nhờ T9 đến T11 và ADR cao hơn. RN 2H ước tính đạt khoảng 485, bằng 99% KPI (thiếu 3 RN). Kết quả T12 phụ thuộc khách Mỹ và khách đặt gần ngày, vì khách đặt sớm châu Âu, Úc cho T12 đã hụt. Với Q1/2027, early-bird cho Anh, Đức, Úc cần chạy sớm, trước ngày ở 60 đến 90 ngày.</p></div>
-  <h3>Chi phí Google Ads và ROAS</h3>
-  <div class="tablewrap"><table><thead><tr><th>Chỉ số</th><th>T7</th><th>T8</th><th>T9</th><th>T10</th><th>T11</th><th>T12</th><th>2H</th></tr></thead><tbody><tr><td>Chi phí 2026 (tr)</td><td class="num">20,1</td><td class="num">18,0</td><td class="num">19,9</td><td class="num">20*</td><td class="num">20 (dự kiến)</td><td class="num">20 (dự kiến)</td><td class="num">118 (dự kiến)</td></tr><tr><td>Chi phí 2025 (tr)</td><td class="num">17,4</td><td class="num">15,6</td><td class="num">17,8</td><td class="num">16,2</td><td class="num">18,1</td><td class="num">18,0</td><td class="num">103,0</td></tr><tr><td>ROAS 2026</td><td class="num">7,1</td><td class="num">14,8</td><td class="num">22,3</td><td class="num">29,5*</td><td class="num"></td><td class="num"></td><td class="num">14,7 (T7 đến T9)</td></tr><tr><td>ROAS 2025</td><td class="num">14,9</td><td class="num">14,4</td><td class="num">15,4</td><td class="num">19,0</td><td class="num"></td><td class="num"></td><td class="num">14,9 (T7 đến T9)</td></tr></tbody></table></div>
-  <p class="chartnote">Chi phí T7 đến T9 tăng 14% so cùng kỳ, doanh thu <span class="tip" tabindex="0" data-tip="Tính theo ngày khách đặt phòng, không theo ngày khách ở. Dùng để đo hiệu quả quảng cáo trong tháng chạy quảng cáo.">theo ngày đặt</span> tăng 12%: ROAS 14,7, ngang cùng kỳ (14,9). ROAS thấp ở T7 (7,1), tăng lên 22,3 ở T9. *T10: ngân sách dự kiến cả tháng, ROAS <span class="tip" tabindex="0" data-tip="T10 chưa hết tháng: doanh thu mới tính đến ngày cập nhật, còn chi phí là ngân sách dự kiến cả tháng, nên chỉ số này sẽ còn thay đổi.">tạm tính</span> trên doanh thu đặt đến nay. T11, T12: 20 tr/tháng. Nguồn: SVL Budget Report 2025, 2026; ROAS = doanh thu theo ngày đặt / chi phí.</p>
-</section>
-
-<section id="JL-s4">
-  <div class="kicker">4 · Việc cần làm T11, T12</div>
-  <h2>Ưu tiên Mỹ, Úc cho RN T11, T12; early-bird Úc, Anh, Đức cho stay T1 đến đầu T2/2027</h2>
-  <div class="tablewrap"><table>
-  <thead><tr><th>Thời gian</th><th class="l">Việc cần làm</th><th class="l">Hạng mục kế hoạch liên quan</th><th class="l">Chỉ số theo dõi</th></tr></thead><tbody>
-  <tr><td>T11 đến T12</td><td class="l">Google Ads T11, T12: 20 tr/tháng. Duy trì 2 chiến dịch nhắm Úc và Mỹ, ưu tiên cả hai. Mỹ: on hand T11, T12 là 37 RN so với 31 cùng kỳ, ADR 3,85 so với 3,49 tr, năm 2025 còn đặt thêm 19 RN sau 26/10. Đẩy trong giai đoạn 20 đến 23/11, 17 đến 20/12 và 31/12, push hạng phòng Premier, Executive. Chiến dịch nào có ROAS dưới <span class="tip" tabindex="0" data-tip="ROAS tối thiểu để chi phí quảng cáo cho một booking không cao hơn hoa hồng OTA (khoảng 17%). Dưới 5,9 thì bán qua OTA còn rẻ hơn chạy quảng cáo.">5,9</span> hai tuần liên tiếp thì chuyển 20% đến 30% ngân sách sang chiến dịch còn lại. Singapore gộp vào chiến dịch chung, không chạy riêng.</td><td class="l">Dồn ngân sách vào quý 4</td><td class="l">ROAS ≥ 5,9 từng chiến dịch theo tuần.</td></tr>
-  <tr><td>T11 đến T12</td><td class="l">Úc T12: on hand 4 RN so với 29 cùng kỳ; cửa sổ đặt sớm đã qua (lead time trung vị T12 là 130 ngày, năm 2025 chỉ đặt thêm 2 RN sau 26/10). Chạy ưu đãi đặt gần ngày cho check-in 18/12 và 30 đến 31/12, không kỳ vọng bù đủ khoảng trống.</td><td class="l">Việc bổ sung để tăng RN T12</td><td class="l">RN Úc T12 đặt theo tuần.</td></tr>
-  <tr><td>T11</td><td class="l">Early-bird cho stay T1 đến đầu T2/2027 , từ 3 đêm: asset group EB nhắm Úc, Anh (Junior Suite), Đức (Premier). Nghỉ hè của học sinh Úc kết thúc 26/01/2027 ở Victoria, Queensland, Nam Úc, Lãnh thổ Bắc Úc; 31/01 ở Tây Úc; 01/02 ở Lãnh thổ Thủ đô Úc; 03/02 ở New South Wales, Tasmania. Ưu tiên nhắm New South Wales và Victoria, hai bang đông dân nhất; stay từ 27/01 đến đầu T2 chỉ nhắm New South Wales, Tây Úc, Tasmania, Lãnh thổ Thủ đô Úc vì các bang còn lại đã hết kỳ nghỉ.</td><td class="l">Early-bird theo lead time cho Đức, Anh, Úc</td><td class="l">OTB T1 đến T3 khách Úc, Anh, Đức so cùng thời điểm 2025.</td></tr>
-  <tr><td>T11 đến T12</td><td class="l">Gói Giáng sinh, Năm mới: afternoon tea, Jolie Rooftop Garden Bar view sông Sài Gòn; upsell Junior Suite.</td><td class="l">Giữ ADR; upsell Junior Suite</td><td class="l">Booking gói theo tuần.</td></tr>
-  </tbody></table></div>
-  <p class="chartnote">Ước tính cuối tháng của bộ phận: T11 ước tính đạt khoảng 110 RN, 379 tr (mục tiêu tháng 145 RN, 482 tr); T12 ước tính đạt khoảng 100 RN, 356 tr (KPI kế hoạch vượt 97 RN; mục tiêu tháng 100 RN, 359 tr).</p>
-</section>
-
-<section id="JL-s5">
-  <div class="kicker">5 · Bài học từ 2H</div>
-  <h2>2 bài học: luôn duy trì chiến dịch early-bird từ đầu tháng; upsell hạng phòng giữ ADR cao hơn OTA</h2>
-  <p class="lead">Mỗi bài học gồm số liệu 2H làm căn cứ và cách áp dụng trong kế hoạch Q1/2027.</p>
-  <div class="box">
-<div class="lesson"><div class="n">1</div><div><h4>Luôn duy trì chạy chiến dịch early-bird từ đầu tháng</h4><div class="lr"><span class="lk">Số liệu</span><p>OTB T12 khách Úc, Anh, Pháp 9 đêm so 32 cùng thời điểm. Đức, Anh có trong nhắm chọn PMax nhưng không được đẩy ngân sách; PMax Jolie Đức &amp; Úc &amp; Mỹ đạt ROAS 21,2 ở T7 rồi dừng sau T8.</p></div><div class="lr ap"><span class="lk">Áp dụng Q1/2027</span><p>Early-bird Úc, Anh, Đức chạy ngay từ đầu T11 (Aussie Summer từ 01/11/2026, Winter Sun từ 05/11/2026); thêm Anh, Đức vào PMax Úc.</p></div></div></div>
-<div class="lesson"><div class="n">2</div><div><h4>Upsell hạng phòng giữ được ADR cao hơn cả OTA</h4><div class="lr"><span class="lk">Số liệu</span><p>ADR web T7 đến T10 cao hơn cùng kỳ 13% đến 18%, cao hơn ADR qua OTA 14% đến 28% (T7 đến T9). Premier từ 29,5% lên 37,2% số đêm web, Executive từ 17,3% lên 21,8%.</p></div><div class="lr ap"><span class="lk">Áp dụng Q1/2027</span><p>Tiếp tục bán chính Premier, Junior Suite, Executive.</p></div></div></div>
-  </div>
-  
-</section>
-</div>
-
-<footer>
-  <b>Nguồn dữ liệu</b>
-  <ul>
-    <li id="ref1">[1] Báo cáo Web Sales: Google Sheet "Hotels Web Sales Status 2026" (RN, ADR, doanh thu, mục tiêu theo tháng lưu trú, cập nhật 27/10/2026); sheet Data (booking web đặt đến 25/10/2026, không dùng cột thông tin cá nhân); sheet SVL Budget Report 2026 (Google Ads thực chi T7 đến T9).</li>
-    <li>Data Hotel 2025-2026 (booking web 2025 để so cùng kỳ và tính tốc độ đặt). Web sales forecast 2026 (chi phí ước tính). Ngân sách marketing T10/2026. Sheet SVL Budget Report 2025 (Google Ads và doanh thu theo ngày đặt từng tháng năm 2025, dùng làm mốc ngân sách T11, T12). Sheet Book Date 2026 (doanh thu web theo ngày đặt T10).</li>
-    <li>Kế hoạch gốc: Silverland_BaoCao_Web_2H2026 (Bến Thành, Sakyo) và Silverland_Jolie_Dashboard (Jolie), lập giữa năm 2026.</li>
-    <li>Google Ads API (tài khoản 645-385-5576 và 753-421-2327): chiến dịch, ngân sách, vị trí địa lý, audience T7 đến 26/10/2026. Log Google Ads tuần 41, 44 và audit tài khoản Bến Thành 28/9, 12/10. Tài khoản Google Ads chung 753-421-2327 và tài khoản Sakyo 396-544-2048: số liệu chiến dịch xem trực tiếp ngày 26/10/2026.</li>
-  </ul>
-  <b>Phương pháp</b>
-  <ul>
-    <li>Ước tính cuối tháng T11, T12 = on hand ngày 27/10/2026 + phần RN, doanh thu của cùng tháng năm 2025 được đặt sau ngày 26/10/2025. Ước tính giả định lượng đặt từ nay đến cuối tháng bằng cùng kỳ.</li>
-    <li>So sánh theo booking (cửa sổ đặt, quốc tịch, lead time) tính theo tháng nhận phòng; có thể lệch nhẹ với số theo đêm lưu trú trong báo cáo Web Sales<sup><a href="#ref1" class="ref">[1]</a></sup>.</li>
-    <li>ROAS theo tháng = doanh thu web theo ngày đặt / chi phí Google Ads. ROAS theo chiến dịch = giá trị chuyển đổi Google Ads / chi phí, xem trực tiếp trên tài khoản ngày 26/10/2026. ADR web 2025 = doanh thu / RN theo báo cáo Web Sales<sup><a href="#ref1" class="ref">[1]</a></sup>.</li><li>Cơ cấu quốc tịch, hạng phòng so sánh theo tỷ trọng trong RN web của từng năm. Dữ liệu 2025 của Jolie loại một nhóm booking 51 RN đặt ngày 18/3/2025, không khớp số liệu báo cáo Web Sales<sup><a href="#ref1" class="ref">[1]</a></sup>.</li>
-    <li>Số khách quốc tế đến Việt Nam: Cục Thống kê, qua <a href="https://vietnamnews.vn/society/1801167/viet-nam-welcomes-17-7-million-foreign-visitors-in-nine-months-71-yearly-target-met.html">Việt Nam News</a> và <a href="https://tradingeconomics.com/vietnam/tourist-arrivals/news/589288">Trading Economics</a> (tháng 9/2026: tổng +16,1%, Singapore +16,1%, Úc +1,6%, Mỹ +13,9%; châu Âu 9 tháng +55%).</li>
-    <li>Khách quốc tế đến TP.HCM 9 tháng 2026: <a href="https://tuoitre.vn/9-thang-dau-nam-2026-doanh-thu-du-lich-tphcm-tang-43-khach-quoc-te-la-dong-luc-tang-truong-chinh-100260928133226188.htm">Tuổi Trẻ</a> (8,52 triệu lượt, +34,5%). Lịch nghỉ hè học sinh Úc: <a href="https://www.australia.com/en-gb/facts-and-planning/when-to-go/australian-school-holidays.html">Tourism Australia</a>.</li>
-    <li>Nhãn "Suy luận" và "Ước tính" đánh dấu nội dung chưa kiểm chứng trực tiếp bằng dữ liệu.</li>
-  </ul>
-  <div>Cập nhật 27/10/2026.</div>
-</footer>
-</main>
-
-<script id="data" type="application/json">{"months": ["T7", "T8", "T9", "T10", "T11", "T12"], "BT": {"rn": [347, 249, 275, 275, 246, 182], "rnProj": [0, 0, 0, 0, 39, 128], "rnT": [338, 338, 294, 270, 360, 440], "rnLY": [234, 272, 157, 209, 267, 347], "rev": [1215.1, 893.8, 942.2, 1100.9, 1172.3, 929.1], "revProj": [0, 0, 0, 0, 154.9, 562.0], "revT": [1183, 1216.8, 999.6, 1080, 1548, 2024], "revLY": [758.3, 915.9, 541.9, 847.0, 1119.1, 1552.2], "adr": [3.5, 3.59, 3.43, 4.0, 4.77, 5.1], "adrT": [3.5, 3.6, 3.4, 4.0, 4.3, 4.6], "win": [42, 4, -6]}, "SK": {"rn": [85, 87, 72, 131, 88, 83], "rnProj": [0, 0, 0, 0, 34, 89], "rnT": [94, 94, 91, 94, 115, 150], "rnLY": [52, 78, 49, 55, 75, 122], "rev": [281.5, 300.7, 242.1, 489.7, 370.6, 387.0], "revProj": [0, 0, 0, 0, 113, 323], "revT": [319.6, 319.6, 291.2, 338.4, 439.4, 583.5], "revLY": [151.9, 207.4, 135.4, 182.8, 260.5, 431.4], "adr": [3.31, 3.46, 3.36, 3.74, 4.21, 4.66], "adrT": [3.4, 3.4, 3.2, 3.6, 3.82, 3.89], "win": [23, 174, 88]}, "JL": {"rn": [66, 55, 78, 76, 101, 39], "rnProj": [0, 0, 0, 0, 9, 61], "rnT": [82, 82, 79, 82, 145, 100], "rnLY": [46, 55, 58, 44, 100, 97], "rev": [190.3, 151.9, 205.3, 234.3, 353.7, 167.1], "revProj": [0, 0, 0, 0, 24.9, 188.7], "revT": [217.3, 217.3, 205.4, 246, 482.4, 359], "revLY": [114.3, 134.4, 128.8, 116.5, 302.4, 316.9], "adr": [2.88, 2.76, 2.63, 3.08, 3.5, 4.28], "adrT": [2.65, 2.65, 2.6, 3.0, 3.33, 3.59], "win": [-20, 36, 79]}, "winLabels": ["Đặt 1/7 đến 17/8", "Đặt 18/8 đến 30/9", "Đặt 1/10 đến 25/10"]}</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
-(function(){
-  var D=JSON.parse(document.getElementById('data').textContent);
-  var root=document.documentElement;
-  try{var t=localStorage.getItem('svl-theme'); if(t) root.setAttribute('data-theme',t);}catch(e){}
-  function css(v){return getComputedStyle(root).getPropertyValue(v).trim();}
-  function fmt(n,d){return n.toLocaleString('vi-VN',{minimumFractionDigits:d||0,maximumFractionDigits:d||0});}
-  var metric={BT:'rn',SK:'rn',JL:'rn'}, charts={}, active='BT';
-
-  function table(h){
-    var x=D[h], rows='';
-    for(var i=0;i<6;i++){
-      var p=Math.round(x.rn[i]/x.rnT[i]*100), cls=p>=95?'pos':(p<75?'neg':'');
-      var otb=i>=4?' <span class="chip w">OTB</span>':'';
-      rows+='<tr><td>'+D.months[i]+otb+'</td><td class="num">'+x.rn[i]+'</td><td class="num">'+x.rnT[i]+'</td><td class="num '+cls+'">'+p+'%</td><td class="num">'+x.rnLY[i]+'</td><td class="num">'+fmt(x.adr[i],2)+'</td><td class="num">'+fmt(x.adrT[i],2)+'</td><td class="num">'+fmt(x.revLY[i]/x.rnLY[i],2)+'</td><td class="num">'+fmt(x.rev[i],0)+'</td><td class="num">'+fmt(x.revT[i],0)+'</td></tr>';
-    }
-    document.getElementById('t-'+h).innerHTML=rows;
-  }
-  function draw(h){
-    if(typeof Chart==='undefined'){document.getElementById('nc-'+h).style.display='block';return;}
-    var x=D[h], k=metric[h], unit=k==='rn'?'đêm':'triệu đồng';
-    if(charts[h]) charts[h].destroy();
-    charts[h]=new Chart(document.getElementById('c-'+h),{
-      data:{labels:D.months,datasets:[
-        {type:'bar',label:'Đã ở / OTB',data:x[k],backgroundColor:css('--bar'),stack:'s',order:3},
-        {type:'bar',label:'Ước tính thêm đến cuối tháng',data:x[k+'Proj'],backgroundColor:css('--bar2'),stack:'s',order:3},
-        {type:'line',label:'Mục tiêu tháng (báo cáo Web Sales [1])',data:x[k+'T'],borderColor:css('--tgt'),backgroundColor:css('--tgt'),borderWidth:2,pointRadius:3,order:1,stack:'tg'},
-        {type:'line',label:'Cùng kỳ 2025',data:x[k+'LY'],borderColor:css('--ly'),backgroundColor:css('--ly'),borderDash:[5,4],borderWidth:2,pointRadius:2,order:2,stack:'ly'}
-      ]},
-      options:{responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{labels:{color:css('--sub')}},tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+fmt(c.parsed.y,0)+' '+unit;}}}},
-        scales:{x:{stacked:true,ticks:{color:css('--sub')},grid:{display:false}},
-          y:{stacked:true,beginAtZero:true,title:{display:true,text:unit,color:css('--sub')},ticks:{color:css('--sub')},grid:{color:css('--line')}}}}
-    });
-    var wk='w'+h; if(!document.getElementById('w-'+h)) return;
-    if(charts[wk]) charts[wk].destroy();
-    var cols=x.win.map(function(v){return v<0?css('--bad'):css('--good');});
-    charts[wk]=new Chart(document.getElementById('w-'+h),{type:'bar',
-      data:{labels:D.winLabels,datasets:[{label:'% thay đổi RN so cùng kỳ',data:x.win,backgroundColor:cols}]},
-      options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
-        plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return (c.parsed.x>0?'+':'')+c.parsed.x+'% RN so cùng kỳ';}}}},
-        scales:{x:{title:{display:true,text:'% thay đổi RN so cùng kỳ',color:css('--sub')},ticks:{color:css('--sub'),callback:function(v){return v+'%';}},grid:{color:css('--line')}},
-          y:{ticks:{color:css('--sub')},grid:{display:false}}}}
-    });
-  }
-  function show(h){
-    active=h;
-    document.querySelectorAll('.htab').forEach(function(b){b.setAttribute('aria-selected',b.dataset.h===h?'true':'false');});
-    document.querySelectorAll('.panel-h').forEach(function(p){p.hidden=(p.id!=='p-'+h);});
-    table(h); draw(h);
-    try{history.replaceState(null,'','#'+h);}catch(e){}
-  }
-  document.querySelectorAll('.htab').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.h); window.scrollTo({top:0});});});
-  document.querySelectorAll('.mtab').forEach(function(b){b.addEventListener('click',function(){
-    var h=b.dataset.h;
-    document.querySelectorAll('.mtab[data-h="'+h+'"]').forEach(function(x){x.setAttribute('aria-pressed','false');});
-    b.setAttribute('aria-pressed','true'); metric[h]=b.dataset.m; draw(h);});});
-  document.getElementById('themeBtn').addEventListener('click',function(){
-    var cur=root.getAttribute('data-theme');
-    var dark=cur? cur==='dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var next=dark?'light':'dark'; root.setAttribute('data-theme',next);
-    try{localStorage.setItem('svl-theme',next);}catch(e){}
-    draw(active);
-  });
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){draw(active);});
-  var raw=(location.hash||'').replace('#',''), start=raw.split('-')[0];
-  show(D[start]?start:'BT');
-  if(raw.indexOf('-s')>0){var el=document.getElementById(raw); if(el){try{history.replaceState(null,'','#'+raw);}catch(e){} el.scrollIntoView();}}
-})();
-</script>
-<div id="tipbox" role="tooltip"></div>
-<script>
-(function(){
-  var box=document.getElementById('tipbox'), cur=null;
-  function show(el){
-    cur=el; box.textContent=el.getAttribute('data-tip'); box.style.display='block';
-    var r=el.getBoundingClientRect(), bw=box.offsetWidth, bh=box.offsetHeight, vw=window.innerWidth, vh=window.innerHeight;
-    var x=Math.min(Math.max(8,r.left+r.width/2-bw/2),vw-bw-8);
-    var y=r.bottom+8; if(y+bh>vh-8) y=r.top-bh-8;
-    box.style.left=x+'px'; box.style.top=Math.max(8,y)+'px';
-  }
-  function hide(){cur=null; box.style.display='none';}
-  document.addEventListener('mouseover',function(e){var t=e.target.closest&&e.target.closest('[data-tip]'); if(t) show(t);});
-  document.addEventListener('mouseout',function(e){var t=e.target.closest&&e.target.closest('[data-tip]'); if(t && !t.contains(e.relatedTarget)) hide();});
-  document.addEventListener('focusin',function(e){if(e.target.hasAttribute&&e.target.hasAttribute('data-tip')) show(e.target);});
-  document.addEventListener('focusout',hide);
-  document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-tip]'); if(t){ if(cur===t) hide(); else show(t);} else hide();});
-  window.addEventListener('scroll',hide,{passive:true});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape') hide();});
-})();
-</script>
-<script>
-(function(){
-var G=[
- ['Chỉ số',[
-  ['RN','Room night, số đêm phòng. 1 phòng ở 3 đêm = 3 RN; 2 phòng ở 2 đêm = 4 RN.'],
-  ['ADR','Giá phòng bình quân mỗi đêm = doanh thu phòng chia số đêm phòng (RN).'],
-  ['On hand','Số đã có trên hệ thống tại ngày cập nhật: tháng đã qua là khách đã ở; tháng chưa tới là phòng đã đặt nhưng chưa đến ngày ở.',['on hand']],
-  ['OTB','On the books: phòng đã được đặt cho các ngày ở trong tương lai, tính đến ngày cập nhật.'],
-  ['Ước tính cuối kỳ','On hand cộng lượng đặt thêm dự kiến từ nay đến cuối tháng, giả định bằng lượng đặt thêm của cùng kỳ năm trước. Là số dự báo, chưa phải kết quả.',['ước tính cuối kỳ']],
-  ['Pickup','Lượng phòng được đặt thêm trong một khoảng thời gian, ví dụ từ hôm nay đến cuối tháng.',['pickup']],
-  ['Cùng kỳ','Cùng giai đoạn của năm trước.',['cùng kỳ']],
-  ['Cùng thời điểm','Số đã đặt tại cùng ngày này của năm trước (ví dụ on hand T12 tính đến 26/10/2025), để so sánh công bằng với on hand hiện tại.',['cùng thời điểm']],
-  ['KPI','Chỉ tiêu ghi trong file kế hoạch chiến lược 6 tháng cuối năm lập giữa năm 2026.'],
-  ['Mục tiêu tháng','Mục tiêu RN, doanh thu từng tháng trong báo cáo Web Sales: T7 đến T10 do chủ đầu tư đặt, T11, T12 do CMO đặt. Khác với KPI kế hoạch chiến lược.',['mục tiêu tháng']],
-  ['ROAS','Return on ad spend = doanh thu web chia chi phí Google Ads. ROAS 19 nghĩa là 1 đồng quảng cáo mang về 19 đồng doanh thu. Dưới 5,9 thì chi phí quảng cáo cao hơn hoa hồng trả cho OTA (khoảng 17%).'],
-  ['CPA','Cost per acquisition: chi phí quảng cáo cho mỗi booking. Trần 2,2 tr tương đương hoa hồng OTA của một booking trung bình.'],
-  ['CPC','Cost per click: chi phí trung bình cho mỗi lượt nhấp vào quảng cáo.'],
-  ['CvR','Conversion rate: tỷ lệ lượt nhấp quảng cáo dẫn tới booking.'],
-  ['Tỷ trọng','Phần trăm của một nhóm trong tổng, ví dụ tỷ trọng khách Úc = RN khách Úc chia tổng RN web.',['tỷ trọng']]
- ]],
- ['Thời gian và đơn vị',[
-  ['2H','6 tháng cuối năm, từ tháng 7 đến tháng 12.'],
-  ['Q1','Quý 1: tháng 1, 2, 3.'],
-  ['T7','Tháng 7. Tương tự T1 là tháng 1, T12 là tháng 12.'],
-  ['Stay','Thời gian khách lưu trú (ngày ở), khác với ngày đặt phòng.',['stay']],
-  ['Theo ngày đặt','Tính theo ngày khách đặt phòng, không theo ngày khách ở. Dùng để đo hiệu quả quảng cáo trong tháng chạy quảng cáo.',['theo ngày đặt']],
-  ['Lead time','Số ngày từ lúc khách đặt đến ngày nhận phòng. Lead time trung vị: một nửa số đêm có lead time thấp hơn mức này.',['lead time']],
-  ['DBA','Days before arrival: số ngày khách đặt trước ngày đến.'],
-  ['tr','Triệu đồng. Tỷ là tỷ đồng; k là nghìn đồng (40k = 40.000 đồng).']
- ]],
- ['Kênh bán và quảng cáo',[
-  ['Web direct','Kênh khách tự đặt phòng trên website của khách sạn, không qua đại lý, nên khách sạn không trả hoa hồng.'],
-  ['OTA','Online travel agent: đại lý du lịch trực tuyến như Booking.com, Agoda, Trip.com; thu hoa hồng khoảng 17% mỗi booking.'],
-  ['IBE','Internet booking engine: hệ thống đặt phòng trên website (Travelanium), nơi tạo gói giá và mã giảm giá.'],
-  ['Search','Chiến dịch Google Ads hiện quảng cáo dạng chữ khi khách gõ từ khóa trên Google.'],
-  ['PMax','Performance Max: chiến dịch Google Ads tự phân phối quảng cáo trên Search, YouTube, Display, Maps, Gmail dựa trên dữ liệu chuyển đổi.'],
-  ['Từ khóa thương hiệu','Từ khóa có tên khách sạn (ví dụ "silverland ben thanh"): khách đã biết khách sạn.',['từ khóa thương hiệu']],
-  ['Non-brand','Từ khóa không có tên khách sạn (ví dụ "hotel near Ben Thanh market"): để tiếp cận khách chưa biết khách sạn.',['non-brand','ngoài thương hiệu']],
-  ['Asset group','Nhóm nội dung trong PMax (hình, tiêu đề, mô tả, tín hiệu đối tượng). EB: nội dung đặt sớm; LM: nội dung đặt sát ngày.',['asset group']],
-  ['Remarketing','Quảng cáo nhắm lại người đã vào website hoặc đã đặt trước đây.',['remarketing']],
-  ['RLSA','Remarketing lists for search ads: ưu tiên hiện quảng cáo Search cho người đã vào website (ví dụ đã thêm phòng vào giỏ).'],
-  ['Customer Match','Danh sách email, số điện thoại khách cũ tải lên Google Ads để nhắm lại hoặc làm tín hiệu cho PMax.'],
-  ['GA4','Google Analytics 4: công cụ đo lường hành vi khách trên website.'],
-  ['search terms insight','Báo cáo trong Google Ads cho biết khách gõ cụm từ gì trước khi thấy quảng cáo PMax.',['search term','Search term']],
-  ['auction insights','Báo cáo Google Ads so sánh tỷ lệ hiển thị quảng cáo với các đối thủ cùng đấu giá từ khóa.'],
-  ['brand exclusion','Loại trừ thương hiệu: PMax không hiện quảng cáo khi khách gõ tên khách sạn, để ngân sách dành cho khách chưa biết khách sạn.']
- ]],
- ['Tên chiến dịch Google Ads',[
-  ['Search VN (excl. au)','Bến Thành: chiến dịch Search từ khóa thương hiệu nhắm nhiều nước (Mỹ, Singapore, khách nước ngoài đang ở Việt Nam), không gồm Úc.'],
-  ['Search Brand AU','Bến Thành: chiến dịch Search từ khóa thương hiệu chỉ nhắm Úc.'],
-  ['PMax Peak','Bến Thành: chiến dịch PMax chính, nhắm Úc và Mỹ, có loại trừ thương hiệu.'],
-  ['PMax SG deal','Bến Thành: chiến dịch PMax nhắm Singapore, Đài Loan và một số nước châu Á, có loại trừ thương hiệu.'],
-  ['PMax Jul\\pur','Bến Thành: chiến dịch PMax phụ tạo từ tháng 7.'],
-  ['Search Sing','Bến Thành: chiến dịch Search nhắm Singapore, chạy tháng 7.'],
-  ['Search Sakyo VN','Sakyo: chiến dịch Search từ khóa thương hiệu nhắm Nhật và khách nước ngoài đang ở Việt Nam.'],
-  ['PMax Sakyo VN','Sakyo: chiến dịch PMax nhắm Việt Nam, đã dừng từ tháng 8 vì tỷ lệ chuyển đổi rất thấp.'],
-  ['Search 18.9','Sakyo: chiến dịch Search tạo ngày 18/9 trên tài khoản Google Ads riêng của Sakyo.'],
-  ['Japan Town','Sakyo: asset group trong PMax nhắm khách Nhật.'],
-  ['Only Úc','Jolie: chiến dịch PMax chỉ nhắm Úc. Only VN: chỉ nhắm khách nước ngoài đang ở Việt Nam.',['Only VN']]
- ]],
- ['Giá, chương trình và vai trò',[
-  ['Rate plan','Gói giá trên website: giá, điều kiện (số đêm tối thiểu, hoàn huỷ) và quyền lợi đi kèm.',['rate plan']],
-  ['Early-bird','Ưu đãi cho khách đặt sớm trước ngày ở một khoảng nhất định.',['early-bird']],
-  ['Sát ngày','Ưu đãi cho khách đặt gần ngày ở (last-minute).',['last-minute','đặt gần ngày']],
-  ['Upsell','Mời khách nâng lên hạng phòng cao hơn để tăng doanh thu mỗi đêm.',['upsell']],
-  ['Parity','Giá trên website không cao hơn giá công khai trên OTA cho cùng hạng phòng, cùng ngày ở.',['parity']],
-  ['Giá thành viên','Giá giảm cho khách nhập mã thành viên SVLMEMBER (giảm 20%) trên website.',['giá thành viên']],
-  ['SVLMEMBER','Mã thành viên đang dùng trên website Silverland, giảm 20% so giá công khai.'],
-  ['Room Only','Giá chỉ gồm phòng, không gồm ăn sáng.'],
-  ['Benefit','Quyền lợi đi kèm khi đặt trực tiếp, ví dụ ăn sáng, trà chiều, đưa đón.',['benefit']],
-  ['RM','Revenue Manager: người phụ trách giá phòng và gói giá.'],
-  ['FO','Front Office: bộ phận lễ tân.'],
-  ['F&B','Bộ phận ẩm thực (nhà hàng, bar).'],
-  ['CĐT','Chủ đầu tư.'],
-  ['Easter','Lễ Phục sinh; năm 2027 là 26 đến 29/03, trùng kỳ nghỉ học ở một số bang của Úc.']
- ]]
+var D={"BT":{"cdt_rn":[338,338,294,270,327,null],"cdt_rev":[1183.0,1216.8,999.6,1080.0,1504.2,null],"cmo_rn":[340,340,201,252,360,440],"cmo_rev":[1156.9,1202.1,728.5,1072.3,1584.3,2066.6],"ck_rn":[275,225,197,245,336,440],"ck_rev":[935.7,795.5,714.0,1042.5,1478.7,2066.6],"otb_rn":[347,249,275,276,253,182],"otb_rev":[1215.1,893.8,942.2,1102.9,1200.5,926.9],"est_rn":[347,249,275,276,285,310],"est_rev":[1215.1,893.8,942.2,1102.9,1327.2,1491.1],"ly_rn":[234,272,157,209,267,347],"ly_rev":[758.3,915.9,541.9,847.0,1119.1,1552.2],"cdt_occ":[10.0,10.0,8.99,7.99,10.0,null],"cmo_occ":[10.06,10.06,6.15,7.46,11.01,13.02],"ck_occ":[8.14,6.66,6.02,7.25,10.28,13.02],"otb_occ":[10.27,7.37,8.41,8.17,7.74,5.39],"est_occ":[10.27,7.37,8.41,8.17,8.72,9.17],"ly_occ":[6.93,8.05,4.8,6.19,8.17,10.27],"bk_otb":[1430.357,1803.617,1394.657,1683.313,null,null],"bk_est":[1430.357,1803.617,1394.657,1863.7,null,null],"bk_ly":[1056.189,1224.085,1390.083,1726.517,1287.127,1570.089]},"SK":{"cdt_rn":[94,94,91,94,114,null],"cdt_rev":[319.6,319.6,291.2,338.4,456.0,null],"cmo_rn":[90,85,69,95,115,150],"cmo_rev":[289.2,248.7,209.7,347.3,439.4,583.5],"ck_rn":[75,78,63,82,100,142],"ck_rev":[241.0,228.2,191.4,299.8,382.1,552.3],"otb_rn":[85,87,72,130,90,91],"otb_rev":[281.5,300.7,242.1,485.1,379.2,415.3],"est_rn":[85,87,72,130,122,172],"est_rev":[281.5,300.7,242.1,485.1,483.6,710.0],"ly_rn":[52,78,49,55,75,122],"ly_rev":[151.9,207.4,135.4,182.8,260.5,431.4],"cdt_occ":[3.99,3.99,3.99,3.99,5.0,null],"cmo_occ":[3.82,3.61,3.03,4.03,5.04,6.37],"ck_occ":[3.18,3.31,2.76,3.48,4.39,6.03],"otb_occ":[3.61,3.69,3.16,5.52,3.95,3.86],"est_occ":[3.61,3.69,3.16,5.52,5.35,7.3],"ly_occ":[2.21,3.31,2.15,2.33,3.29,5.18],"bk_otb":[369.818,377.749,617.872,675.529,null,null],"bk_est":[369.818,377.749,617.872,747.9,null,null],"bk_ly":[255.945,166.779,166.876,413.712,338.408,406.616]},"JL":{"cdt_rn":[82,82,79,82,119,null],"cdt_rev":[217.3,217.3,205.4,246.0,410.6,null],"cmo_rn":[123,75,65,75,145,145],"cmo_rev":[336.1,201.6,158.7,218.4,482.4,521.0],"ck_rn":[105,65,60,70,130,145],"ck_rev":[287.0,174.7,146.5,203.8,432.5,521.0],"otb_rn":[66,55,78,76,106,39],"otb_rev":[190.3,151.9,205.3,234.3,371.1,167.1],"est_rn":[66,55,78,76,110,100],"est_rev":[190.3,151.9,205.3,234.3,378.6,355.8],"ly_rn":[46,55,58,44,100,97],"ly_rev":[114.3,134.4,128.8,116.5,302.4,316.9],"cdt_occ":[4.01,4.01,3.99,4.01,6.01,null],"cmo_occ":[6.01,3.67,3.28,3.67,7.32,7.09],"ck_occ":[5.13,3.18,3.03,3.42,6.57,7.09],"otb_occ":[3.23,2.69,3.94,3.71,5.35,1.91],"est_occ":[3.23,2.69,3.94,3.71,5.56,4.89],"ly_occ":[2.25,2.69,2.93,2.15,5.05,4.74],"bk_otb":[142.092,265.521,443.243,606.554,null,null],"bk_est":[142.092,265.521,443.243,671.5,null,null],"bk_ly":[258.977,223.592,274.706,309.19,382.205,188.71]}};
+var HOTEL={
+  BT:{name:'Silverland Bến Thành',short:'Bến Thành',rooms:109},
+  SK:{name:'Silverland Sakyo',short:'Sakyo',rooms:76},
+  JL:{name:'Silverland Jolie',short:'Jolie',rooms:66}
+};
+var M=['T7','T8','T9','T10','T11','T12'], DAYS=[31,31,30,31,30,31];
+var SER=[
+  {id:'cdt',name:'Target CĐT',kind:'kpi',sw:'line',v:'--s-cdt',dash:[],pt:'circle'},
+  {id:'cmo',name:'Target CMO',kind:'kpi',sw:'line',v:'--s-cmo',dash:[],pt:'triangle'},
+  {id:'ck',name:'Target Team cam kết',kind:'kpi',sw:'dash',v:'--s-ck',dash:[7,4],pt:'rect'},
+  {id:'otb',name:'OTB',kind:'bar',sw:'thick',v:'--s-otb'},
+  {id:'est',name:'Ước tính',kind:'bar',sw:'thickdash',v:'--s-otb'},
+  {id:'ly',name:'Cùng kỳ 2025',kind:'ly',sw:'dot',v:'--s-ly',dash:[2,3],pt:'circle'}
 ];
-window.SVL_GLOSS=G;
-function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
-var flat=[];G.forEach(function(g){g[1].forEach(function(t){flat.push([t[0],t[1]]);(t[2]||[]).forEach(function(a){flat.push([a,t[1]]);});});});
-flat.sort(function(a,b){return b[0].length-a[0].length;});
-function wrapIn(scope){
-  var used={};
-  scope.querySelectorAll('[data-tip]').forEach(function(e){used[e.textContent.trim().toLowerCase()]=1;});
-  var walker=document.createTreeWalker(scope,NodeFilter.SHOW_TEXT,{acceptNode:function(n){
-    var p=n.parentElement; if(!p) return NodeFilter.FILTER_REJECT;
-    if(p.closest('[data-tip],a,button,script,style,canvas,summary,.gl-panel,.nogl,thead,.tag-inf,.inf,.chip,.seg,.ref,sup')) return NodeFilter.FILTER_REJECT;
-    return n.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;}});
-  var nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
-  flat.forEach(function(f){
-    var key=f[0].toLowerCase(); if(used[key]) return;
-    var re=new RegExp('(^|[^\\p{L}\\p{N}_])('+esc(f[0])+')(?=$|[^\\p{L}\\p{N}_])','u');
-    for(var i=0;i<nodes.length;i++){
-      var n=nodes[i]; if(!n.parentNode) continue;
-      var m=re.exec(n.nodeValue); if(!m) continue;
-      var start=m.index+m[1].length, end=start+m[2].length;
-      var after=n.splitText(start); var rest=after.splitText(end-start);
-      var sp=document.createElement('span'); sp.className='tip'; sp.tabIndex=0; sp.setAttribute('data-tip',f[1]); sp.textContent=after.nodeValue;
-      after.parentNode.replaceChild(sp,after);
-      nodes.splice(i,1,n,rest);
-      used[key]=1; break;
-    }
-  });
+var METRIC={
+  rn:{lab:'RN',full:'Số đêm phòng (RN)',unit:'RN',kpi:true},
+  occ:{lab:'%OCC',full:'Công suất phòng web (%OCC)',unit:'%',kpi:true},
+  rev:{lab:'Doanh thu',sub:'stay date',full:'Doanh thu stay date (triệu đồng)',unit:'tr',kpi:true},
+  bk:{lab:'Doanh thu',sub:'book date',full:'Doanh thu book date (triệu đồng)',unit:'tr',kpi:false}
+};
+var NOTE={
+BT:[
+ ['Kết quả T7 đến T10','Tổng T7 đến T10 đạt 1.147 RN, doanh thu stay date 4.154 tr. Chưa đạt Target CĐT, đạt Target CMO và vượt Target Team cam kết. Về RN: đạt 92% Target CĐT, 101% Target CMO, 122% Target Team cam kết. Về doanh thu stay date: đạt 93% Target CĐT, 100% Target CMO, 119% Target Team cam kết.'],
+ ['Vì sao chưa đạt Target CĐT','Phần hụt nằm chủ yếu ở T8: 249 RN so với Target CĐT 338 RN (đạt 74%), cũng là tháng duy nhất thấp hơn cùng kỳ (272 RN). Theo dữ liệu booking web, khách lưu trú T8 của các thị trường nhỏ giảm mạnh so với T8/2025: Philippines 36 xuống 11 RN, Croatia 16 xuống 0, Anh 15 xuống 2, Đức 13 xuống 6.'],
+ ['T11, T12 so với Target','T11 ước tính 285 RN (OTB 253 RN, cần đặt thêm 32 RN): đạt 87% Target CĐT, 79% Target CMO, 85% Target Team cam kết. T12 ước tính 310 RN (OTB 182 RN, cần đặt thêm 128 RN): đạt 70% Target CMO và Target Team cam kết (cùng 440 RN); chưa có Target CĐT. Hai lý do chính: Target CMO T11, T12 (800 RN) cao hơn cùng kỳ 30%, trong khi doanh thu book date T10 chỉ tăng khoảng 8%; và tính từ 27/10, stay T11 chỉ còn 5 đến 34 ngày, ngắn hơn lead time trung vị của khách Úc (51 ngày) và Mỹ (54 ngày).'],
+ ['Book date','Doanh thu book date T7 đến T9 là 4.629 tr, tăng 26% so với cùng kỳ. T10 (đến 28/10) đạt 1.683 tr; nếu giữ nhịp này cả tháng khoảng 1.864 tr, tăng khoảng 8% so với T10/2025.'],
+ ['Action T11, T12','(1) T11 tập trung ưu đãi đặt gần ngày và gói promo, vì cửa sổ đặt sớm cho T11 đã qua. (2) Úc: duy trì early-bird giai đoạn hè cho stay 12/12/2026 đến 31/01/2027, từ 3 đêm, nhắm New South Wales, Victoria, Queensland, Nam Úc, Tây Úc. (3) Mỹ: Giáng sinh, Tết Tây và campaign "Come Back Home" nhắm khu vực đông Việt kiều. (4) Singapore: kỳ nghỉ cuối năm của học sinh các trường công lập Singapore (21/11 đến 31/12/2026, theo lịch Bộ Giáo dục Singapore) và Giáng sinh, gói gia đình. (5) Google Ads phân bổ theo ROAS, ưu tiên Úc, Mỹ, Singapore; theo dõi RN theo thị trường hằng tuần.'],
+ ['Kết luận','Nếu T11, T12 về đúng ước tính, Bến Thành đạt Target Team cam kết 2H về RN (101%) và gần đạt về doanh thu stay date (99%); so với Target CMO đạt khoảng 90%. Toàn bộ phần thiếu Target CMO nằm ở T11, T12 (thiếu 205 RN, 833 tr), lớn nhất là T12 (thiếu 130 RN).']
+],
+SK:[
+ ['Kết quả T7 đến T10','Tổng T7 đến T10 đạt 374 RN, doanh thu stay date 1.309 tr. Đạt cả 3 Target. Về RN: đạt 100% Target CĐT, 110% Target CMO, 126% Target Team cam kết. Về doanh thu stay date: đạt 103% Target CĐT, 120% Target CMO, 136% Target Team cam kết.'],
+ ['Vì sao vượt Target','T10 có 130 RN, đạt 138% Target CĐT và gấp 2,4 lần cùng kỳ, bù cho T7 đến T9 còn dưới Target CĐT (85, 87, 72 RN so với 94, 94, 91 RN). Ba nguồn tăng có số liệu: thị trường mở rộng (tỷ trọng Singapore, Úc, Mỹ tăng từ 21,5% lên 44,0% RN web); hạng phòng cao bán nhiều hơn (Solace Premier, Sanctuary Executive chiếm 57% RN web lưu trú T7 đến T12); khách đặt sớm hơn (lead time trung vị tăng từ 21 lên 33 ngày). Chi phí Google Ads T7 đến T9 chỉ tăng 11% so với cùng kỳ, ROAS 15,4, gấp đôi cùng kỳ (7,4). Điểm yếu là khách Nhật: lưu trú T8 giảm từ 48 xuống 20 RN so với T8/2025.'],
+ ['T11, T12 so với Target','T11 ước tính 122 RN (OTB 90 RN, cần đặt thêm 32 RN): đạt 107% Target CĐT, 106% Target CMO, 122% Target Team cam kết. T12 ước tính 172 RN (OTB 91 RN, cần đặt thêm 81 RN): đạt 115% Target CMO, 121% Target Team cam kết. Rủi ro: ước tính T12 dựa trên tốc độ đặt 2025 và cần gần gấp đôi OTB hiện tại; tuần 19 đến 25/10 ROAS giảm so với 30 ngày trước đó (Search Sakyo VN 13,3 so với 18,9; PMax Úc & Sing 6,7 so với 21,3); OTB T11, T12 khách Nhật 19 RN so với 31 RN cùng thời điểm năm 2025.'],
+ ['Book date','Doanh thu book date T7 đến T9 là 1.365 tr, tăng 132% so với cùng kỳ. T10 (đến 28/10) đạt 676 tr, đã cao hơn cả tháng T10/2025 (414 tr) 63%.'],
+ ['Action T11, T12','(1) T11 nâng Google Ads lên 34 đến 35 tr, ưu tiên Search Sakyo VN (ROAS 30 ngày 18,9). (2) Nhật: rate plan năm mới, bán vị trí và khả năng phục vụ tiếng Nhật trên mọi content. (3) Úc: early-bird từ 3 đêm cho stay 12/12/2026 đến 31/01/2027. (4) Mỹ: ưu đãi ở dài, Room Only, cho stay 20/12/2026 đến 03/01/2027. (5) Singapore: kỳ nghỉ cuối năm của học sinh Singapore (21/11 đến 31/12/2026) và Giáng sinh, cạnh tranh bằng giá và quyền lợi so với Trip.com. (6) Gói Xmas và countdown: chờ chị Hạnh, anh Nguyên chốt.'],
+ ['Kết luận','Sakyo là khách sạn duy nhất vượt cả 3 Target. 2H ước tính 668 RN, đạt 111% Target CMO và 124% Target Team cam kết; doanh thu stay date 2.503 tr, đạt 118% Target CMO và 132% Target Team cam kết. Hai điểm cần theo dõi là T12 và khách Nhật.']
+],
+JL:[
+ ['Kết quả T7 đến T10','Tổng T7 đến T10 đạt 275 RN, doanh thu stay date 782 tr. Chưa đạt Target nào. Về RN: đạt 85% Target CĐT, 81% Target CMO, 92% Target Team cam kết. Về doanh thu stay date: đạt 88% Target CĐT, 85% Target CMO, 96% Target Team cam kết. So với cùng kỳ vẫn tăng 35% về RN và 58% về doanh thu stay date.'],
+ ['Vì sao chưa đạt Target','Hụt lớn nhất ở T7: 66 RN so với Target CMO 123 RN, Target Team cam kết 105 RN, Target CĐT 82 RN. Số đêm đặt qua web đầu kỳ giảm 20% so với cùng kỳ (đặt 1/7 đến 17/8), ROAS Google Ads T7 chỉ 7,1 (cùng kỳ 14,9). Khách châu Âu (Pháp, Đức, Ý) của Jolie giảm ở cả kênh OTA (Booking.com giảm 9% đến 30%), trong khi khách châu Âu đến Việt Nam 9 tháng 2026 tăng 55%. <span class="inf">Suy luận</span>Jolie đang mất thị phần nhóm khách châu Âu. T9 là tháng tốt nhất: 78 RN, đạt 99% Target CĐT (79 RN).'],
+ ['T11, T12 so với Target','T11 ước tính 110 RN (OTB 106 RN, cần đặt thêm 4 RN): đạt 92% Target CĐT, 76% Target CMO, 85% Target Team cam kết. T12 ước tính 100 RN (OTB 39 RN, cần đặt thêm 61 RN, nhiều hơn 43 RN đặt thêm của cùng kỳ 2025): đạt 69% Target CMO và Target Team cam kết (cùng 145 RN). Lý do chính: khách Úc, Anh, Pháp đặt T12 rất sớm (lead time trung vị 130 ngày); OTB T12 của ba thị trường này 9 RN so với 32 RN cùng thời điểm năm 2025, cửa sổ đặt sớm đã qua.'],
+ ['Book date','Doanh thu book date T7 chỉ 142 tr, giảm 45% so với cùng kỳ (259 tr); T7 đến T9 cộng lại 851 tr, tăng 12% so với cùng kỳ. T10 (đến 28/10) đạt 607 tr, gần gấp đôi T10/2025 (309 tr).'],
+ ['Action T11, T12','(1) Google Ads 20 tr/tháng, giữ 2 chiến dịch nhắm Úc và Mỹ. (2) Mỹ: đẩy mạnh quảng cáo trong các giai đoạn 20 đến 23/11, 17 đến 20/12 và 31/12/2026, bán Premier, Executive. (3) Úc: ưu đãi đặt gần ngày cho check-in 18/12 và 30 đến 31/12/2026. (4) Gói Giáng sinh, Năm mới: trà chiều, Jolie Rooftop Garden Bar view sông Sài Gòn, upsell Junior Suite. (5) Chiến dịch nào có ROAS dưới 5,9 hai tuần liên tiếp thì chuyển 20% đến 30% ngân sách sang chiến dịch còn lại.'],
+ ['Kết luận','Jolie tăng so với cùng kỳ nhưng chưa đạt Target nào của 2H: ước tính 485 RN, đạt 77% Target CMO và 84% Target Team cam kết; doanh thu stay date 1.516 tr, đạt 79% Target CMO và 86% Target Team cam kết. Target CMO 2H của Jolie (628 RN) cao hơn cùng kỳ 57%, mức đòi hỏi cao nhất trong ba khách sạn. Khoảng thiếu lớn nhất so với Target Team cam kết là T12 (45 RN) và T7 (39 RN).']
+]};
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+function fmt(n,d){if(n==null||isNaN(n))return '-';return n.toLocaleString('vi-VN',{minimumFractionDigits:d||0,maximumFractionDigits:d||0});}
+function sum(a,idx){var s=0;for(var i=0;i<idx.length;i++){var v=a[idx[i]];if(v==null)return null;s+=v;}return s;}
+function cap(h,idx){var s=0;idx.forEach(function(i){s+=HOTEL[h].rooms*DAYS[i];});return s;}
+var st={h:'BT',m:'rn',tm:'rev',on:{cdt:1,cmo:1,ck:1,otb:1,est:1,ly:1},mon:[1,1,1,1,1,1]};
+try{var sv=JSON.parse(localStorage.getItem('svl-kpi2h')||'null');if(sv){if(D[sv.h])st.h=sv.h;if(METRIC[sv.m])st.m=sv.m;if(sv.on)st.on=sv.on;if(sv.mon&&sv.mon.length===6)st.mon=sv.mon;if(sv.tm&&METRIC[sv.tm]&&sv.tm!=='bk')st.tm=sv.tm;}}catch(e){}
+function save(){try{localStorage.setItem('svl-kpi2h',JSON.stringify({h:st.h,m:st.m,tm:st.tm,on:st.on,mon:st.mon}));}catch(e){}}
+function series(h,m,id){
+  var x=D[h];
+  if(m==='bk'){if(id==='otb')return x.bk_otb;if(id==='est')return x.bk_est;if(id==='ly')return x.bk_ly;return [null,null,null,null,null,null];}
+  var k=m==='rev'?'rev':m==='occ'?'occ':'rn';return x[id+'_'+k];
 }
-window.SVL_WRAP=wrapIn;
-function panel(el){
-  if(!el) return;
-  var h='';
-  G.forEach(function(g){h+='<div class="gl-grp"><div class="gl-h">'+g[0]+'</div><dl>';g[1].forEach(function(t){h+='<dt>'+t[0]+'</dt><dd>'+t[1]+'</dd>';});h+='</dl></div>';});
-  el.innerHTML=h;
+function val2H(h,m,id,idx){
+  idx=idx||[0,1,2,3,4,5];
+  if(m==='occ'){var r=sum(D[h][id+'_rn'],idx);return r==null?null:r/cap(h,idx)*100;}
+  return sum(series(h,m,id),idx);
 }
-window.SVL_PANEL=panel;
-})();
+function show(v,m){if(v==null)return '-';if(m==='occ')return fmt(v,1)+'%';return fmt(v,0)+(m==='rn'?' RN':' tr');}
+function pct(a,b){return (a==null||!b)?null:a/b*100;}
+function pctTag(p,label){if(p==null)return '<span>'+label+': chưa có số</span>';var c=p>=100?'pos':'neg';return '<span>đạt <b class="'+c+'">'+fmt(p,0)+'%</b> '+label+'</span>';}
+function growTag(a,b){if(a==null||!b)return '-';var g=(a/b-1)*100;return (g>=0?'tăng':'giảm')+' <b class="'+(g>=0?'pos':'neg')+'">'+fmt(Math.abs(g),0)+'%</b> so với cùng kỳ';}
 
-SVL_PANEL(document.getElementById('glPanel'));
-['p-BT','p-SK','p-JL'].forEach(function(id){var el=document.getElementById(id);if(el)SVL_WRAP(el);});
-SVL_WRAP(document.querySelector('header.top'));
+function renderTabs(){
+  var t=document.getElementById('htabs');
+  t.innerHTML=Object.keys(HOTEL).map(function(h){
+    var e=val2H(h,'rn','est'),c=val2H(h,'rn','ck');
+    return '<button class="htab" role="tab" type="button" data-h="'+h+'" aria-selected="'+(h===st.h)+'">'+HOTEL[h].name+'<span class="s">2H ước tính đạt '+fmt(e/c*100,0)+'% Target Team cam kết</span></button>';
+  }).join('');
+  t.querySelectorAll('.htab').forEach(function(b){b.onclick=function(){st.h=b.dataset.h;save();renderAll();};});
+}
+function renderCards(){
+  var h=st.h,box=document.getElementById('cards');
+  box.innerHTML=Object.keys(METRIC).map(function(m){
+    var mt=METRIC[m],head='<div class="k">'+mt.lab+(mt.sub?' <small>'+mt.sub+'</small>':'')+'</div>',body;
+    if(m==='bk'){
+      var a=val2H(h,'bk','otb',[0,1,2,3]),a3=val2H(h,'bk','otb',[0,1,2]),l3=val2H(h,'bk','ly',[0,1,2]);
+      body='<div class="v">'+fmt(a,0)+' <small>tr</small></div><div class="d">Đặt từ 1/7 đến 28/10</div><div class="mini"><span>T7 đến T9 '+growTag(a3,l3)+'</span></div>';
+    }else{
+      var e=val2H(h,m,'est'),idx4=[0,1,2,3,4];
+      body='<div class="v">'+(m==='occ'?fmt(e,1)+'<small>%</small>':fmt(e,0)+' <small>'+(m==='rn'?'RN':'tr')+'</small>')+'</div>'+
+        '<div class="d">Ước tính 2H · '+growTag(e,val2H(h,m,'ly'))+'</div>'+
+        '<div class="mini">'+pctTag(pct(val2H(h,m,'est',idx4),val2H(h,m,'cdt',idx4)),'Target CĐT (T7 đến T11)')+pctTag(pct(e,val2H(h,m,'cmo')),'Target CMO')+pctTag(pct(e,val2H(h,m,'ck')),'Target Team cam kết')+'</div>';
+    }
+    return '<div class="card'+(m===st.m?' on':'')+'">'+head+body+'</div>';
+  }).join('');
+  var MT={rn:'Số đêm (RN)',occ:'Công suất (%OCC)',rev:'Doanh thu stay date (triệu đồng)',bk:'Doanh thu book date (triệu đồng)'};
+  var mt=document.getElementById('mtabs');
+  mt.innerHTML=Object.keys(MT).map(function(m){return '<button type="button" class="mtab" data-m="'+m+'" aria-pressed="'+(m===st.m)+'">'+MT[m]+'</button>';}).join('');
+  mt.querySelectorAll('.mtab').forEach(function(b){b.onclick=function(){st.m=b.dataset.m;save();renderCards();renderChips();draw();renderSum();};});
+}
+function swatch(s){
+  var c=css(s.v);
+  if(s.sw==='box')return '<i class="sw" style="background:'+c+'"></i>';
+  return '<i class="sw '+s.sw+'" style="border-color:'+c+'"></i>';
+}
+function renderChips(){
+  var bk=st.m==='bk';
+  document.getElementById('chipBox').innerHTML=SER.map(function(s){
+    var dis=bk&&s.kind==='kpi';
+    return '<button type="button" class="chip" data-s="'+s.id+'" aria-pressed="'+(!!st.on[s.id]&&!dis)+'"'+(dis?' disabled title="Không có KPI theo book date"':'')+'>'+swatch(s)+s.name+'</button>';
+  }).join('');
+  var all=SER.every(function(s){return st.on[s.id];});
+  document.getElementById('chipAll').setAttribute('aria-pressed',all);
+  document.querySelectorAll('#chipBox .chip').forEach(function(b){b.onclick=function(){
+    var id=b.dataset.s;st.on[id]=st.on[id]?0:1;
+    if(!SER.some(function(s){return st.on[s.id];}))st.on[id]=1;
+    save();renderChips();draw();};});
+}
+document.getElementById('chipAll').onclick=function(){SER.forEach(function(s){st.on[s.id]=1;});save();renderChips();draw();};
+
+var chart;
+function draw(){
+  var h=st.h,m=st.m,ds=[],grid=css('--grid'),sub=css('--sub'),ink=css('--ink'),paper=css('--paper');
+  var otb=series(h,m,'otb'),est=series(h,m,'est');
+  var otbStyle={pt:'circle'};
+  if(st.on.est){
+    var last=est.map(function(v,i){return (v!=null&&otb[i]!=null&&Math.abs(v-otb[i])>0.05)?1:0;});
+    ds.push({type:'line',label:'Ước tính',data:est,borderColor:css('--s-otb'),backgroundColor:paper,borderWidth:3.5,borderDash:[9,6],pointStyle:'circle',pointRadius:est.map(function(v,i){return last[i]?6:0;}),pointHoverRadius:7,pointBorderColor:css('--s-otb'),pointBorderWidth:2.5,tension:0,spanGaps:false,order:2,_id:'est'});
+  }
+  if(st.on.otb)ds.push({type:'line',label:'OTB',data:otb,borderColor:css('--s-otb'),backgroundColor:css('--s-otb'),borderWidth:4.5,pointStyle:'circle',pointRadius:5.5,pointHoverRadius:7,pointBorderColor:paper,pointBorderWidth:2,tension:0,spanGaps:false,order:0,_id:'otb'});
+  SER.forEach(function(s){
+    if(s.kind==='bar'||!st.on[s.id])return;
+    if(m==='bk'&&s.kind==='kpi')return;
+    ds.push({type:'line',label:s.name,data:series(h,m,s.id),borderColor:css(s.v),backgroundColor:css(s.v),borderWidth:s.kind==='ly'?2.5:3,borderDash:s.dash,pointStyle:s.pt,pointRadius:5,pointHoverRadius:6.5,pointBorderColor:paper,pointBorderWidth:1.5,tension:0,spanGaps:false,order:1,stack:'L'+s.id,_id:s.id});
+  });
+  var cfg={data:{labels:M,datasets:ds},options:{responsive:true,maintainAspectRatio:false,animation:false,
+    interaction:{mode:'index',intersect:false},
+    plugins:{legend:{display:false},tooltip:{enabled:false,external:tipFn}},
+    scales:{x:{stacked:false,offset:true,grid:{display:false},ticks:{color:sub,font:{family:'Be Vietnam Pro',size:12}},border:{color:css('--line')}},
+      y:{stacked:false,beginAtZero:true,grid:{color:grid},border:{display:false},ticks:{color:sub,font:{family:'Be Vietnam Pro',size:12},callback:function(v){return m==='occ'?v+'%':fmt(v,0);}},
+        title:{display:true,text:METRIC[m].full,color:sub,font:{family:'Be Vietnam Pro',size:12}}}}}};
+  if(chart){chart.destroy();}
+  chart=new Chart(document.getElementById('chart'),cfg);
+  var c=document.getElementById('cap');
+  c.innerHTML=m==='bk'
+    ?'Đường liền đậm: doanh thu book date trong tháng (T10 tính đến 28/10). Đường đứt cùng màu: ước tính, T10 là ước tính đủ tháng theo nhịp đặt 1 đến 28/10. T11, T12 chưa phát sinh. Đường chấm: cùng kỳ 2025 theo ngày đặt. Không có Target theo book date.'
+    :'Đường liền đậm: OTB (T7 đến T10 là số thực tế theo stay date). Đường đứt cùng màu: ước tính, T7 đến T10 trùng OTB, T11 và T12 là số ước tính đạt được đến cuối tháng. Các đường còn lại: Target theo stay date; Target CĐT chưa có số T12 nên đường dừng ở T11. Đường chấm: cùng kỳ 2025.'+(m==='occ'?' %OCC tính trên '+HOTEL[h].rooms+' phòng.':'');
+}
+function tipFn(ctx){
+  var el=document.getElementById('tip'),t=ctx.tooltip;
+  if(!t||t.opacity===0){el.style.display='none';return;}
+  var i=t.dataPoints&&t.dataPoints.length?t.dataPoints[0].dataIndex:null;if(i==null){el.style.display='none';return;}
+  var h=st.h,m=st.m,rows=[],e=series(h,m,'est')[i],o=series(h,m,'otb')[i];
+  SER.forEach(function(s){
+    if(!st.on[s.id])return;if(m==='bk'&&s.kind==='kpi')return;
+    var v=series(h,m,s.id)[i];
+    if(s.id==='est'&&v!=null&&o!=null&&Math.abs(v-o)<0.05)return;
+    rows.push('<div class="r"><span>'+swatch(s).replace('class="sw','class="sw')+s.name+'</span><b>'+show(v,m==='bk'?'rev':m)+'</b></div>');
+  });
+  var f='';
+  if(m!=='bk'&&e!=null){
+    var mr=m==='occ'?'rn':m,er=series(h,mr,'est')[i];
+    var p=[];['cdt','cmo','ck'].forEach(function(k){var tv=series(h,mr,k)[i];if(tv)p.push(SER.filter(function(s){return s.id===k;})[0].name+' '+fmt(er/tv*100,0)+'%');});
+    var ly=series(h,mr,'ly')[i];
+    f='<div class="f">Ước tính đạt: '+(p.join(' · ')||'-')+(ly?'<br>Ước tính '+growTag(er,ly):'')+'</div>';
+  }else if(m==='bk'){
+    var lyb=series(h,m,'ly')[i];
+    if(o!=null&&lyb)f='<div class="f">'+(i===3?'Đến 28/10 so với cả T10/2025: ':'Thực tế ')+growTag(o,lyb).replace(' so với cùng kỳ',i===3?'':' so với cùng kỳ')+'</div>';
+  }
+  el.innerHTML='<div class="t">'+M[i]+'/2026 · '+METRIC[m].lab+(METRIC[m].sub?' '+METRIC[m].sub:'')+'</div>'+rows.join('')+f;
+  el.style.display='block';
+  var r=ctx.chart.canvas.getBoundingClientRect(),x=r.left+t.caretX+14,y=r.top+t.caretY-10;
+  var w=el.offsetWidth,hh=el.offsetHeight;
+  if(x+w>window.innerWidth-8)x=r.left+t.caretX-w-14;
+  if(x<8)x=8;
+  if(y+hh>window.innerHeight-8)y=window.innerHeight-hh-8;
+  el.style.left=x+'px';el.style.top=Math.max(8,y)+'px';
+}
+function selIdx(){var a=[];st.mon.forEach(function(v,i){if(v)a.push(i);});return a;}
+function rlab(idx){if(!idx.length)return '';var c=true;for(var k=1;k<idx.length;k++)if(idx[k]!==idx[k-1]+1)c=false;
+  if(idx.length===1)return M[idx[0]];return c?M[idx[0]]+' đến '+M[idx[idx.length-1]]:idx.map(function(i){return M[i];}).join(', ');}
+function avail(h,m,id,idx){return idx.filter(function(i){return series(h,m,id)[i]!=null;});}
+function pc(e,t){if(e==null||!t)return '<td>-</td>';var p=e/t*100;return '<td class="'+(p>=100?'pos':'neg')+'">'+fmt(p,0)+'%</td>';}
+function gc(e,l){if(e==null||!l)return '<td>-</td>';var g=(e/l-1)*100;return '<td class="'+(g>=0?'pos':'neg')+'">'+(g>=0?'+':'−')+fmt(Math.abs(g),0)+'%</td>';}
+function renderMonths(){
+  var all=st.mon.every(function(v){return v;});
+  if(!all&&st.mon.filter(function(v){return v;}).length!==1)st.mon=[1,1,1,1,1,1],all=true;
+  document.getElementById('monBox').innerHTML=M.map(function(mo,i){return '<button type="button" class="chip" data-i="'+i+'" aria-pressed="'+(!all&&!!st.mon[i])+'">'+mo+'</button>';}).join('');
+  document.getElementById('monAll').setAttribute('aria-pressed',all);
+  document.querySelectorAll('#monBox .chip').forEach(function(b){b.onclick=function(){var i=+b.dataset.i;
+    st.mon=[0,0,0,0,0,0];st.mon[i]=1;save();renderMonths();renderSum();};});
+}
+document.getElementById('monAll').onclick=function(){st.mon=[1,1,1,1,1,1];save();renderMonths();renderSum();};
+var PART=[4,5], ASOF='29/10/2026';
+function isPart(idx){return idx.some(function(i){return PART.indexOf(i)>=0;});}
+function star(idx,h,m){
+  if(!isPart(idx))return '';
+  var pi=idx.filter(function(i){return PART.indexOf(i)>=0;});
+  var tip='Chưa đủ dữ liệu: '+rlab(pi)+' chưa kết thúc, số thực tế là số đã đặt (OTB) đến '+ASOF+'.';
+  if(h&&m&&pi.length===1){var e=series(h,m,'est')[pi[0]];if(e!=null)tip+=' Ước tính cuối tháng: '+show(e,m)+'.';}
+  return '<sup class="ast">*</sup><span class="ii" tabindex="0" role="note" aria-label="'+tip+'" data-tip="'+tip+'">i</span>';
+}
+function renderTcards(h,idx){
+  var L={rev:['Doanh thu','stay date'],rn:['RN',''],occ:['%OCC','']};
+  var box=document.getElementById('tcards');
+  box.innerHTML=['rev','rn','occ'].map(function(m){
+    var a=val2H(h,m,'otb',idx),ic=avail(h,m,'cdt',idx);
+    var v=m==='occ'?fmt(a,1)+'<small>%</small>':fmt(a,0)+' <small>'+(m==='rn'?'RN':'tr')+'</small>';
+    var cd=ic.length?pct(val2H(h,m,'otb',ic),val2H(h,m,'cdt',ic)):null;
+    return '<button type="button" class="tcard" data-m="'+m+'" aria-pressed="'+(m===st.tm)+'"><span class="go">'+(m===st.tm?'Đang xem':'Bấm để xem ›')+'</span><div class="k">'+L[m][0]+(L[m][1]?' <small>'+L[m][1]+'</small>':'')+'</div>'+
+      '<div class="v">'+v+(isPart(idx)?'<sup class="ast">*</sup>':'')+'</div><div class="d">Thực tế '+(idx.length===6?'2H':rlab(idx))+' · '+growTag(a,val2H(h,m,'ly',idx))+'</div>'+
+      '<div class="mini">'+pctTag(cd,'Target CĐT'+(ic.length&&ic.length<idx.length?' ('+rlab(ic)+')':''))+pctTag(pct(a,val2H(h,m,'cmo',idx)),'Target CMO')+pctTag(pct(a,val2H(h,m,'ck',idx)),'Target Team cam kết')+'</div></button>';
+  }).join('');
+  box.querySelectorAll('.tcard').forEach(function(b){b.onclick=function(){st.tm=b.dataset.m;save();renderSum();};});
+}
+function renderSum(){
+  var h=st.h,m=st.tm,idx=selIdx(),t=document.getElementById('sum'),s=document.getElementById('sumSub');
+  renderTcards(h,idx);
+  var all=idx.length===6;
+  document.getElementById('sumH').textContent=(all?'Tổng 2H':'Tổng '+rlab(idx))+(m==='bk'?' so với cùng kỳ':' so với từng KPI');
+  if(m==='bk'){
+    var ia=avail(h,'bk','otb',idx);
+    s.textContent='Không có KPI theo ngày đặt, chỉ so với cùng kỳ. T10/2026 tính đến 28/10; T11, T12 chưa phát sinh.'+(ia.length<idx.length?' Dòng 2026 chỉ cộng các tháng đã có số ('+(rlab(ia)||'không có')+'), cùng kỳ cộng đúng các tháng đó.':'');
+    var a=ia.length?val2H(h,'bk','otb',ia):null,e=ia.length?val2H(h,'bk','est',ia):null,l=ia.length?val2H(h,'bk','ly',ia):null,lAll=val2H(h,'bk','ly',idx);
+    t.innerHTML='<thead><tr><th>Kỳ đặt</th><th>Thực tế 2026</th><th>Ước tính 2026</th><th>Cùng kỳ 2025</th><th>So với cùng kỳ</th></tr></thead><tbody>'+
+      '<tr><td>'+(rlab(ia)||'-')+'</td><td>'+show(a,'rev')+'</td><td>'+show(e,'rev')+'</td><td>'+show(l,'rev')+'</td>'+gc(e,l)+'</tr>'+
+      (ia.length<idx.length?'<tr><td>Cùng kỳ cả '+rlab(idx)+'</td><td>-</td><td>-</td><td>'+show(lAll,'rev')+'</td><td>-</td></tr>':'')+'</tbody>';
+    return;
+  }
+  var ic=avail(h,m,'cdt',idx);
+  var miss=rlab(idx.filter(function(i){return ic.indexOf(i)<0;}));s.innerHTML=METRIC[m].full+'.'+(ic.length<idx.length?(ic.length?' Target CĐT chưa có số '+miss+', nên dòng Target CĐT chỉ so với '+rlab(ic)+'.':' Target CĐT chưa có số '+miss+'.'):'');
+  var rows=[['Target CĐT'+(ic.length&&ic.length<idx.length?' ('+rlab(ic)+')':''),'cdt',ic],['Target CMO','cmo',idx],['Target Team cam kết','ck',idx],['Cùng kỳ 2025','ly',idx]];
+  t.innerHTML='<thead><tr><th>So với</th><th>KPI</th><th>Thực tế</th><th>Thực tế / KPI</th><th>Chênh lệch</th></tr></thead><tbody>'+
+    rows.map(function(r){
+      var ix=r[2];if(!ix.length)return '<tr><td>'+r[0]+'</td><td colspan="4" style="text-align:left">Chưa có số</td></tr>';
+      var tv=val2H(h,m,r[1],ix),o=val2H(h,m,'otb',ix),p=pct(o,tv);
+      var diff=(o==null||tv==null)?'-':(m==='occ'?((o-tv>=0?'+':'−')+fmt(Math.abs(o-tv),1)+' điểm'):((o-tv>=0?'+':'−')+fmt(Math.abs(o-tv),0)+(m==='rn'?' RN':' tr')));
+      var tag=p==null?'':(r[1]==='ly'?'':(p>=100?'<span class="tag g">Đạt</span>':(isPart(ix)?'<span class="tag y">Tạm tính</span>':'<span class="tag r">Chưa đạt</span>')));
+      return '<tr><td>'+r[0]+'</td><td>'+show(tv,m)+'</td><td>'+show(o,m)+star(ix,ix.length===1?h:null,m)+'</td><td>'+(p==null?'-':(r[1]==='ly'?'<span class="'+(p>=100?'pos':'neg')+'">'+(p>=100?'tăng ':'giảm ')+fmt(Math.abs(p-100),0)+'%</span>':fmt(p,0)+'%'))+tag+'</td><td>'+diff+'</td></tr>';
+    }).join('')+'</tbody>';
+  document.getElementById('astNote').hidden=!isPart(idx);
+}
+function renderVerdict(){
+  document.getElementById('verdict').innerHTML=NOTE[st.h].map(function(r){return '<div class="vrow'+(r[0]==='Kết luận'?' vk':'')+(r[0].indexOf('Action')===0?' va':'')+'"><span class="vl">'+r[0]+'</span>'+(r[1].indexOf('(1)')===0?'<ol class="vli">'+r[1].split(/\(\d\)\s*/).filter(function(x){return x.trim();}).map(function(x){return '<li>'+x.trim()+'</li>';}).join('')+'</ol>':'<p>'+r[1]+'</p>')+'</div>';}).join('');
+  document.getElementById('foot').innerHTML='<p><b>Nguồn.</b> Target CĐT, Target CMO, Target Team cam kết và OTB: file Theo dõi OCC 2026 (tab '+HOTEL[st.h].short+', cột CEO Target, CMO Target, Team Target, Actual), khớp file Tổng hợp Target Web 2H/2026; đọc ngày 29/10/2026. Ước tính T11, T12: ước tính của bộ phận ngày 27/10/2026'+(st.h==='BT'?' (Bến Thành dùng mức thận trọng)':'')+'. Doanh thu book date 2026: Daily Pick up Website 2026, tab Data Bookdate (T10 đến 28/10). Cùng kỳ 2025: báo cáo Web Sales (stay date) và SVL Budget Report 2025 (book date).</p><p><b>%OCC</b> tính bằng RN chia số phòng nhân số ngày trong tháng ('+HOTEL[st.h].rooms+' phòng), khớp cách tính của file Theo dõi OCC.</p>';
+}
+(function(){
+  var el=document.getElementById('tip');
+  function on(e){var t=e.target.closest&&e.target.closest('.ii');if(!t)return;
+    el.innerHTML='<div>'+t.getAttribute('data-tip')+'</div>';el.style.display='block';el.style.maxWidth='280px';
+    var r=t.getBoundingClientRect(),w=el.offsetWidth,hh=el.offsetHeight,x=r.right-w,y=r.top-hh-8;
+    if(x<8)x=8;if(y<8)y=r.bottom+8;el.style.left=x+'px';el.style.top=y+'px';}
+  function off(e){var t=e.target.closest&&e.target.closest('.ii');if(t)el.style.display='none';}
+  document.addEventListener('mouseover',on);document.addEventListener('focusin',on);
+  document.addEventListener('mouseout',off);document.addEventListener('focusout',off);
+})();
+var EFF={"BT": {"c": ["Ba việc tạo kết quả rõ nhất trong 2H là tăng ngân sách đúng mùa đặt, luôn duy trì chiến dịch early-bird cho Úc, và mở rộng tệp khách Mỹ, Singapore, châu Âu, Anh theo từng mùa cao điểm.", ""], "items": [["A1", "Tăng ngân sách Google Ads đúng mùa đặt (T7 đến T9)", "Số đêm đặt qua web từ 1/7 đến 17/8 tăng 42% so với cùng kỳ; doanh thu book date T7 đến T9 tăng 26% so với cùng kỳ. ROAS 19,0, gấp 3,2 lần ngưỡng hoà vốn 5,9 (ngưỡng hoà vốn là mức ROAS mà chi phí quảng cáo cho mỗi booking bằng hoa hồng OTA, khoảng 17% doanh thu; ROAS trên 5,9 thì bán qua web rẻ hơn bán qua OTA).", "Tăng chi đúng tháng khách đặt nhiều thì lượng đặt sẽ tăng.", "Dồn ngân sách vào tháng khách đặt nhiều nhất cho kỳ ở cần bán. Để bán stay T1 đến T3/2027, tăng ngân sách trong T12/2026 và T1/2027, vì năm trước 70% số đêm đặt trong T12 và 65% số đêm đặt trong T1 là để ở Q1.", "Chỉ tăng thêm khi ROAS 7 ngày từ 12 và chiến dịch mất hiển thị do hết ngân sách trên 20%.", false], ["B1", "Luôn duy trì chiến dịch early-bird cho Úc, chạy trước ngày ở 60 đến 90 ngày", "OTB T12 khách Úc 83 RN, so với 62 RN cùng thời điểm năm 2025 (số đêm khách Úc đã đặt cho T12/2025 tính đến cùng ngày năm trước), tăng 34%; rate plan đặt sớm chiếm 38% RN web đặt T7 đến T10.", "Mở bán trước cửa sổ đặt giữ được khách Úc đặt sớm cho các mùa lễ lớn.", "Aussie Summer cho stay đến hết T1/2027.", "Chỉ nhắm các bang đông khách: New South Wales, Victoria, Queensland, Nam Úc, Tây Úc.", false], ["B3, B4", "Duy trì mở rộng tệp khách Mỹ, Singapore, châu Âu, Anh theo từng mùa cao điểm", "Mỹ: số đêm lưu trú T7 đến T12 tăng 68% so với cùng kỳ (192 lên 323 RN), tỷ trọng tăng từ 10,0% lên 16,3%. Singapore: doanh thu stay date T7 đến T10 tăng 15% so với cùng kỳ (609 tr), đứng thứ 3 sau Úc và Mỹ.", "Mỗi thị trường có mùa đi du lịch riêng; chạy chiến dịch đúng mùa của từng thị trường thì số đêm tăng.", "Mỹ: Giáng sinh, Tết Tây. Singapore: kỳ nghỉ cuối năm của học sinh Singapore (21/11 đến 31/12/2026). Châu Âu, Anh: mở từ 01/12 cho stay T1 đến T3/2027.", "Triển khai campaign \"Come Back Home\" cho Giáng sinh, Tết Tây, nhắm khu vực đông Việt kiều.", false], ["CP1", "Benefit đưa đón sân bay từ 2 đêm", "So với cùng kỳ, lượng đặt qua web tăng 42% khi còn bán gói có đưa đón (đặt 1/7 đến 17/8), chỉ còn tăng 4% sau khi tạm dừng (đặt 18/8 đến 30/9) và giảm 6% (đặt 1 đến 25/10).", "Đưa đón là quyền lợi khách web cần nhất; tạm dừng thì lượng đặt chậm lại.", "Giữ đưa đón như benefit riêng của kênh web.", "Đưa đón có điều kiện cho stay Q1/2027: từ 2 đêm một chiều, từ 4 đêm hai chiều (chờ duyệt).", true]]}, "SK": {"c": ["Sakyo tăng trưởng nhờ ba việc: cắt chiến dịch không ra booking, dồn tiền vào thị trường đang tăng (Singapore, Úc, Mỹ) và bán hạng cao kèm quyền lợi thay vì giảm giá.", ""], "items": [["A1, A2", "Cắt chiến dịch không ra booking, dồn tiền sang chiến dịch có chuyển đổi", "Dừng PMax Sakyo VN (tỷ lệ chuyển đổi 0,01%) từ T8, chuyển sang PMax Úc & Sing. Chi phí Google Ads T7 đến T9 chỉ tăng 11% so với cùng kỳ nhưng doanh thu book date cùng giai đoạn tăng 132%; ROAS 15,4, gấp đôi cùng kỳ (7,4).", "Cắt sớm chiến dịch không hiệu quả giúp doanh thu book date tăng mà không cần tăng nhiều chi phí.", "Rà tỷ lệ chuyển đổi từng chiến dịch hằng tháng.", "T11 nâng ngân sách lên 34 đến 35 tr, ưu tiên Search Sakyo VN (ROAS 30 ngày 18,9).", false], ["B4", "Giữ tệp khách Mỹ trên Search", "Search Sakyo VN, người dùng ở Mỹ (01/07 đến 26/10): chi 8,8 tr, giá trị chuyển đổi 202,8 tr (ROAS 23,1), là vị trí có chi phí lớn nhất của chiến dịch. Tỷ trọng khách Mỹ tăng từ 7,7% lên 13,4% RN web lưu trú T7 đến T10.", "Khách Mỹ tìm tên khách sạn trên Search cho hiệu quả cao: mỗi 1 đồng quảng cáo mang về khoảng 23 đồng giá trị chuyển đổi.", "Giữ nhắm Mỹ trong Search Sakyo VN.", "So sánh PMax Mỹ & Sing (chạy từ 26/10) với Search; nếu ROAS của PMax thấp hơn, giữ ngân sách Mỹ ở Search.", false], ["B2", "Bật lại chiến dịch cho Singapore và Nhật", "Tỷ trọng khách Singapore tăng từ 5,0% lên 16,7% RN web lưu trú T7 đến T10. Danh sách khách Nhật trên Search có 29 click, 5 chuyển đổi, giá trị 86 tr, nhưng tỷ trọng khách Nhật vẫn giảm từ 36,8% xuống 25,8%.", "Singapore phản hồi nhanh khi có chiến dịch; với khách Nhật, chỉ chạy quảng cáo là chưa đủ.", "Giữ Singapore, Nhật trong Search và PMax.", "Nhật: bán vị trí và khả năng phục vụ tiếng Nhật. Singapore: cạnh tranh bằng giá và quyền lợi so với Trip.com.", false], ["C1, C4", "Bán hạng cao kèm quyền lợi thay vì giảm giá", "Solace Premier, Sanctuary Executive chiếm 57% RN web lưu trú T7 đến T12. ADR web T7 đến T10 tăng 13% đến 30% so với cùng kỳ, trong khi số đêm T7 đến T10 vẫn tăng 60% so với cùng kỳ.", "Quyền lợi (massage, trà chiều, đưa đón) giữ được giá mà vẫn bán được phòng.", "Ưu tiên Solace Premier, Sanctuary Executive.", "Chuyển đưa đón sang gói hạng Premier trở lên; hiện vẫn bán nhiều ở Stillness Studio (19 trên 54 RN).", false]]}, "JL": {"c": ["Điểm mạnh của Jolie là giữ giá: ADR web T7 đến T9 cao hơn ADR qua OTA 14% đến 28%, mà số đêm vẫn tăng so với cùng kỳ.", ""], "items": [["4", "Giữ giá và upsell hạng cao", "ADR web T7 đến T10 tăng 13% đến 18% so với cùng kỳ, cao hơn ADR qua OTA 14% đến 28% (T7 đến T9). Tỷ trọng Premier tăng từ 29,5% lên 37,2% RN web, Executive từ 17,3% lên 21,8%.", "Rate plan đặt sớm giữ giá vẫn bán được và kéo khách lên hạng cao.", "Bán chính Premier, Junior Suite, Executive.", "Kiểm lại giá Agoda, Trip.com cho Q1/2027; bù chênh lệch bằng quyền lợi, không giảm giá web.", false], ["T10", "Tăng ngân sách T10, giữ 2 chiến dịch Úc và Mỹ", "Chi phí Google Ads T10 là 20 tr, tăng 23% so với cùng kỳ. Doanh thu book date T10 (đến 28/10) 607 tr, gần gấp đôi cả tháng T10/2025 (309 tr); OTB T12 khách Mỹ 20 RN, so với 8 RN cùng thời điểm năm 2025.", "Dồn ngân sách vào đúng 2 thị trường chính là Úc và Mỹ thì doanh thu book date tăng ngay trong tháng chạy quảng cáo, không phải chờ sang tháng sau.", "20 tr/tháng, giữ 2 chiến dịch Úc và Mỹ.", "Thêm Anh, Đức vào PMax Úc thay vì mở chiến dịch mới.", true], ["1", "Rate plan đặt sớm và PMax Đức & Úc & Mỹ", "Rate plan đặt sớm chiếm 62% RN web đặt T7 đến T10. PMax Đức & Úc & Mỹ đạt ROAS 21,2 ở T7. OTB T12 Úc, Anh, Pháp chỉ 9 RN, so với 32 RN cùng thời điểm năm 2025.", "Khách Úc, Anh, Pháp đặt phòng T12 trước khoảng 4 tháng (lead time trung vị 130 ngày). Vì vậy chỉ mở rate plan đặt sớm trên IBE là chưa đủ: cần chạy quảng cáo cho ưu đãi này từ khoảng 4 tháng trước ngày ở để khách thấy đúng lúc họ lên kế hoạch.", "Rate plan đặt sớm trên IBE.", "Chạy early-bird kèm ngân sách từ đầu T11: Aussie Summer cho Úc từ 01/11/2026, Winter Sun cho Anh, Đức từ 05/11/2026.", false]]}};
+function renderEff(){
+  var e=EFF[st.h];
+  var items=e.items.map(function(x,i){
+    return '<div class="lesson"><div class="n">'+(i+1)+'</div><div><h4>'+x[1]+(x[6]?' <span class="inf">Suy luận</span>':'')+'</h4>'+
+      '<div class="lr"><span class="lk">Kết quả</span><p>'+x[2]+'</p></div>'+
+      '<div class="lr"><span class="lk">Bài học</span><p>'+x[3]+'</p></div>'+
+      '<div class="lr"><span class="lk">Duy trì</span><p>'+x[4]+'</p></div>'+
+      '<div class="lr ap"><span class="lk">Tối ưu tiếp</span><p>'+x[5]+'</p></div></div></div>';}).join('');
+  document.getElementById('effH').textContent=e.items.length+' hạng mục đã triển khai và hiệu quả: duy trì và tối ưu';
+  document.getElementById('eff').innerHTML='<div class="effc"><span class="lk">Kết luận</span><p>'+e.c[0]+'</p>'+(e.c[1]?'<p>'+e.c[1]+'</p>':'')+'</div><div class="effbox">'+items+'</div>'+
+    '<p class="chartcap">Nguồn: bảng hạng mục đã làm, chưa làm trong Review 2H, Google Ads API (26, 27/10), dữ liệu booking sheet Data (đặt đến 25/10), Daily Pick up Website 2026 (doanh thu book date). Nhãn Suy luận: chưa tách được riêng ảnh hưởng của hạng mục này với các yếu tố khác.</p>';
+}
+function renderAll(){renderTabs();renderCards();renderChips();draw();renderMonths();renderSum();renderVerdict();renderEff();}
+
+(function(){
+  var root=document.documentElement;
+  try{var t=localStorage.getItem('svl-theme');if(t)root.setAttribute('data-theme',t);}catch(e){}
+  document.getElementById('themeBtn').onclick=function(){
+    var cur=root.getAttribute('data-theme');
+    var dark=cur?cur==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var next=dark?'light':'dark';root.setAttribute('data-theme',next);
+    try{localStorage.setItem('svl-theme',next);}catch(e){}
+    renderAll();
+  };
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',renderAll);
+  renderAll();
+})();
 </script>
 </body>
 </html>
