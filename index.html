@@ -497,8 +497,7 @@ function renderEff(){
       '<div class="lr"><span class="lk">Duy trì</span><p>'+x[4]+'</p></div>'+
       '<div class="lr ap"><span class="lk">Tối ưu tiếp</span><p>'+x[5]+'</p></div></div></div>';}).join('');
   document.getElementById('effH').textContent=e.items.length+' hạng mục đã triển khai và hiệu quả: duy trì và tối ưu';
-  document.getElementById('eff').innerHTML='<div class="effc"><span class="lk">Kết luận</span><p>'+e.c[0]+'</p>'+(e.c[1]?'<p>'+e.c[1]+'</p>':'')+'</div><div class="effbox">'+items+'</div>'+
-    '<p class="chartcap">Nguồn: bảng hạng mục đã làm, chưa làm trong Review 2H, Google Ads API (26, 27/10), dữ liệu booking sheet Data (đặt đến 25/10), Daily Pick up Website 2026 (doanh thu book date). Nhãn Suy luận: chưa tách được riêng ảnh hưởng của hạng mục này với các yếu tố khác.</p>';
+  document.getElementById('eff').innerHTML='<div class="effc"><span class="lk">Kết luận</span><p>'+e.c[0]+'</p>'+(e.c[1]?'<p>'+e.c[1]+'</p>':'')+'</div><div class="effbox">'+items+'</div>';
 }
 
 /* ---------- motion ---------- */
